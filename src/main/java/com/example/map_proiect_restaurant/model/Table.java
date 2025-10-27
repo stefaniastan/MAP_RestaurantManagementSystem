@@ -49,3 +49,6 @@ public class Table {
         this.orders = orders;
     }
 }
+
+
+// fct de to string la fiecare clasa.

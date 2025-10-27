@@ -1,9 +1,11 @@
 package com.example.map_proiect_restaurant.model;
 
-public class Chef {
+public class Chef extends Staff{
+
     private String specialization;
 
-    public Chef(String specialization){
+    public Chef(String Id, String Name, String specialization){
+        super(Id, Name);
         this.specialization = specialization;
     }
 
