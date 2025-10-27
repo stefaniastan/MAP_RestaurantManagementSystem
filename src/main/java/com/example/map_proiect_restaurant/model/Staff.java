@@ -9,8 +9,8 @@ public abstract class Staff {
         this.Name = this.Name;
     }
     public String getId() {return this.Id;}
-    public String setId() {return this.Id;}
+    public void setId(String id) {this.Id = id;}
 
     public String getName() {return this.Name;}
-    public String setName() {return this.Name;}
+    public void setName(String name) { this.Name = name;}
 }
