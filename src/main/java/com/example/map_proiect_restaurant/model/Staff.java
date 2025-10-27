@@ -5,8 +5,8 @@ public abstract class Staff {
     private String Name;
 
     public  Staff(String id, String name) {
-        this.Id = this.Id;
-        this.Name = this.Name;
+        this.Id = id;
+        this.Name = name;
     }
     public String getId() {return this.Id;}
     public void setId(String id) {this.Id = id;}
