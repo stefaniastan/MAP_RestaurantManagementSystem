@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public class ChefRepository implements AbstractRepository<Chef> {
     private final List<Chef> chefs = new ArrayList<>(Arrays.asList(
-            new Chef("Chef1", "Albert", "desserts"),
-            new Chef("Chef2", "Marian", "fine dining")
+            new Chef("Chef1", "Albert", "desserts", 23),
+            new Chef("Chef2", "Marian", "fine dining", 44)
     ));
 
     @Override
