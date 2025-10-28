@@ -6,11 +6,15 @@ public class Customer {
     private String Id;
     private String Name;
     private List<Order> orders;
+    private String Adress;
+    private String Email;
 
-    public Customer(String Id, String Name, List<Order> orders) {
+    public Customer(String Id, String Name, List<Order> orders, String Adress, String Email) {
         this.Id = Id;
         this.Name = Name;
         this.orders = orders;
+        this.Adress = Adress;
+        this.Email = Email;
     }
 
     public String getId(){
@@ -35,5 +39,19 @@ public class Customer {
 
     public void setOrders(List<Order> orders){
         this.orders = orders;
+    }
+
+    public String getAdress(){
+        return Adress;
+    }
+    public void setAdress(String Adress){
+        this.Adress = Adress;
+    }
+
+    public String getEmail(){
+        return Email;
+    }
+    public void setEmail(String Email){
+        this.Email = Email;
     }
 }

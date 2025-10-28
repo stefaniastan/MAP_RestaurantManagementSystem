@@ -11,8 +11,8 @@ import java.util.Arrays;
 @Repository
 public class CustomerRepository implements AbstractRepository<Customer> {
     private final List<Customer> customers = new ArrayList<>(Arrays.asList(
-            new Customer("Customer1", "Stefania", new ArrayList<Order>()),
-            new Customer("Customer2", "Andrei", new ArrayList<Order>())
+            new Customer("Customer1", "Stefania", new ArrayList<Order>(), "Str.Avram Iancu", "stefania@email.com"),
+            new Customer("Customer2", "Andrei", new ArrayList<Order>(), "Str.Balcescu", "andrei@email.com")
     ));
 
     @Override
