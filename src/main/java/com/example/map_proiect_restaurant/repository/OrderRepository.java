@@ -27,12 +27,12 @@ public class OrderRepository implements AbstractRepository<Order> {
     }
 
     @Override
-    public Order findById(Integer id) {
+    public Order findById(String id) {
         return null;
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
 
     }
 }

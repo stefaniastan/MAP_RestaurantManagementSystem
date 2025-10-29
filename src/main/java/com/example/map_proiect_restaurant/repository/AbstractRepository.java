@@ -5,7 +5,7 @@ import java.util.List;
 public interface AbstractRepository <T> {
     T save(T t);
     List<T> findAll();
-    T findById(Integer id);
-    void deleteById(Integer id);
+    T findById(String id);
+    void deleteById(String id);
 
 }

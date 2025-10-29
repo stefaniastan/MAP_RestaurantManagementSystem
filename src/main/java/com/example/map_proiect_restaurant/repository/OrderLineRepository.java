@@ -26,7 +26,7 @@ public class OrderLineRepository implements AbstractRepository<OrderLine>{
     }
 
     @Override
-    public OrderLine findById(Integer id) {
+    public OrderLine findById(String id) {
         for (OrderLine orderLine : orderLines) {
             if (orderLine.getId().equals(id)) {
                 return orderLine;
@@ -36,7 +36,7 @@ public class OrderLineRepository implements AbstractRepository<OrderLine>{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (OrderLine orderLine : orderLines) {
             if (orderLine.getId().equals(id)) {
                 orderLines.remove(orderLine);

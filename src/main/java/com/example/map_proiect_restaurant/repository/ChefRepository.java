@@ -26,7 +26,7 @@ public class ChefRepository implements AbstractRepository<Chef> {
     }
 
     @Override
-    public Chef findById(Integer id) {
+    public Chef findById(String id) {
         for (Chef chef : chefs) {
             if (chef.getId().equals(id)) {
                 return chef;
@@ -36,7 +36,7 @@ public class ChefRepository implements AbstractRepository<Chef> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (Chef chef : chefs) {
             if (chef.getId().equals(id)) {
                 chefs.remove(chef);

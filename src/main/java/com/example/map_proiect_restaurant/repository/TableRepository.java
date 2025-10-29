@@ -27,7 +27,7 @@ public class TableRepository implements AbstractRepository<Table>{
     }
 
     @Override
-    public Table findById(Integer id) {
+    public Table findById(String id) {
         for (Table table : tables) {
             if (table.getId().equals(id)) {
                 return table;
@@ -37,7 +37,7 @@ public class TableRepository implements AbstractRepository<Table>{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (Table table : tables) {
             if (table.getId().equals(id)) {
                 tables.remove(table);

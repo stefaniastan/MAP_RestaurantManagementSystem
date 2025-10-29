@@ -26,7 +26,7 @@ public class MenuItemRepository implements AbstractRepository <MenuItem>{
     }
 
     @Override
-    public MenuItem findById(Integer id) {
+    public MenuItem findById(String id) {
         for (MenuItem menuItem : menuItems) {
             if (menuItem.getId().equals(id)) {
                 return menuItem;
@@ -36,7 +36,7 @@ public class MenuItemRepository implements AbstractRepository <MenuItem>{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (MenuItem menuItem : menuItems) {
             if (menuItem.getId().equals(id)) {
                 menuItems.remove(menuItem);

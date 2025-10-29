@@ -26,7 +26,7 @@ public class BillRepository implements AbstractRepository<Bill> {
     }
 
     @Override
-    public Bill findById(Integer id) {
+    public Bill findById(String id) {
         for (Bill bill : bills) {
             if (bill.getId().equals(id)) {
                 return bill;
@@ -36,7 +36,7 @@ public class BillRepository implements AbstractRepository<Bill> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (Bill bill : bills) {
             if (bill.getId().equals(id)) {
                 bills.remove(bill);

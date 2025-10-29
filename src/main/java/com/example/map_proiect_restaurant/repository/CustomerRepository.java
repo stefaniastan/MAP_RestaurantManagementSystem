@@ -27,7 +27,7 @@ public class CustomerRepository implements AbstractRepository<Customer> {
     }
 
     @Override
-    public Customer findById(Integer id) {
+    public Customer findById(String id) {
         for(Customer customer : customers) {
             if(customer.getId().equals(id)) {
                 return customer;
@@ -37,7 +37,7 @@ public class CustomerRepository implements AbstractRepository<Customer> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for(Customer customer : customers) {
             if(customer.getId().equals(id)) {
                 customers.remove(customer);

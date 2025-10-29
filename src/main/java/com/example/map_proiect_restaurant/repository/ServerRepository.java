@@ -26,7 +26,7 @@ public class ServerRepository implements AbstractRepository<Server>{
     }
 
     @Override
-    public Server findById(Integer id) {
+    public Server findById(String id) {
         for (Server server : servers) {
             if (server.getId().equals(id)) {
                 return server;
@@ -36,7 +36,7 @@ public class ServerRepository implements AbstractRepository<Server>{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         for (Server server : servers) {
             if (server.getId().equals(id)) {
                 servers.remove(server);
