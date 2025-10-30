@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public class ServerRepository implements AbstractRepository<Server>{
     private final List<Server> servers = new ArrayList<>(Arrays.asList(
-            new Server("Server1", "Ana", "Hall1"),
-            new Server("Server2", "Alex", "Hall2")
+            new Server("Server1", "Ana", "Hall1", "Great"),
+            new Server("Server2", "Alex", "Hall2", "Good")
     ));
 
     @Override
