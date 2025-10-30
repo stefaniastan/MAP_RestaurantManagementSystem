@@ -50,5 +50,3 @@ public class Table {
     }
 }
 
-
-// fct de to string la fiecare clasa.
