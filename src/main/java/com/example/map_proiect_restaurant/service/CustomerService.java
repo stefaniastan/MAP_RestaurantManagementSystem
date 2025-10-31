@@ -28,11 +28,11 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public Customer findCustomerById(String id){
+    public Customer getCustomerById(String id){
         return customerRepository.findById(id);
     }
 
-    public List<Customer> findAllCustomers(){
+    public List<Customer> getAllCustomers(){
         return customerRepository.findAll();
     }
 }
