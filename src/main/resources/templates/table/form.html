@@ -8,10 +8,10 @@
 
 <form th:action="@{/tables}" th:object="${table}" method="post">
     <label>ID:</label>
-    <input type="text" th:field="{id}" required><br>
+    <input type="text" th:field="*{id}" required><br>
 
     <label>Number:</label>
-    <input type="number" th:field="{number}" required><br>
+    <input type="number" th:field="*{number}" required><br>
 
     <label>Occupied Status:</label>
     <input type="text" th:field="*{occupiedStatus}" required><br>
