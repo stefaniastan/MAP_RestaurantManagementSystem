@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables</title>
+</head>
+<body>
+<h2>All Tables</h2>
+
+<a href="/tables/new">➕ Add New Table</a>
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Number</th>
+        <th>Occupied Status</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="table : ${tables}">
+        <td th:text="${table.id}"></td>
+        <td th:text="${table.number}"></td>
+        <td th:text="${table.occupiedStatus}"></td>
+        <td>
+            <form th:action="@{'/tables/' + ${table.id} + '/delete'}" method="post">
+                <button type="submit">🗑️ Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
