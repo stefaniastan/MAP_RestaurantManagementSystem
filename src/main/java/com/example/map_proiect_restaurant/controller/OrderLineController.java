@@ -19,13 +19,13 @@ public class OrderLineController {
     @GetMapping
     public String getAllOrderLines(Model model) {
         model.addAttribute("orderLines", orderLineService.getAllOrderLines());
-        return "orderLine/orderLine-index";
+        return "orderLine/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("orderLine", new OrderLine("", "", 0.0));
-        return "orderLine/orderLine-form";
+        return "orderLine/form";
     }
 
     @PostMapping

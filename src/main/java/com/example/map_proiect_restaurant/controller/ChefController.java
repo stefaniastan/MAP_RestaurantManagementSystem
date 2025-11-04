@@ -19,13 +19,13 @@ public class ChefController {
     @GetMapping
     public String getAllChefs(Model model) {
         model.addAttribute("chefs", chefService.getAllChefs());
-        return "chef/chef-index";
+        return "chef/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("chef", new Chef("", "", "", "", 0));
-        return "chef/chef-form";
+        return "chef/form";
     }
 
     @PostMapping

@@ -19,13 +19,13 @@ public class BillController {
     @GetMapping
     public String getAllBills(Model model) {
         model.addAttribute("bills", billService.getAllBills());
-        return "bill/bill-index";
+        return "bill/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("bill", new Bill("", "", 0.0));
-        return "bill/bill-form";
+        return "bill/form";
     }
 
     @PostMapping

@@ -19,13 +19,13 @@ public class ServerController {
     @GetMapping
     public String getAllServers(Model model) {
         model.addAttribute("servers", serverService.getAllServers());
-        return "server/server-index";
+        return "server/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("server", new Server("", "", "", ""));
-        return "server/server-form";
+        return "server/form";
     }
 
     @PostMapping

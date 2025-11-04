@@ -19,13 +19,13 @@ public class OrderAssignmentController {
     @GetMapping
     public String getAllAssignments(Model model) {
         model.addAttribute("orderAssignments", orderAssignmentService.findAllOrderAssignments());
-        return "orderAssignment/orderAssignment-index";
+        return "orderAssignment/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("orderAssignment", new OrderAssignment("", "", ""));
-        return "orderAssignment/orderAssignment-form";
+        return "orderAssignment/form";
     }
 
     @PostMapping

@@ -19,13 +19,13 @@ public class MenuItemController {
     @GetMapping
     public String getAllMenuItems(Model model) {
         model.addAttribute("menuItems", menuItemService.findAllMenuItems());
-        return "menuItem/menuItem-index";
+        return "menuItem/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("menuItem", new MenuItem("", "", 0.0));
-        return "menuItem/menuItem-form";
+        return "menuItem/form";
     }
 
     @PostMapping
