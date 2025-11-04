@@ -18,7 +18,7 @@ public class MenuItemController {
 
     @GetMapping
     public String getAllMenuItems(Model model) {
-        model.addAttribute("menuItems", menuItemService.getAllMenuItems());
+        model.addAttribute("menuItems", menuItemService.findAllMenuItems());
         return "menuItem/menuItem-index";
     }
 
