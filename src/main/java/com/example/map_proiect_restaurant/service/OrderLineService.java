@@ -23,8 +23,8 @@ public class OrderLineService {
         return orderLineRepository.save(orderLine);
     }
 
-    public void deleteOrderLine(OrderLine orderLine){
-        orderLineRepository.deleteById(orderLine.getId());
+    public void deleteOrderLine(String id){
+        orderLineRepository.deleteById(id);
     }
 
     public OrderLine getOrderLineById(String id){
