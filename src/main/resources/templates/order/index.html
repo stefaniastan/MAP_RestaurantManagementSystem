@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Orders</title>
 </head>
 <body>
+<h2>All Orders</h2>
+
+<a href="/orders/new">➕ Add New Order</a>
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Customer ID</th>
+        <th>Table ID</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.customerId}"></td>
+        <td th:text="${order.tableId}"></td>
+        <td th:text="${order.status}"></td>
+        <td>
+            <form th:action="@{'/orders/' + ${order.id} + '/delete'}" method="post">
+                <button type="submit">🗑️ Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
