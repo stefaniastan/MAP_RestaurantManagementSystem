@@ -20,7 +20,7 @@ public class CustomerController {
     @GetMapping
     public String getAllCustomers(Model model) {
         model.addAttribute("customers", customerService.getAllCustomers());
-        return "customers/index";
+        return "customer/index";
     }
 
     @GetMapping("/new")
