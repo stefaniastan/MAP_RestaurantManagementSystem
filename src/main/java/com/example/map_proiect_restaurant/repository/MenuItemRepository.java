@@ -37,10 +37,7 @@ public class MenuItemRepository implements AbstractRepository <MenuItem>{
 
     @Override
     public void deleteById(String id) {
-        for (MenuItem menuItem : menuItems) {
-            if (menuItem.getId().equals(id)) {
-                menuItems.remove(menuItem);
-            }
-        }
+        menuItems.removeIf(menuItem -> menuItem.getId().equals(id));
     }
+
 }

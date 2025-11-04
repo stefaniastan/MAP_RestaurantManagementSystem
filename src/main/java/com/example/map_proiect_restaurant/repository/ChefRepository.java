@@ -37,10 +37,7 @@ public class ChefRepository implements AbstractRepository<Chef> {
 
     @Override
     public void deleteById(String id) {
-        for (Chef chef : chefs) {
-            if (chef.getId().equals(id)) {
-                chefs.remove(chef);
-            }
-        }
+        chefs.removeIf(chef -> chef.getId().equals(id));
     }
+
 }

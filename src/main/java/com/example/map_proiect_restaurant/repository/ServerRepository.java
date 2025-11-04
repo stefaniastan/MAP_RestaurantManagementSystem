@@ -37,10 +37,7 @@ public class ServerRepository implements AbstractRepository<Server>{
 
     @Override
     public void deleteById(String id) {
-        for (Server server : servers) {
-            if (server.getId().equals(id)) {
-                servers.remove(server);
-            }
-        }
+        servers.removeIf(server -> server.getId().equals(id));
     }
+
 }

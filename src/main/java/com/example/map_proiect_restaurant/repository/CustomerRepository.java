@@ -38,10 +38,7 @@ public class CustomerRepository implements AbstractRepository<Customer> {
 
     @Override
     public void deleteById(String id) {
-        for(Customer customer : customers) {
-            if(customer.getId().equals(id)) {
-                customers.remove(customer);
-            }
-        }
+        customers.removeIf(customer -> customer.getId().equals(id));
     }
+
 }

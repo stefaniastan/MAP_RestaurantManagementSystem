@@ -38,10 +38,7 @@ public class TableRepository implements AbstractRepository<Table>{
 
     @Override
     public void deleteById(String id) {
-        for (Table table : tables) {
-            if (table.getId().equals(id)) {
-                tables.remove(table);
-            }
-        }
+        tables.removeIf(table -> table.getId().equals(id));
     }
+
 }
