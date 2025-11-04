@@ -38,10 +38,7 @@ public class OrderAssignmentRepository implements AbstractRepository<OrderAssign
 
     @Override
     public void deleteById(String id) {
-        for (OrderAssignment orderAssignment : orderAssignments) {
-            if (orderAssignment.getId().equals(id)) {
-                orderAssignments.remove(orderAssignment);
-            }
-        }
+        orderAssignments.removeIf(orderAssignment -> orderAssignment.getId().equals(id));
     }
+
 }

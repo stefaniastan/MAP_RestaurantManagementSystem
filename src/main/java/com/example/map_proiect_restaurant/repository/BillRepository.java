@@ -37,10 +37,7 @@ public class BillRepository implements AbstractRepository<Bill> {
 
     @Override
     public void deleteById(String id) {
-        for (Bill bill : bills) {
-            if (bill.getId().equals(id)) {
-                bills.remove(bill);
-            }
-        }
+        bills.removeIf(bill -> bill.getId().equals(id));
     }
+
 }
