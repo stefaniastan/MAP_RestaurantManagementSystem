@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chefs</title>
+</head>
+<body>
+<h2>Chefs</h2>
+
+<a href="/chefs/new">Add New Chef</a>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rating</th>
+        <th>Specialization</th>
+        <th>Age</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="chef : ${chefs}">
+        <td th:text="${chef.id}"></td>
+        <td th:text="${chef.name}"></td>
+        <td th:text="${chef.rating}"></td>
+        <td th:text="${chef.specialization}"></td>
+        <td th:text="${chef.age}"></td>
+        <td>
+            <form th:action="@{'/chefs/' + ${chef.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

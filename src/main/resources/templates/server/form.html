@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Server</title>
+</head>
+<body>
+<h2>Add New Server</h2>
+
+<form th:action="@{/servers}" th:object="${server}" method="post">
+    <label>ID:</label>
+    <input type="text" th:field="*{id}" required><br>
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required><br>
+
+    <label>Designation:</label>
+    <input type="text" th:field="*{designation}" required><br>
+
+    <label>Rating:</label>
+    <input type="text" th:field="*{rating}" required><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/servers">⬅️ Back to list</a>
+</body>
+</html>
