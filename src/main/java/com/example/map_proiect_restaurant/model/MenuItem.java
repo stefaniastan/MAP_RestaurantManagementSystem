@@ -15,14 +15,14 @@ public class MenuItem {
         return Id;
     }
     public void setId(String id) {
-        this.Id = Id;
+        this.Id = id;
     }
 
     public String getName() {
         return Name;
     }
     public void setName(String name) {
-        this.Name = Name;
+        this.Name = name;
     }
 
     public double getPrice() {
