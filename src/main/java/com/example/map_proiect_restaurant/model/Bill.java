@@ -1,9 +1,13 @@
 package com.example.map_proiect_restaurant.model;
 
-public class Bill {
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
+public class Bill implements InFileRepository.IdProvider {
     private String Id;
     private String orderId;
     private double totalAmount;
+
+    public Bill(){}
 
     public Bill(String Id, String orderId, double totalAmount) {
         this.Id = Id;
@@ -11,10 +15,12 @@ public class Bill {
         this.totalAmount = totalAmount;
 
     }
-
+    @Override
     public String getId() {
         return Id;
     }
+
+    @Override
     public void setId(String Id) {
         this.Id = Id;
     }

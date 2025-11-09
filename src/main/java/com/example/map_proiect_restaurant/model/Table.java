@@ -1,13 +1,17 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
 import java.util.List;
 
-public class Table {
+public class Table implements InFileRepository.IdProvider{
 
     private String Id;
     private Integer number;
     private String occupiedStatus;
     private List<Order> orders;
+
+    public Table(){}
 
     public Table(String Id, String occupiedStatus, Integer number, List<Order> orders) {
         this.Id = Id;
@@ -16,11 +20,12 @@ public class Table {
         this.orders = orders;
 
     }
-
+    @Override
     public String getId(){
         return Id;
     }
 
+    @Override
     public void setId(String Id){
         this.Id = Id;
     }

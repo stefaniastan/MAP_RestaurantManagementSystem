@@ -1,19 +1,25 @@
 package com.example.map_proiect_restaurant.model;
 
-public class MenuItem {
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
+public class MenuItem implements InFileRepository.IdProvider{
     private String Id;
     private String Name;
     private double price;
+
+    public MenuItem() {}
 
     public MenuItem(String Id, String Name, double price){
         this.Id = Id;
         this.Name = Name;
         this.price = price;
     }
-
+    @Override
     public String getId() {
         return Id;
     }
+
+    @Override
     public void setId(String id) {
         this.Id = id;
     }

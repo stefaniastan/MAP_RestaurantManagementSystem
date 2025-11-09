@@ -1,9 +1,13 @@
 package com.example.map_proiect_restaurant.model;
 
-public class OrderLine {
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
+public class OrderLine implements InFileRepository.IdProvider {
     private String Id;
     private String menuItemId;
     private double quantity;
+
+    public OrderLine(){}
 
     public OrderLine(String Id, String menuItemId, double quantity) {
         this.Id = Id;
@@ -11,7 +15,10 @@ public class OrderLine {
         this.quantity = quantity;
 
     }
+    @Override
     public String getId() {return this.Id;}
+
+    @Override
     public void setId(String Id) {this.Id = Id;}
 
     public String getMenuItemId() {return this.menuItemId;}

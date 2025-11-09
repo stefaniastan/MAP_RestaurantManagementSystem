@@ -1,14 +1,29 @@
 package com.example.map_proiect_restaurant.model;
 
-public class Chef extends Staff{
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
+public class Chef extends Staff implements InFileRepository.IdProvider {
 
     private String specialization;
     private Integer Age;
+
+    public Chef(){
+        super("", "", "");
+    }
 
     public Chef(String Id, String name, String Rating, String specialization,  Integer Age){
         super(Id, name, Rating);
         this.specialization = specialization;
         this.Age = Age;
+    }
+
+    @Override
+    public String getId() {
+        return super.getId();
+    }
+    @Override
+    public void setId(String Id) {
+        super.setId(Id);
     }
 
     public String getSpecialization() {

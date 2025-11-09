@@ -1,14 +1,18 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.example.map_proiect_restaurant.repository.InFileRepository;
+
 import java.util.List;
 
-public class Order {
+public class Order implements InFileRepository.IdProvider{
     private String Id;
     private String customerId;
     private String tableId;
     private String status;
     private List<OrderLine> orderLines;
     private List<OrderAssignment> assignments;
+
+    public Order(){}
 
     public Order(String Id, String customerId, String tableId, String status, List<OrderLine> orderLines, List<OrderAssignment> assignments) {
         this.Id = Id;
@@ -19,10 +23,12 @@ public class Order {
         this.assignments = assignments;
 
     }
-
+    @Override
     public String getId() {
         return Id;
     }
+
+    @Override
     public void setId(String Id) {
         this.Id = Id;
     }
