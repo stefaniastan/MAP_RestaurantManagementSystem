@@ -4,8 +4,8 @@ public class Server extends Staff{
 
     private String designation;
 
-    public Server(String Id, String Name, String designation, String Rating) {
-        super(Id,Name, Rating);
+    public Server(String Id, String name, String designation, String Rating) {
+        super(Id,name, Rating);
         this.designation = designation;
     }
 

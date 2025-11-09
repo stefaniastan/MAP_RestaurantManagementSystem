@@ -5,8 +5,8 @@ public class Chef extends Staff{
     private String specialization;
     private Integer Age;
 
-    public Chef(String Id, String Name, String Rating, String specialization,  Integer Age){
-        super(Id, Name, Rating);
+    public Chef(String Id, String name, String Rating, String specialization,  Integer Age){
+        super(Id, name, Rating);
         this.specialization = specialization;
         this.Age = Age;
     }
