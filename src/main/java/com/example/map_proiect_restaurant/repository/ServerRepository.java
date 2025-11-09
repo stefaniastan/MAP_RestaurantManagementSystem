@@ -3,41 +3,9 @@ package com.example.map_proiect_restaurant.repository;
 import com.example.map_proiect_restaurant.model.Server;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @Repository
-public class ServerRepository implements AbstractRepository<Server>{
-    private final List<Server> servers = new ArrayList<>(Arrays.asList(
-            new Server("Server1", "Ana", "Hall1", "Great"),
-            new Server("Server2", "Alex", "Hall2", "Good")
-    ));
-
-    @Override
-    public Server save(Server server) {
-        servers.add(server);
-        return server;
+public class ServerRepository extends InFileRepository<Server> {
+    public ServerRepository() {
+        super(Server.class, "src/main/resources/data/servers.json");
     }
-
-    @Override
-    public List<Server> findAll() {
-        return servers;
-    }
-
-    @Override
-    public Server findById(String id) {
-        for (Server server : servers) {
-            if (server.getId().equals(id)) {
-                return server;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void deleteById(String id) {
-        servers.removeIf(server -> server.getId().equals(id));
-    }
-
 }
