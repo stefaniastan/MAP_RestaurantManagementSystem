@@ -1,0 +1,12 @@
+[
+  {"Id": "Server-1", "Name": "Bianca", "Rating": "A", "designation": "Waiter"},
+  {"Id": "Server-2", "Name": "Mihai", "Rating": "A-", "designation": "Waiter"},
+  {"Id": "Server-3", "Name": "Diana", "Rating": "B+", "designation": "Host"},
+  {"Id": "Server-4", "Name": "Radu", "Rating": "A", "designation": "Waiter"},
+  {"Id": "Server-5", "Name": "Carmen", "Rating": "A", "designation": "Host"},
+  {"Id": "Server-6", "Name": "Lucian", "Rating": "B", "designation": "Waiter"},
+  {"Id": "Server-7", "Name": "Elisa", "Rating": "A", "designation": "Host"},
+  {"Id": "Server-8", "Name": "Tudor", "Rating": "A", "designation": "Waiter"},
+  {"Id": "Server-9", "Name": "Alina", "Rating": "B+", "designation": "Host"},
+  {"Id": "Server-10", "Name": "Cristi", "Rating": "A-", "designation": "Waiter"}
+]

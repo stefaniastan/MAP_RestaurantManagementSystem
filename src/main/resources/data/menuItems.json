@@ -1,0 +1,12 @@
+[
+{"Id": "MenuItem-1", "Name": "Spaghetti Carbonara", "price": 35.50},
+{"Id": "MenuItem-2", "Name": "Pizza Margherita", "price": 28.00},
+{"Id": "MenuItem-3", "Name": "Caesar Salad", "price": 24.50},
+{"Id": "MenuItem-4", "Name": "Grilled Salmon", "price": 48.00},
+{"Id": "MenuItem-5", "Name": "Tiramisu", "price": 20.00},
+{"Id": "MenuItem-6", "Name": "Ribeye Steak", "price": 60.00},
+{"Id": "MenuItem-7", "Name": "Vegetarian Burger", "price": 32.50},
+{"Id": "MenuItem-8", "Name": "Tomato Soup", "price": 18.00},
+{"Id": "MenuItem-9", "Name": "Seafood Risotto", "price": 45.00},
+{"Id": "MenuItem-10", "Name": "Panna Cotta", "price": 19.00}
+]

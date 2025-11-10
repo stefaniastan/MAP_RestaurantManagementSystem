@@ -1,0 +1,12 @@
+[
+  {"Id": "Chef-1", "Name": "Marius", "Rating": "A", "specialization": "Italian", "Age": 34},
+  {"Id": "Chef-2", "Name": "Ana", "Rating": "B+", "specialization": "Desserts", "Age": 28},
+  {"Id": "Chef-3", "Name": "Vlad", "Rating": "A", "specialization": "Seafood", "Age": 39},
+  {"Id": "Chef-4", "Name": "Ioana", "Rating": "A", "specialization": "Asian", "Age": 32},
+  {"Id": "Chef-5", "Name": "George", "Rating": "B", "specialization": "Steak", "Age": 45},
+  {"Id": "Chef-6", "Name": "Raluca", "Rating": "A", "specialization": "Vegan", "Age": 30},
+  {"Id": "Chef-7", "Name": "Sorin", "Rating": "A-", "specialization": "Pasta", "Age": 33},
+  {"Id": "Chef-8", "Name": "Elena", "Rating": "B+", "specialization": "Salads", "Age": 26},
+  {"Id": "Chef-9", "Name": "Andrei", "Rating": "A", "specialization": "Grill", "Age": 37},
+  {"Id": "Chef-10", "Name": "Paula", "Rating": "A", "specialization": "Sushi", "Age": 31}
+]

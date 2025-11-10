@@ -1,0 +1,12 @@
+[
+  {"Id": "Table-1", "number": 1, "occupiedStatus": "Free", "orders": []},
+  {"Id": "Table-2", "number": 2, "occupiedStatus": "Occupied", "orders": []},
+  {"Id": "Table-3", "number": 3, "occupiedStatus": "Free", "orders": []},
+  {"Id": "Table-4", "number": 4, "occupiedStatus": "Occupied", "orders": []},
+  {"Id": "Table-5", "number": 5, "occupiedStatus": "Free", "orders": []},
+  {"Id": "Table-6", "number": 6, "occupiedStatus": "Free", "orders": []},
+  {"Id": "Table-7", "number": 7, "occupiedStatus": "Occupied", "orders": []},
+  {"Id": "Table-8", "number": 8, "occupiedStatus": "Free", "orders": []},
+  {"Id": "Table-9", "number": 9, "occupiedStatus": "Occupied", "orders": []},
+  {"Id": "Table-10", "number": 10, "occupiedStatus": "Free", "orders": []}
+]

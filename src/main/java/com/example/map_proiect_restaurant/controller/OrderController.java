@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/orders")
+@RequestMapping("/orders.json")
 public class OrderController {
 
     private final OrderService orderService;
@@ -20,7 +20,7 @@ public class OrderController {
 
     @GetMapping
     public String getAllOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("orders.json", orderService.getAllOrders());
         return "order/index";
     }
 
@@ -40,13 +40,13 @@ public class OrderController {
     @PostMapping
     public String createOrder(@ModelAttribute Order order) {
         orderService.addOrder(order);
-        return "redirect:/orders";
+        return "redirect:/orders.json";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteOrder(@PathVariable String id) {
         orderService.deleteOrder(id);
-        return "redirect:/orders";
+        return "redirect:/orders.json";
     }
 }
 
