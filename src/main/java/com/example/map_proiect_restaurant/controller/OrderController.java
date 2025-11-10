@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/orders.json")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -26,7 +26,7 @@ public class OrderController {
 
     @GetMapping("/new")
     public String createForm(Model model) {
-        model.addAttribute("order", new Order(
+        model.addAttribute("orders", new Order(
                 "", // Id
                 "", // customerId
                 "", // tableId
@@ -40,13 +40,13 @@ public class OrderController {
     @PostMapping
     public String createOrder(@ModelAttribute Order order) {
         orderService.addOrder(order);
-        return "redirect:/orders.json";
+        return "redirect:/orders";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteOrder(@PathVariable String id) {
         orderService.deleteOrder(id);
-        return "redirect:/orders.json";
+        return "redirect:/orders";
     }
 }
 
