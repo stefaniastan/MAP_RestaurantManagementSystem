@@ -1,12 +1,12 @@
 [
-  {"Id": "Line-1", "menuItemId": "MenuItem-1", "quantity": 2},
-  {"Id": "Line-2", "menuItemId": "MenuItem-2", "quantity": 1},
-  {"Id": "Line-3", "menuItemId": "MenuItem-3", "quantity": 3},
-  {"Id": "Line-4", "menuItemId": "MenuItem-4", "quantity": 1},
-  {"Id": "Line-5", "menuItemId": "MenuItem-5", "quantity": 2},
-  {"Id": "Line-6", "menuItemId": "MenuItem-6", "quantity": 1},
-  {"Id": "Line-7", "menuItemId": "MenuItem-7", "quantity": 2},
-  {"Id": "Line-8", "menuItemId": "MenuItem-8", "quantity": 4},
-  {"Id": "Line-9", "menuItemId": "MenuItem-9", "quantity": 1},
-  {"Id": "Line-10", "menuItemId": "MenuItem-10", "quantity": 3}
+  { "menuItemId": "MenuItem-1", "quantity": 2.0, "id": "Line-1", "Id": "Line-1" },
+  { "menuItemId": "MenuItem-2", "quantity": 1.0, "id": "Line-2", "Id": "Line-2" },
+  { "menuItemId": "MenuItem-3", "quantity": 3.0, "id": "Line-3", "Id": "Line-3" },
+  { "menuItemId": "MenuItem-4", "quantity": 2.0, "id": "Line-4", "Id": "Line-4" },
+  { "menuItemId": "MenuItem-5", "quantity": 1.0, "id": "Line-5", "Id": "Line-5" },
+  { "menuItemId": "MenuItem-6", "quantity": 4.0, "id": "Line-6", "Id": "Line-6" },
+  { "menuItemId": "MenuItem-7", "quantity": 2.0, "id": "Line-7", "Id": "Line-7" },
+  { "menuItemId": "MenuItem-8", "quantity": 4.0, "id": "Line-8", "Id": "Line-8" },
+  { "menuItemId": "MenuItem-9", "quantity": 1.0, "id": "Line-9", "Id": "Line-9" },
+  { "menuItemId": "MenuItem-10", "quantity": 3.0, "id": "Line-10", "Id": "Line-10" }
 ]

@@ -1,12 +1,12 @@
 [
-  {"Id": "Server-1", "Name": "Bianca", "Rating": "A", "designation": "Waiter"},
-  {"Id": "Server-2", "Name": "Mihai", "Rating": "A-", "designation": "Waiter"},
-  {"Id": "Server-3", "Name": "Diana", "Rating": "B+", "designation": "Host"},
-  {"Id": "Server-4", "Name": "Radu", "Rating": "A", "designation": "Waiter"},
-  {"Id": "Server-5", "Name": "Carmen", "Rating": "A", "designation": "Host"},
-  {"Id": "Server-6", "Name": "Lucian", "Rating": "B", "designation": "Waiter"},
-  {"Id": "Server-7", "Name": "Elisa", "Rating": "A", "designation": "Host"},
-  {"Id": "Server-8", "Name": "Tudor", "Rating": "A", "designation": "Waiter"},
-  {"Id": "Server-9", "Name": "Alina", "Rating": "B+", "designation": "Host"},
-  {"Id": "Server-10", "Name": "Cristi", "Rating": "A-", "designation": "Waiter"}
+  { "designation": "Hall 1", "id": "Server-1", "name": "Bianca", "rating": "A", "Id": "Server-1", "Name": "Bianca", "Rating": "A" },
+  { "designation": "Hall 2", "id": "Server-2", "name": "Mihai", "rating": "A-", "Id": "Server-2", "Name": "Mihai", "Rating": "A-" },
+  { "designation": "Hall 3", "id": "Server-3", "name": "Diana", "rating": "B+", "Id": "Server-3", "Name": "Diana", "Rating": "B+" },
+  { "designation": "Hall 4", "id": "Server-4", "name": "Radu", "rating": "A", "Id": "Server-4", "Name": "Radu", "Rating": "A" },
+  { "designation": "Hall 5", "id": "Server-5", "name": "Carmen", "rating": "A", "Id": "Server-5", "Name": "Carmen", "Rating": "A" },
+  { "designation": "Hall 6", "id": "Server-6", "name": "Andreea", "rating": "B", "Id": "Server-6", "Name": "Andreea", "Rating": "B" },
+  { "designation": "Hall 7", "id": "Server-7", "name": "Vlad", "rating": "A-", "Id": "Server-7", "Name": "Vlad", "Rating": "A-" },
+  { "designation": "Hall 8", "id": "Server-8", "name": "Elena", "rating": "B+", "Id": "Server-8", "Name": "Elena", "Rating": "B+" },
+  { "designation": "Hall 9", "id": "Server-9", "name": "Marius", "rating": "A", "Id": "Server-9", "Name": "Marius", "Rating": "A" },
+  { "designation": "Hall 10", "id": "Server-10", "name": "Raluca", "rating": "A", "Id": "Server-10", "Name": "Raluca", "Rating": "A" }
 ]

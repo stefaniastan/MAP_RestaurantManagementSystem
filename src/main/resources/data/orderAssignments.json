@@ -1,12 +1,12 @@
 [
-  {"Id": "Assignment-1", "orderId": "Order-1", "staffId": "Chef-1"},
-  {"Id": "Assignment-2", "orderId": "Order-2", "staffId": "Chef-2"},
-  {"Id": "Assignment-3", "orderId": "Order-3", "staffId": "Server-1"},
-  {"Id": "Assignment-4", "orderId": "Order-4", "staffId": "Chef-3"},
-  {"Id": "Assignment-5", "orderId": "Order-5", "staffId": "Server-2"},
-  {"Id": "Assignment-6", "orderId": "Order-6", "staffId": "Chef-4"},
-  {"Id": "Assignment-7", "orderId": "Order-7", "staffId": "Server-3"},
-  {"Id": "Assignment-8", "orderId": "Order-8", "staffId": "Chef-5"},
-  {"Id": "Assignment-9", "orderId": "Order-9", "staffId": "Server-4"},
-  {"Id": "Assignment-10", "orderId": "Order-10", "staffId": "Chef-6"}
+  { "orderId": "Order-1", "staffId": "Chef-1", "id": "Assignment-1", "Id": "Assignment-1" },
+  { "orderId": "Order-2", "staffId": "Chef-2", "id": "Assignment-2", "Id": "Assignment-2" },
+  { "orderId": "Order-3", "staffId": "Chef-3", "id": "Assignment-3", "Id": "Assignment-3" },
+  { "orderId": "Order-4", "staffId": "Chef-4", "id": "Assignment-4", "Id": "Assignment-4" },
+  { "orderId": "Order-5", "staffId": "Server-1", "id": "Assignment-5", "Id": "Assignment-5" },
+  { "orderId": "Order-6", "staffId": "Server-2", "id": "Assignment-6", "Id": "Assignment-6" },
+  { "orderId": "Order-7", "staffId": "Server-3", "id": "Assignment-7", "Id": "Assignment-7" },
+  { "orderId": "Order-8", "staffId": "Chef-5", "id": "Assignment-8", "Id": "Assignment-8" },
+  { "orderId": "Order-9", "staffId": "Server-4", "id": "Assignment-9", "Id": "Assignment-9" },
+  { "orderId": "Order-10", "staffId": "Chef-6", "id": "Assignment-10", "Id": "Assignment-10" }
 ]

@@ -19,7 +19,7 @@ public abstract class Staff {
     public void setId(String Id) {this.Id = Id;}
 
     public String getName() {return this.Name;}
-    public void setName(String name) { this.Name = Name;}
+    public void setName(String name) { this.Name = name;}
 
     public String getRating() {return this.Rating;}
     public void setRating(String Rating) {this.Rating = Rating;}
