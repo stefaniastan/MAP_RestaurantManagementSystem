@@ -1,10 +1,12 @@
 package com.example.map_proiect_restaurant.model;
 
 import com.example.map_proiect_restaurant.repository.InFileRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Chef extends Staff implements InFileRepository.IdProvider {
-
+    @JsonProperty("specialization")
     private String specialization;
+    @JsonProperty("Age")
     private Integer Age;
 
     public Chef(){

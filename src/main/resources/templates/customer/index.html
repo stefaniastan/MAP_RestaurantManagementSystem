@@ -18,13 +18,13 @@
         <th>Action</th>
     </tr>
     <tr th:each="customer : ${customers}">
-        <td th:text="${customer.Id}"></td>
-        <td th:text="${customer.Name}"></td>
-        <td th:text="${customer.Adress}"></td>
-        <td th:text="${customer.Email}"></td>
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.adress}"></td>
+        <td th:text="${customer.email}"></td>
         <td th:text="${customer.orders != null ? customer.orders.size() : 0}"></td>
         <td>
-            <form th:action="@{'/customers/' + ${customer.Id} + '/delete'}" method="post">
+            <form th:action="@{'/customers/' + ${customer.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>

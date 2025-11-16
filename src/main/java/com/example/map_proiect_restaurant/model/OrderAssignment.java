@@ -1,8 +1,10 @@
 package com.example.map_proiect_restaurant.model;
 
 import com.example.map_proiect_restaurant.repository.InFileRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrderAssignment implements InFileRepository.IdProvider {
+    @JsonProperty("Id")
     private String Id;
     private String orderId;
     private String staffId;

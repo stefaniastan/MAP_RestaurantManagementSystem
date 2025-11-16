@@ -1,72 +1,25 @@
-[
-  {
-    "Id": "Customer-1",
-    "Name": "Stefania",
-    "orders": [],
-    "Adress": "Str. Avram Iancu 1",
-    "Email": "stefania@example.com"
-  },
-  {
-    "Id": "Customer-2",
-    "Name": "Andrei",
-    "orders": [],
-    "Adress": "Str. Balcescu 5",
-    "Email": "andrei@example.com"
-  },
-  {
-    "Id": "Customer-3",
-    "Name": "Ioana",
-    "orders": [],
-    "Adress": "Str. Libertatii 12",
-    "Email": "ioana@example.com"
-  },
-  {
-    "Id": "Customer-4",
-    "Name": "Mihai",
-    "orders": [],
-    "Adress": "Str. Principala 3",
-    "Email": "mihai@example.com"
-  },
-  {
-    "Id": "Customer-5",
-    "Name": "Raluca",
-    "orders": [],
-    "Adress": "Str. Unirii 8",
-    "Email": "raluca@example.com"
-  },
-  {
-    "Id": "Customer-6",
-    "Name": "Gabriel",
-    "orders": [],
-    "Adress": "Str. Dealului 20",
-    "Email": "gabriel@example.com"
-  },
-  {
-    "Id": "Customer-7",
-    "Name": "Cristina",
-    "orders": [],
-    "Adress": "Str. Lacului 7",
-    "Email": "cristina@example.com"
-  },
-  {
-    "Id": "Customer-8",
-    "Name": "Radu",
-    "orders": [],
-    "Adress": "Str. Florilor 2",
-    "Email": "radu@example.com"
-  },
-  {
-    "Id": "Customer-9",
-    "Name": "Adina",
-    "orders": [],
-    "Adress": "Str. Miorita 14",
-    "Email": "adina@example.com"
-  },
-  {
-    "Id": "Customer-10",
-    "Name": "Vlad",
-    "orders": [],
-    "Adress": "Str. Pescariu 9",
-    "Email": "vlad@example.com"
-  }
-]
+[ {
+  "id" : "Customer-7",
+  "name" : "Cristina",
+  "orders" : [ ],
+  "adress" : "Str. Lacului 7",
+  "email" : "cristina@example.com"
+}, {
+  "id" : "Customer-8",
+  "name" : "Radu",
+  "orders" : [ ],
+  "adress" : "Str. Florilor 2",
+  "email" : "radu@example.com"
+}, {
+  "id" : "Customer-9",
+  "name" : "Adina",
+  "orders" : [ ],
+  "adress" : "Str. Miorita 14",
+  "email" : "adina@example.com"
+}, {
+  "id" : "Customer-10",
+  "name" : "Vlad",
+  "orders" : [ ],
+  "adress" : "Str. Pescariu 9",
+  "email" : "vlad@example.com"
+} ]

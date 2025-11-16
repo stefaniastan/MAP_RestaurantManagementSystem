@@ -1,8 +1,13 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public abstract class Staff {
+    @JsonProperty("Id")
     private String Id;
+    @JsonProperty("Name")
     private String Name;
+    @JsonProperty("Rating")
     private String Rating;
 
     public  Staff(String Id, String name, String Rating) {
