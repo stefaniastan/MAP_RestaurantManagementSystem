@@ -34,20 +34,12 @@ public class InFileRepository<T> implements AbstractRepository<T> {
                 file.createNewFile();
                 objectMapper.writeValue(file, new ArrayList<>());
             }
-
-            // Folosim JavaType pentru conversia corectă
-            var collectionType = objectMapper
-                    .getTypeFactory()
-                    .constructCollectionType(List.class, type);
-
-            return objectMapper.readValue(file, collectionType);
-
+            return objectMapper.readValue(file, new TypeReference<List<T>>() {});
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
-
 
     // === Save data to JSON file ===
     private void saveData() {
