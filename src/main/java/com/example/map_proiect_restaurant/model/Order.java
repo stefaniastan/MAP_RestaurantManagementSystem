@@ -10,13 +10,13 @@ public class Order implements InFileRepository.IdProvider{
     private String Id;
     private String customerId;
     private String tableId;
-    private String status;
+    private OrderStatusEnum status;
     private List<OrderLine> orderLines;
     private List<OrderAssignment> assignments;
 
     public Order(){}
 
-    public Order(String Id, String customerId, String tableId, String status, List<OrderLine> orderLines, List<OrderAssignment> assignments) {
+    public Order(String Id, String customerId, String tableId, OrderStatusEnum status, List<OrderLine> orderLines, List<OrderAssignment> assignments) {
         this.Id = Id;
         this.customerId = customerId;
         this.tableId = tableId;
@@ -51,10 +51,10 @@ public class Order implements InFileRepository.IdProvider{
         this.tableId = tableId;
     }
 
-    public String getStatus() {
+    public OrderStatusEnum getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(OrderStatusEnum status) {
         this.status = status;
     }
 

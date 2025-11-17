@@ -54,10 +54,16 @@
   "email" : "cristi@example.com"
 }, {
   "id" : "Customer-20",
-  "name" : "Raluca",
+  "name" : "Cristi",
+  "orders" : [ ],
+  "adress" : "Str. Trandafirilor 9",
+  "email" : "cristi@example.com"
+}, {
+  "id" : "Customer-21",
+  "name" : "Puiu",
   "orders" : null,
-  "adress" : "Str. Viilor 11",
-  "email" : "raluca@example.com"
+  "adress" : "Str penticostalului 29",
+  "email" : "puiu@gmail.com"
 }, {
   "id" : "Customer-21",
   "name" : "Igor",

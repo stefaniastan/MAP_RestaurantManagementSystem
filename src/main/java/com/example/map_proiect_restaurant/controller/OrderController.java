@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Order;
+import com.example.map_proiect_restaurant.model.OrderStatusEnum;
 import com.example.map_proiect_restaurant.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ public class OrderController {
                 "", // Id
                 "", // customerId
                 "", // tableId
-                "open", // status
+                OrderStatusEnum.pending, // status
                 new ArrayList<>(), // orderLines
                 new ArrayList<>()  // assignments
         ));
