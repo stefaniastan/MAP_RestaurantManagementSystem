@@ -4,36 +4,34 @@ import com.example.map_proiect_restaurant.repository.InFileRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MenuItem implements InFileRepository.IdProvider{
-    @JsonProperty("Id")
-    private String Id;
-    @JsonProperty("Name")
-    private String Name;
+    private String id;
+    private String name;
     private double price;
 
     public MenuItem() {}
 
-    public MenuItem(String Id, String Name, double price){
-        this.Id = Id;
-        this.Name = Name;
+    public MenuItem(String id, String name, double price){
+        this.id = id;
+        this.name = name;
         this.price = price;
     }
 
 
     @Override
     public String getId() {
-        return Id;
+        return id;
     }
 
     @Override
     public void setId(String id) {
-        this.Id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
     public double getPrice() {

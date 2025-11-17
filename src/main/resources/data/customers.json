@@ -1,12 +1,61 @@
-[
-  { "id": "Customer-11", "name": "Ana", "orders": [], "adress": "Str. Florilor 10", "email": "ana@example.com" },
-  { "id": "Customer-12", "name": "Mihai", "orders": [], "adress": "Str. Soarelui 5", "email": "mihai@example.com" },
-  { "id": "Customer-13", "name": "Ioana", "orders": [], "adress": "Str. Carpatilor 3", "email": "ioana@example.com" },
-  { "id": "Customer-14", "name": "Roxana", "orders": [], "adress": "Str. Libertatii 8", "email": "roxana@example.com" },
-  { "id": "Customer-15", "name": "Vlad", "orders": [], "adress": "Str. Castanilor 12", "email": "vlad2@example.com" },
-  { "id": "Customer-16", "name": "Andreea", "orders": [], "adress": "Str. Magnoliei 7", "email": "andreea@example.com" },
-  { "id": "Customer-17", "name": "Bogdan", "orders": [], "adress": "Str. Bradului 4", "email": "bogdan@example.com" },
-  { "id": "Customer-18", "name": "Elena", "orders": [], "adress": "Str. Lalelelor 6", "email": "elena@example.com" },
-  { "id": "Customer-19", "name": "Cristi", "orders": [], "adress": "Str. Trandafirilor 9", "email": "cristi@example.com" },
-  { "id": "Customer-20", "name": "Raluca", "orders": [], "adress": "Str. Viilor 11", "email": "raluca@example.com" }
-]
+[ {
+  "id" : "Customer-11",
+  "name" : "Ana",
+  "orders" : [ ],
+  "adress" : "Str. Florilor 10",
+  "email" : "ana@example.com"
+}, {
+  "id" : "Customer-12",
+  "name" : "Mihai",
+  "orders" : [ ],
+  "adress" : "Str. Soarelui 5",
+  "email" : "mihai@example.com"
+}, {
+  "id" : "Customer-13",
+  "name" : "Ioana",
+  "orders" : [ ],
+  "adress" : "Str. Carpatilor 3",
+  "email" : "ioana@example.com"
+}, {
+  "id" : "Customer-14",
+  "name" : "Roxana",
+  "orders" : [ ],
+  "adress" : "Str. Libertatii 8",
+  "email" : "roxana@example.com"
+}, {
+  "id" : "Customer-15",
+  "name" : "Vlad",
+  "orders" : [ ],
+  "adress" : "Str. Castanilor 12",
+  "email" : "vlad2@example.com"
+}, {
+  "id" : "Customer-16",
+  "name" : "Andreea",
+  "orders" : [ ],
+  "adress" : "Str. Magnoliei 7",
+  "email" : "andreea@example.com"
+}, {
+  "id" : "Customer-17",
+  "name" : "Bogdan",
+  "orders" : [ ],
+  "adress" : "Str. Bradului 4",
+  "email" : "bogdan@example.com"
+}, {
+  "id" : "Customer-18",
+  "name" : "Elena",
+  "orders" : [ ],
+  "adress" : "Str. Lalelelor 6",
+  "email" : "elena@example.com"
+}, {
+  "id" : "Customer-19",
+  "name" : "Cristi",
+  "orders" : [ ],
+  "adress" : "Str. Trandafirilor 9",
+  "email" : "cristi@example.com"
+}, {
+  "id" : "Customer-20",
+  "name" : "Raluca",
+  "orders" : null,
+  "adress" : "Str. Viilor 11",
+  "email" : "raluca@example.com"
+} ]
