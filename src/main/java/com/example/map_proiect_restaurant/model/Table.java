@@ -9,12 +9,12 @@ public class Table implements InFileRepository.IdProvider{
     @JsonProperty("Id")
     private String Id;
     private Integer number;
-    private String occupiedStatus;
+    private TableStatusEnum occupiedStatus;
     private List<Order> orders;
 
     public Table(){}
 
-    public Table(String Id, String occupiedStatus, Integer number, List<Order> orders) {
+    public Table(String Id, TableStatusEnum occupiedStatus, Integer number, List<Order> orders) {
         this.Id = Id;
         this.occupiedStatus = occupiedStatus;
         this.number = number;
@@ -31,11 +31,11 @@ public class Table implements InFileRepository.IdProvider{
         this.Id = Id;
     }
 
-    public String getOccupiedStatus(){
+    public TableStatusEnum getOccupiedStatus(){
         return occupiedStatus;
     }
 
-    public void setOccupiedStatus(String occupiedStatus){
+    public void setOccupiedStatus(TableStatusEnum occupiedStatus){
         this.occupiedStatus = occupiedStatus;
     }
 

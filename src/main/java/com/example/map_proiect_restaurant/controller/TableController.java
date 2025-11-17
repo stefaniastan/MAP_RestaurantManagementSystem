@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Table;
+import com.example.map_proiect_restaurant.model.TableStatusEnum;
 import com.example.map_proiect_restaurant.service.TableService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class TableController {
     // 🔹 GET form (for create)
     @GetMapping("/new")
     public String createForm(Model model) {
-        model.addAttribute("table", new Table("", "free", 0, null));
+        model.addAttribute("table", new Table("", TableStatusEnum.free, 0, null));
         return "table/form";
     }
 
