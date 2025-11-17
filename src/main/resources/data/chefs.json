@@ -98,14 +98,4 @@
   "Rating" : "B",
   "specialization" : "Grill",
   "Age" : 34
-}, {
-  "id" : "Chef-21",
-  "age" : 29,
-  "name" : "Maria",
-  "rating" : "A",
-  "Id" : "Chef-21",
-  "Name" : "Maria",
-  "Rating" : "A",
-  "specialization" : "Tortellini",
-  "Age" : 29
 } ]
