@@ -1,12 +1,12 @@
 [
-  { "price": 24.5, "name": "Caesar Salad", "id": "MenuItem-3", "Id": "MenuItem-3", "Name": "Caesar Salad" },
-  { "price": 48.0, "name": "Grilled Salmon", "id": "MenuItem-4", "Id": "MenuItem-4", "Name": "Grilled Salmon" },
-  { "price": 20.0, "name": "Tiramisu", "id": "MenuItem-5", "Id": "MenuItem-5", "Name": "Tiramisu" },
-  { "price": 60.0, "name": "Ribeye Steak", "id": "MenuItem-6", "Id": "MenuItem-6", "Name": "Ribeye Steak" },
-  { "price": 32.5, "name": "Vegetarian Burger", "id": "MenuItem-7", "Id": "MenuItem-7", "Name": "Vegetarian Burger" },
-  { "price": 18.0, "name": "Tomato Soup", "id": "MenuItem-8", "Id": "MenuItem-8", "Name": "Tomato Soup" },
-  { "price": 45.0, "name": "Seafood Risotto", "id": "MenuItem-9", "Id": "MenuItem-9", "Name": "Seafood Risotto" },
-  { "price": 19.0, "name": "Panna Cotta", "id": "MenuItem-10", "Id": "MenuItem-10", "Name": "Panna Cotta" },
-  { "price": 12.0, "name": "Mushroom Soup", "id": "MenuItem-11", "Id": "MenuItem-11", "Name": "Mushroom Soup" },
-  { "price": 25.0, "name": "Margherita Pizza", "id": "MenuItem-12", "Id": "MenuItem-12", "Name": "Margherita Pizza" }
+  { "price": 24.5, "name": "Caesar Salad", "id": "MenuItem-3"},
+  { "price": 48.0, "name": "Grilled Salmon", "id": "MenuItem-4" },
+  { "price": 20.0, "name": "Tiramisu", "id": "MenuItem-5" },
+  { "price": 60.0, "name": "Ribeye Steak", "id": "MenuItem-6" },
+  { "price": 32.5, "name": "Vegetarian Burger", "id": "MenuItem-7" },
+  { "price": 18.0, "name": "Tomato Soup", "id": "MenuItem-8" },
+  { "price": 45.0, "name": "Seafood Risotto", "id": "MenuItem-9"},
+  { "price": 19.0, "name": "Panna Cotta", "id": "MenuItem-10" },
+  { "price": 12.0, "name": "Mushroom Soup", "id": "MenuItem-11" },
+  { "price": 25.0, "name": "Margherita Pizza", "id": "MenuItem-12" }
 ]

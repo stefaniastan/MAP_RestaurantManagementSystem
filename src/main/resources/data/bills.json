@@ -1,12 +1,41 @@
-[
-  { "orderId": "Order-1", "totalAmount": 45.75, "id": "Bill-1", "Id": "Bill-1" },
-  { "orderId": "Order-2", "totalAmount": 120.5, "id": "Bill-2", "Id": "Bill-2" },
-  { "orderId": "Order-3", "totalAmount": 89.9, "id": "Bill-3", "Id": "Bill-3" },
-  { "orderId": "Order-4", "totalAmount": 55.25, "id": "Bill-4", "Id": "Bill-4" },
-  { "orderId": "Order-5", "totalAmount": 98.1, "id": "Bill-5", "Id": "Bill-5" },
-  { "orderId": "Order-6", "totalAmount": 130.0, "id": "Bill-6", "Id": "Bill-6" },
-  { "orderId": "Order-7", "totalAmount": 74.9, "id": "Bill-7", "Id": "Bill-7" },
-  { "orderId": "Order-8", "totalAmount": 160.45, "id": "Bill-8", "Id": "Bill-8" },
-  { "orderId": "Order-9", "totalAmount": 200.0, "id": "Bill-9", "Id": "Bill-9" },
-  { "orderId": "Order-10", "totalAmount": 110.3, "id": "Bill-10", "Id": "Bill-10" }
-]
+[ {
+  "id" : "Bill-1",
+  "orderId" : "Order-1",
+  "totalAmount" : 45.75
+}, {
+  "id" : "Bill-2",
+  "orderId" : "Order-2",
+  "totalAmount" : 120.5
+}, {
+  "id" : "Bill-3",
+  "orderId" : "Order-3",
+  "totalAmount" : 89.9
+}, {
+  "id" : "Bill-4",
+  "orderId" : "Order-4",
+  "totalAmount" : 55.25
+}, {
+  "id" : "Bill-5",
+  "orderId" : "Order-5",
+  "totalAmount" : 98.1
+}, {
+  "id" : "Bill-6",
+  "orderId" : "Order-6",
+  "totalAmount" : 130.0
+}, {
+  "id" : "Bill-7",
+  "orderId" : "Order-7",
+  "totalAmount" : 74.9
+}, {
+  "id" : "Bill-8",
+  "orderId" : "Order-8",
+  "totalAmount" : 160.45
+}, {
+  "id" : "Bill-9",
+  "orderId" : "Order-9",
+  "totalAmount" : 200.0
+}, {
+  "id" : "Bill-10",
+  "orderId" : "Order-10",
+  "totalAmount" : 113.3
+} ]

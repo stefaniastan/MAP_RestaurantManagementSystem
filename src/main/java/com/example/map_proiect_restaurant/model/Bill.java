@@ -4,28 +4,26 @@ import com.example.map_proiect_restaurant.repository.InFileRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Bill implements InFileRepository.IdProvider {
-    @JsonProperty("Id")
-
-    private String Id;
+    private String id;
     private String orderId;
     private double totalAmount;
 
     public Bill(){}
 
-    public Bill(String Id, String orderId, double totalAmount) {
-        this.Id = Id;
+    public Bill(String id, String orderId, double totalAmount) {
+        this.id = id;
         this.orderId = orderId;
         this.totalAmount = totalAmount;
 
     }
     @Override
     public String getId() {
-        return Id;
+        return id;
     }
 
     @Override
-    public void setId(String Id) {
-        this.Id = Id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOrderId() {
