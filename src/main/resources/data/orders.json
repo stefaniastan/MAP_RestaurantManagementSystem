@@ -1,13 +1,12 @@
 [
-{"id": "Order-1", "customerId": "Customer-1", "tableId": "Table-1", "status": "Delivered", "orderLines": [], "assignments": []},
-{"id": "Order-2", "customerId": "Customer-2", "tableId": "Table-2", "status": "Pending", "orderLines": [], "assignments": []},
-{"id": "Order-3", "customerId": "Customer-3", "tableId": "Table-3", "status": "Delivered", "orderLines": [], "assignments": []},
-{"id": "Order-4", "customerId": "Customer-4", "tableId": "Table-4", "status": "Cooking", "orderLines": [], "assignments": []},
-{"id": "Order-5", "customerId": "Customer-5", "tableId": "Table-5", "status": "Pending", "orderLines": [], "assignments": []},
-{"id": "Order-6", "customerId": "Customer-6", "tableId": "Table-6", "status": "Delivered", "orderLines": [], "assignments": []},
-{"id": "Order-7", "customerId": "Customer-7", "tableId": "Table-7", "status": "Cooking", "orderLines": [], "assignments": []},
-{"id": "Order-8", "customerId": "Customer-8", "tableId": "Table-8", "status": "Pending", "orderLines": [], "assignments": []},
-{"id": "Order-9", "customerId": "Customer-9", "tableId": "Table-9", "status": "Delivered", "orderLines": [], "assignments": []},
-{"id": "Order-10", "customerId": "Customer-10", "tableId": "Table-10", "status": "Cooking", "orderLines": [], "assignments": []}
+{"Id": "Order-1", "customerId": "Customer-1", "tableId": "Table-1", "status": "Delivered", "orderLines": [], "assignments": []},
+{"Id": "Order-2", "customerId": "Customer-2", "tableId": "Table-2", "status": "Pending", "orderLines": [], "assignments": []},
+{"Id": "Order-3", "customerId": "Customer-3", "tableId": "Table-3", "status": "Delivered", "orderLines": [], "assignments": []},
+{"Id": "Order-4", "customerId": "Customer-4", "tableId": "Table-4", "status": "Cooking", "orderLines": [], "assignments": []},
+{"Id": "Order-5", "customerId": "Customer-5", "tableId": "Table-5", "status": "Pending", "orderLines": [], "assignments": []},
+{"Id": "Order-6", "customerId": "Customer-6", "tableId": "Table-6", "status": "Delivered", "orderLines": [], "assignments": []},
+{"Id": "Order-7", "customerId": "Customer-7", "tableId": "Table-7", "status": "Cooking", "orderLines": [], "assignments": []},
+{"Id": "Order-8", "customerId": "Customer-8", "tableId": "Table-8", "status": "Pending", "orderLines": [], "assignments": []},
+{"Id": "Order-9", "customerId": "Customer-9", "tableId": "Table-9", "status": "Delivered", "orderLines": [], "assignments": []},
+{"Id": "Order-10", "customerId": "Customer-10", "tableId": "Table-10", "status": "Cooking", "orderLines": [], "assignments": []}
 ]
-

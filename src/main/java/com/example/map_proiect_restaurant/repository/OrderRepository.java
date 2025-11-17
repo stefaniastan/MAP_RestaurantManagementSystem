@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderRepository extends InFileRepository<Order> {
     public OrderRepository() {
-        super(Order.class, "data/orders.json");
+        super(Order.class, "src/main/resources/data/orders.json");
     }
 }

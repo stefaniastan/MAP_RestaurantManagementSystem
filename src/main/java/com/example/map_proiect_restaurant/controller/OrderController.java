@@ -20,13 +20,13 @@ public class OrderController {
 
     @GetMapping
     public String getAllOrders(Model model) {
-        model.addAttribute("orders.json", orderService.getAllOrders());
+        model.addAttribute("orders", orderService.getAllOrders());
         return "order/index";
     }
 
     @GetMapping("/new")
     public String createForm(Model model) {
-        model.addAttribute("orders", new Order(
+        model.addAttribute("order", new Order(
                 "", // Id
                 "", // customerId
                 "", // tableId
