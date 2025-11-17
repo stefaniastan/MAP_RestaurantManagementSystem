@@ -58,4 +58,10 @@
   "orders" : null,
   "adress" : "Str. Viilor 11",
   "email" : "raluca@example.com"
+}, {
+  "id" : "Customer-21",
+  "name" : "Igor",
+  "orders" : null,
+  "adress" : "Str. Cimitirului 30",
+  "email" : "Igor.nati@gmail.com"
 } ]

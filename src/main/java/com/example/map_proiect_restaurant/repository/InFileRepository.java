@@ -34,12 +34,19 @@ public class InFileRepository<T> implements AbstractRepository<T> {
                 file.createNewFile();
                 objectMapper.writeValue(file, new ArrayList<>());
             }
-            return objectMapper.readValue(file, new TypeReference<List<T>>() {});
+
+            // Correct type-safe deserialization
+            return objectMapper.readValue(
+                    file,
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, type)
+            );
+
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
+
 
     // === Save data to JSON file ===
     private void saveData() {
