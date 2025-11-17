@@ -64,4 +64,10 @@
   "orders" : null,
   "adress" : "Str. Cimitirului 30",
   "email" : "Igor.nati@gmail.com"
+}, {
+  "id" : "Customer-22",
+  "name" : "Igore",
+  "orders" : null,
+  "adress" : "Str. Cimitirului 31",
+  "email" : "Igor.pis@gmail.com"
 } ]
