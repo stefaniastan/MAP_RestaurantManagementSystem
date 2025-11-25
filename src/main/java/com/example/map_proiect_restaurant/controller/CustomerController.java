@@ -52,7 +52,7 @@ public class CustomerController {
         customerService.updateCustomer(customer);
         return "redirect:/customers";
     }
-
+//
     @PostMapping
     public String createCustomer(@ModelAttribute Customer customer) {
         customerService.addCustomer(customer);
