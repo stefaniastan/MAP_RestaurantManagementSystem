@@ -28,6 +28,17 @@ public class CustomerController {
         model.addAttribute("customer", new Customer("", "", null, "", ""));
         return "customer/form";
     }
+    @GetMapping("/{id}")
+    public String getCustomerDetails(@PathVariable String id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+
+        if (customer == null) {
+            return "redirect:/customers";
+        }
+
+        model.addAttribute("customer", customer);
+        return "customer/details";
+    }
 
     @PostMapping
     public String createCustomer(@ModelAttribute Customer customer) {
@@ -40,4 +51,5 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return "redirect:/customers";
     }
+
 }

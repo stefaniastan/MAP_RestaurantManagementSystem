@@ -4,25 +4,32 @@
     <title>Customers</title>
 </head>
 <body>
+
 <h2>Customers</h2>
 
 <a href="/customers/new">Add New Customer</a>
 
 <table border="1">
     <tr>
-        <th>ID</th>
         <th>Name</th>
-        <th>Address</th>
-        <th>Email</th>
         <th>Orders</th>
-        <th>Action</th>
+        <th>Details</th>
+        <th>Delete</th>
     </tr>
+
     <tr th:each="customer : ${customers}">
-        <td th:text="${customer.id}"></td>
         <td th:text="${customer.name}"></td>
-        <td th:text="${customer.adress}"></td>
-        <td th:text="${customer.email}"></td>
+
         <td th:text="${customer.orders != null ? customer.orders.size() : 0}"></td>
+
+        <!-- DETAILS button styled identically -->
+        <td>
+            <form th:action="@{'/customers/' + ${customer.id}}" method="get">
+                <button type="submit">Details</button>
+            </form>
+        </td>
+
+        <!-- DELETE button -->
         <td>
             <form th:action="@{'/customers/' + ${customer.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
@@ -30,5 +37,6 @@
         </td>
     </tr>
 </table>
+
 </body>
 </html>

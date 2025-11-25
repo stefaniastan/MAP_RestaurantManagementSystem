@@ -23,12 +23,6 @@
   "adress" : "Str. Libertatii 8",
   "email" : "roxana@example.com"
 }, {
-  "id" : "Customer-15",
-  "name" : "Vlad",
-  "orders" : [ ],
-  "adress" : "Str. Castanilor 12",
-  "email" : "vlad2@example.com"
-}, {
   "id" : "Customer-16",
   "name" : "Andreea",
   "orders" : [ ],
@@ -70,10 +64,4 @@
   "orders" : null,
   "adress" : "Str. Cimitirului 30",
   "email" : "Igor.nati@gmail.com"
-}, {
-  "id" : "Customer-22",
-  "name" : "Igore",
-  "orders" : null,
-  "adress" : "Str. Cimitirului 31",
-  "email" : "Igor.pis@gmail.com"
 } ]

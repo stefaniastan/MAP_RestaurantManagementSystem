@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Details</title>
+</head>
+<body>
+
+<h2>Customer Details</h2>
+
+<p><strong>ID:</strong> <span th:text="${customer.id}"></span></p>
+<p><strong>Name:</strong> <span th:text="${customer.name}"></span></p>
+<p><strong>Address:</strong> <span th:text="${customer.adress}"></span></p>
+<p><strong>Email:</strong> <span th:text="${customer.email}"></span></p>
+
+<h3>Orders</h3>
+
+<table border="1">
+    <tr>
+        <th>Order ID</th>
+    </tr>
+
+    <tr th:each="order : ${customer.orders}">
+        <td th:text="${order.id}"></td>
+    </tr>
+
+    <!-- Handles customers with no orders -->
+    <tr th:if="${customer.orders == null or customer.orders.size() == 0}">
+        <td>No Orders</td>
+    </tr>
+</table>
+
+<br>
+
+<a href="/customers">⬅ Back</a>
+
+</body>
+</html>
