@@ -28,7 +28,31 @@ public class CustomerController {
         model.addAttribute("customer", new Customer("", "", null, "", ""));
         return "customer/form";
     }
+    @GetMapping("/{id}")
+    public String getCustomerDetails(@PathVariable String id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
 
+        if (customer == null) {
+            return "redirect:/customers";
+        }
+
+        model.addAttribute("customer", customer);
+        return "customer/details";
+    }
+    @GetMapping("/{id}/edit")
+    public String editCustomer(@PathVariable String id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customer/form";  // same form used for both add + edit
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateCustomer(@PathVariable String id, @ModelAttribute Customer customer) {
+        customer.setId(id); // ensure same ID is kept
+        customerService.updateCustomer(customer);
+        return "redirect:/customers";
+    }
+//
     @PostMapping
     public String createCustomer(@ModelAttribute Customer customer) {
         customerService.addCustomer(customer);
@@ -40,4 +64,5 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return "redirect:/customers";
     }
+
 }
