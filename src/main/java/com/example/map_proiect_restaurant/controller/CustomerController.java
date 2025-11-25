@@ -39,6 +39,19 @@ public class CustomerController {
         model.addAttribute("customer", customer);
         return "customer/details";
     }
+    @GetMapping("/{id}/edit")
+    public String editCustomer(@PathVariable String id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customer/form";  // same form used for both add + edit
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateCustomer(@PathVariable String id, @ModelAttribute Customer customer) {
+        customer.setId(id); // ensure same ID is kept
+        customerService.updateCustomer(customer);
+        return "redirect:/customers";
+    }
 
     @PostMapping
     public String createCustomer(@ModelAttribute Customer customer) {

@@ -1,7 +1,7 @@
 [ {
   "id" : "Customer-11",
-  "name" : "Ana",
-  "orders" : [ ],
+  "name" : "Anaa",
+  "orders" : null,
   "adress" : "Str. Florilor 10",
   "email" : "ana@example.com"
 }, {
@@ -55,13 +55,13 @@
 }, {
   "id" : "Customer-21",
   "name" : "Puiu",
-  "orders" : null,
+  "orders" : [ ],
   "adress" : "Str penticostalului 29",
   "email" : "puiu@gmail.com"
 }, {
   "id" : "Customer-21",
   "name" : "Igor",
-  "orders" : null,
+  "orders" : [ ],
   "adress" : "Str. Cimitirului 30",
   "email" : "Igor.nati@gmail.com"
 } ]

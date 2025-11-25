@@ -12,8 +12,9 @@
 <table border="1">
     <tr>
         <th>Name</th>
-        <th>Orders</th>
+        <th>Orders (#)</th>
         <th>Details</th>
+        <th>Update</th>
         <th>Delete</th>
     </tr>
 
@@ -22,10 +23,17 @@
 
         <td th:text="${customer.orders != null ? customer.orders.size() : 0}"></td>
 
-        <!-- DETAILS button styled identically -->
+        <!-- DETAILS button -->
         <td>
             <form th:action="@{'/customers/' + ${customer.id}}" method="get">
                 <button type="submit">Details</button>
+            </form>
+        </td>
+
+        <!-- UPDATE button -->
+        <td>
+            <form th:action="@{'/customers/' + ${customer.id} + '/edit'}" method="get">
+                <button type="submit">Update</button>
             </form>
         </td>
 
