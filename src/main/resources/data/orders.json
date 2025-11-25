@@ -63,11 +63,19 @@
   "id" : "Order-9",
   "Id" : "Order-9"
 }, {
-  "customerId" : "Customer-10",
-  "tableId" : "Table-10",
+  "customerId" : "Customer-11",
+  "tableId" : "Table-2",
   "status" : "pending",
-  "orderLines" : [ ],
-  "assignments" : [ ],
+  "orderLines" : null,
+  "assignments" : null,
   "id" : "Order-10",
   "Id" : "Order-10"
+}, {
+  "customerId" : "Customer-11",
+  "tableId" : "Table-2",
+  "status" : "pending",
+  "orderLines" : null,
+  "assignments" : null,
+  "id" : "Order-1222",
+  "Id" : "Order-1222"
 } ]
