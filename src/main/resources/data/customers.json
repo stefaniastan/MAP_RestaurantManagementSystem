@@ -24,10 +24,10 @@
   "email" : "roxana@example.com"
 }, {
   "id" : "Customer-15",
-  "name" : "Vlad",
-  "orders" : [ ],
-  "adress" : "Str. Castanilor 12",
-  "email" : "vlad2@example.com"
+  "name" : "Andrei",
+  "orders" : null,
+  "adress" : "avram iancu",
+  "email" : "vlad@example.com"
 }, {
   "id" : "Customer-16",
   "name" : "Andreea",

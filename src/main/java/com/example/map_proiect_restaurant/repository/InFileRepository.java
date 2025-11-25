@@ -65,12 +65,12 @@ public class InFileRepository<T> implements AbstractRepository<T> {
 
         IdProvider item = (IdProvider) entity;
 
-        // dacă nu are ID -> generează unul nou
+        // dacă nu are ID
         if (item.getId() == null || item.getId().isEmpty()) {
             item.setId(type.getSimpleName() + "-" + UUID.randomUUID());
             data.add(entity);
         } else {
-            // dacă există -> actualizează
+            // dacă există
             boolean updated = false;
             for (int i = 0; i < data.size(); i++) {
                 IdProvider existing = (IdProvider) data.get(i);
