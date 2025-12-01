@@ -1,44 +1,51 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.example.map_proiect_restaurant.repository.InFileRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
-public class Bill implements InFileRepository.IdProvider {
-    private String id;
-    private String orderId;
-    private double totalAmount;
+@Entity
+@Table(name = "bills")
+public class Bill {
 
-    public Bill(){}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Bill(String id, String orderId, double totalAmount) {
-        this.id = id;
-        this.orderId = orderId;
+    @OneToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @Column(nullable = false)
+    private Double totalAmount;
+
+    public Bill() {}
+
+    public Bill(Order order, Double totalAmount) {
+        this.order = order;
         this.totalAmount = totalAmount;
-
     }
-    @Override
-    public String getId() {
+
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
-    @Override
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public double getTotalAmount() {
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Double getTotalAmount() {
         return totalAmount;
     }
-    public void setTotalAmount(double totalAmount) {
+
+    public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
-
-
 }
