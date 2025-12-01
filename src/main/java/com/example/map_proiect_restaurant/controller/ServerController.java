@@ -2,41 +2,51 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Server;
 import com.example.map_proiect_restaurant.service.ServerService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/servers")
 public class ServerController {
 
     private final ServerService serverService;
 
+    @Autowired
     public ServerController(ServerService serverService) {
         this.serverService = serverService;
     }
 
     @GetMapping
-    public String getAllServers(Model model) {
-        model.addAttribute("servers", serverService.getAllServers());
-        return "server/index";
+    public List<Server> getAllServers() {
+        return serverService.getAllServers();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("server", new Server("", "", "", ""));
-        return "server/form";
+    @GetMapping("/{id}")
+    public Server getServerById(@PathVariable Long id) {
+        return serverService.getServerById(id);
     }
 
     @PostMapping
-    public String createServer(@ModelAttribute Server server) {
-        serverService.addServer(server);
-        return "redirect:/servers";
+    public Server createServer(@RequestBody Server server) {
+        return serverService.addServer(server);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteServer(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public Server updateServer(@PathVariable Long id, @RequestBody Server server) {
+        server.setId(id);
+        return serverService.updateServer(server);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteServer(@PathVariable Long id) {
         serverService.deleteServer(id);
-        return "redirect:/servers";
+        return "Server deleted successfully";
+    }
+
+    @GetMapping("/designation/{designation}")
+    public List<Server> getServersByDesignation(@PathVariable String designation) {
+        return serverService.getServersByDesignation(designation);
     }
 }

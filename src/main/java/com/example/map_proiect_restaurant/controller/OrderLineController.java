@@ -2,41 +2,56 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.OrderLine;
 import com.example.map_proiect_restaurant.service.OrderLineService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/orderLines")
+import java.util.List;
+
+@RestController
+@RequestMapping("/order-lines")
 public class OrderLineController {
 
     private final OrderLineService orderLineService;
 
+    @Autowired
     public OrderLineController(OrderLineService orderLineService) {
         this.orderLineService = orderLineService;
     }
 
     @GetMapping
-    public String getAllOrderLines(Model model) {
-        model.addAttribute("orderLines", orderLineService.getAllOrderLines());
-        return "orderLine/index";
+    public List<OrderLine> getAllOrderLines() {
+        return orderLineService.getAllOrderLines();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("orderLine", new OrderLine("", "", 0.0));
-        return "orderLine/form";
+    @GetMapping("/{id}")
+    public OrderLine getOrderLineById(@PathVariable Long id) {
+        return orderLineService.getOrderLineById(id);
     }
 
     @PostMapping
-    public String createOrderLine(@ModelAttribute OrderLine orderLine) {
-        orderLineService.addOrderLine(orderLine);
-        return "redirect:/orderLines";
+    public OrderLine createOrderLine(@RequestBody OrderLine orderLine) {
+        return orderLineService.addOrderLine(orderLine);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteOrderLine(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public OrderLine updateOrderLine(@PathVariable Long id, @RequestBody OrderLine orderLine) {
+        orderLine.setId(id);
+        return orderLineService.updateOrderLine(orderLine);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteOrderLine(@PathVariable Long id) {
         orderLineService.deleteOrderLine(id);
-        return "redirect:/orderLines";
+        return "Order line deleted successfully";
+    }
+
+    @GetMapping("/order/{orderId}")
+    public List<OrderLine> getOrderLinesByOrderId(@PathVariable Long orderId) {
+        return orderLineService.getOrderLinesByOrderId(orderId);
+    }
+
+    @GetMapping("/menu-item/{menuItemId}")
+    public List<OrderLine> getOrderLinesByMenuItemId(@PathVariable Long menuItemId) {
+        return orderLineService.getOrderLinesByMenuItemId(menuItemId);
     }
 }

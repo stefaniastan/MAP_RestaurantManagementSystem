@@ -2,41 +2,56 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.OrderAssignment;
 import com.example.map_proiect_restaurant.service.OrderAssignmentService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/orderAssignments")
+import java.util.List;
+
+@RestController
+@RequestMapping("/order-assignments")
 public class OrderAssignmentController {
 
     private final OrderAssignmentService orderAssignmentService;
 
+    @Autowired
     public OrderAssignmentController(OrderAssignmentService orderAssignmentService) {
         this.orderAssignmentService = orderAssignmentService;
     }
 
     @GetMapping
-    public String getAllAssignments(Model model) {
-        model.addAttribute("orderAssignments", orderAssignmentService.findAllOrderAssignments());
-        return "orderAssignment/index";
+    public List<OrderAssignment> getAllOrderAssignments() {
+        return orderAssignmentService.getAllOrderAssignments();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("orderAssignment", new OrderAssignment("", "", ""));
-        return "orderAssignment/form";
+    @GetMapping("/{id}")
+    public OrderAssignment getOrderAssignmentById(@PathVariable Long id) {
+        return orderAssignmentService.getOrderAssignmentById(id);
     }
 
     @PostMapping
-    public String createOrderAssignment(@ModelAttribute OrderAssignment orderAssignment) {
-        orderAssignmentService.addOrderAssignment(orderAssignment);
-        return "redirect:/orderAssignments";
+    public OrderAssignment createOrderAssignment(@RequestBody OrderAssignment assignment) {
+        return orderAssignmentService.addOrderAssignment(assignment);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteOrderAssignment(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public OrderAssignment updateOrderAssignment(@PathVariable Long id, @RequestBody OrderAssignment assignment) {
+        assignment.setId(id);
+        return orderAssignmentService.updateOrderAssignment(assignment);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteOrderAssignment(@PathVariable Long id) {
         orderAssignmentService.deleteOrderAssignment(id);
-        return "redirect:/orderAssignments";
+        return "Order assignment deleted successfully";
+    }
+
+    @GetMapping("/order/{orderId}")
+    public List<OrderAssignment> getOrderAssignmentsByOrderId(@PathVariable Long orderId) {
+        return orderAssignmentService.getOrderAssignmentsByOrderId(orderId);
+    }
+
+    @GetMapping("/staff/{staffId}")
+    public List<OrderAssignment> getOrderAssignmentsByStaffId(@PathVariable Long staffId) {
+        return orderAssignmentService.getOrderAssignmentsByStaffId(staffId);
     }
 }
