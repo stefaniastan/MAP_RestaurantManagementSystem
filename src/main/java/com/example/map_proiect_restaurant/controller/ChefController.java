@@ -2,41 +2,51 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Chef;
 import com.example.map_proiect_restaurant.service.ChefService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/chefs")
 public class ChefController {
 
     private final ChefService chefService;
 
+    @Autowired
     public ChefController(ChefService chefService) {
         this.chefService = chefService;
     }
 
     @GetMapping
-    public String getAllChefs(Model model) {
-        model.addAttribute("chefs", chefService.getAllChefs());
-        return "chef/index";
+    public List<Chef> getAllChefs() {
+        return chefService.getAllChefs();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("chef", new Chef("", "", "", "", 0));
-        return "chef/form";
+    @GetMapping("/{id}")
+    public Chef getChefById(@PathVariable Long id) {
+        return chefService.getChefById(id);
     }
 
     @PostMapping
-    public String createChef(@ModelAttribute Chef chef) {
-        chefService.addChef(chef);
-        return "redirect:/chefs";
+    public Chef createChef(@RequestBody Chef chef) {
+        return chefService.addChef(chef);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteChef(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public Chef updateChef(@PathVariable Long id, @RequestBody Chef chef) {
+        chef.setId(id);
+        return chefService.updateChef(chef);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteChef(@PathVariable Long id) {
         chefService.deleteChef(id);
-        return "redirect:/chefs";
+        return "Chef deleted successfully";
+    }
+
+    @GetMapping("/specialization/{specialization}")
+    public List<Chef> getChefsBySpecialization(@PathVariable String specialization) {
+        return chefService.getChefsBySpecialization(specialization);
     }
 }

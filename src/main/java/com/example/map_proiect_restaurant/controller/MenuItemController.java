@@ -2,41 +2,56 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.MenuItem;
 import com.example.map_proiect_restaurant.service.MenuItemService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/menuItems")
+import java.util.List;
+
+@RestController
+@RequestMapping("/menu-items")
 public class MenuItemController {
 
     private final MenuItemService menuItemService;
 
+    @Autowired
     public MenuItemController(MenuItemService menuItemService) {
         this.menuItemService = menuItemService;
     }
 
     @GetMapping
-    public String getAllMenuItems(Model model) {
-        model.addAttribute("menuItems", menuItemService.findAllMenuItems());
-        return "menuItem/index";
+    public List<MenuItem> getAllMenuItems() {
+        return menuItemService.getAllMenuItems();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("menuItem", new MenuItem("", "", 0.0));
-        return "menuItem/form";
+    @GetMapping("/{id}")
+    public MenuItem getMenuItemById(@PathVariable Long id) {
+        return menuItemService.getMenuItemById(id);
     }
 
     @PostMapping
-    public String createMenuItem(@ModelAttribute MenuItem menuItem) {
-        menuItemService.addMenuItem(menuItem);
-        return "redirect:/menuItems";
+    public MenuItem createMenuItem(@RequestBody MenuItem menuItem) {
+        return menuItemService.addMenuItem(menuItem);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteMenuItem(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public MenuItem updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem) {
+        menuItem.setId(id);
+        return menuItemService.updateMenuItem(menuItem);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteMenuItem(@PathVariable Long id) {
         menuItemService.deleteMenuItem(id);
-        return "redirect:/menuItems";
+        return "Menu item deleted successfully";
+    }
+
+    @GetMapping("/name/{name}")
+    public List<MenuItem> getMenuItemsByName(@PathVariable String name) {
+        return menuItemService.getMenuItemsByName(name);
+    }
+
+    @GetMapping("/price-range")
+    public List<MenuItem> getMenuItemsByPriceRange(@RequestParam Double minPrice, @RequestParam Double maxPrice) {
+        return menuItemService.getMenuItemsByPriceRange(minPrice, maxPrice);
     }
 }

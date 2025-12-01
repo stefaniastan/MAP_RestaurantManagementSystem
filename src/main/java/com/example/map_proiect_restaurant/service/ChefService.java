@@ -15,15 +15,6 @@ public class ChefService {
         this.chefRepository = chefRepository;
     }
 
-    public Chef getChefById(String id){
-        return chefRepository.findById(id);
-    }
-
-    public void deleteChef(String id)
-    {
-        chefRepository.deleteById(id);
-    }
-
     public Chef addChef(Chef chef) {
         return chefRepository.save(chef);
     }
@@ -34,5 +25,18 @@ public class ChefService {
 
     public List<Chef> getAllChefs() {
         return chefRepository.findAll();
+    }
+
+    public Chef getChefById(Long id) {
+        return chefRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Chef not found"));
+    }
+
+    public void deleteChef(Long id) {
+        chefRepository.deleteById(id);
+    }
+
+    public List<Chef> getChefsBySpecialization(String specialization) {
+        return chefRepository.findBySpecialization(specialization);
     }
 }

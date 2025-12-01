@@ -2,41 +2,51 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Bill;
 import com.example.map_proiect_restaurant.service.BillService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/bills")
 public class BillController {
 
     private final BillService billService;
 
+    @Autowired
     public BillController(BillService billService) {
         this.billService = billService;
     }
 
     @GetMapping
-    public String getAllBills(Model model) {
-        model.addAttribute("bills", billService.getAllBills());
-        return "bill/index";
+    public List<Bill> getAllBills() {
+        return billService.getAllBills();
     }
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("bill", new Bill("", "", 0.0));
-        return "bill/form";
+    @GetMapping("/{id}")
+    public Bill getBillById(@PathVariable Long id) {
+        return billService.getBillById(id);
     }
 
     @PostMapping
-    public String createBill(@ModelAttribute Bill bill) {
-        billService.addBill(bill);
-        return "redirect:/bills";
+    public Bill createBill(@RequestBody Bill bill) {
+        return billService.addBill(bill);
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteBill(@PathVariable String id) {
+    @PutMapping("/{id}")
+    public Bill updateBill(@PathVariable Long id, @RequestBody Bill bill) {
+        bill.setId(id);
+        return billService.updateBill(bill);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteBill(@PathVariable Long id) {
         billService.deleteBill(id);
-        return "redirect:/bills";
+        return "Bill deleted successfully";
+    }
+
+    @GetMapping("/order/{orderId}")
+    public List<Bill> getBillsByOrderId(@PathVariable Long orderId) {
+        return billService.getBillsByOrderId(orderId);
     }
 }
