@@ -1,33 +1,43 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.example.map_proiect_restaurant.repository.InFileRepository;
+import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Customer implements InFileRepository.IdProvider {
+@Entity
+@Table(name = "customers")
+public class Customer {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
     private String name;
-    private List<Order> orders;
-    private String adress;
+
+    @Column(nullable = false, length = 200)
+    private String address;
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public Customer() {}
 
-    public Customer(String id, String name, List<Order> orders, String adress, String email) {
-        this.id = id;
+    public Customer(String name, String address, String email) {
         this.name = name;
-        this.orders = orders;
-        this.adress = adress;
+        this.address = address;
         this.email = email;
     }
 
-    @Override
-    public String getId() {
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
-    @Override
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,20 +49,12 @@ public class Customer implements InFileRepository.IdProvider {
         this.name = name;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public String getAddress() {
+        return address;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -61,5 +63,25 @@ public class Customer implements InFileRepository.IdProvider {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    // Helper method to add order
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setCustomer(this);
+    }
+
+    // Helper method to remove order
+    public void removeOrder(Order order) {
+        orders.remove(order);
+        order.setCustomer(null);
     }
 }

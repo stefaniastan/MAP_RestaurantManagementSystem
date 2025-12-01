@@ -1,32 +1,64 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.example.map_proiect_restaurant.repository.InFileRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
-public class OrderLine implements InFileRepository.IdProvider {
-    @JsonProperty("Id")
-    private String Id;
-    private String menuItemId;
-    private double quantity;
+@Entity
+@Table(name = "order_lines")
+public class OrderLine {
 
-    public OrderLine(){}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public OrderLine(String Id, String menuItemId, double quantity) {
-        this.Id = Id;
-        this.menuItemId = menuItemId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "menu_item_id", nullable = false)
+    private MenuItem menuItem;
+
+    @Column(nullable = false)
+    private Integer quantity;
+
+    public OrderLine() {}
+
+    public OrderLine(Order order, MenuItem menuItem, Integer quantity) {
+        this.order = order;
+        this.menuItem = menuItem;
         this.quantity = quantity;
-
     }
-    @Override
-    public String getId() {return this.Id;}
 
-    @Override
-    public void setId(String Id) {this.Id = Id;}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-    public String getMenuItemId() {return this.menuItemId;}
-    public void setMenuItemId(String menuItemId) {this.menuItemId = menuItemId;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public double getQuantity() {return quantity;}
-    public void setQuantity(double quantity) {this.quantity = quantity;}
+    public Order getOrder() {
+        return order;
+    }
 
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public MenuItem getMenuItem() {
+        return menuItem;
+    }
+
+    public void setMenuItem(MenuItem menuItem) {
+        this.menuItem = menuItem;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }
