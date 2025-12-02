@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tables</title>
+</head>
+<body>
+<h1>Tables</h1>
+<a th:href="@{/tables/new}">➕ Add New Table</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Number</th>
+        <th>Occupied Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="table : ${tables}">
+        <td th:text="${table.id}"></td>
+        <td th:text="${table.number}"></td>
+        <td th:text="${table.occupiedStatus} ? 'Occupied' : 'Available'"></td>
+        <td>
+            <a th:href="@{/tables/edit/{id}(id=${table.id})}">Edit</a>
+            <a th:href="@{/tables/delete/{id}(id=${table.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+

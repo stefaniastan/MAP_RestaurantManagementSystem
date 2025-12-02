@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+</head>
+<body>
+<h1>Orders</h1>
+<a th:href="@{/orders/new}">➕ Add New Order</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Table</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.customer.name}"></td>
+        <td th:text="${order.table.number}"></td>
+        <td th:text="${order.status}"></td>
+        <td>
+            <a th:href="@{/orders/edit/{id}(id=${order.id})}">Edit</a>
+            <a th:href="@{/orders/delete/{id}(id=${order.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

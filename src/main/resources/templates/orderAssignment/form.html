@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Order Assignment</title>
+    <title>Add/Edit Order Assignment</title>
 </head>
 <body>
-<h2>Add New Order Assignment</h2>
+<h2 th:text="${orderAssignment.id != null} ? 'Edit Order Assignment' : 'Add New Order Assignment'"></h2>
 
-<form th:action="@{/orderAssignments}" th:object="${orderAssignment}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
+<form th:action="@{${orderAssignment.id != null} ? '/orderAssignments/update' : '/orderAssignments/save'}"
+      th:object="${orderAssignment}" method="post">
+    <input type="hidden" th:field="*{id}" />
 
-    <label>Order ID:</label>
-    <input type="text" th:field="*{orderId}" required><br>
+    <label>Order:</label>
+    <select th:field="*{order}" required>
+        <option th:each="o : ${orders}" th:value="${o}" th:text="${o.id}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('order')}" th:errors="*{order}"></div>
 
-    <label>Staff ID:</label>
-    <input type="text" th:field="*{staffId}" required><br>
+    <label>Staff:</label>
+    <select th:field="*{staff}" required>
+        <option th:each="s : ${staffList}" th:value="${s}" th:text="${s.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('staff')}" th:errors="*{staff}"></div>
 
     <button type="submit">Save</button>
 </form>
 
-<a href="/orderAssignments">⬅️ Back to list</a>
+<a th:href="@{/orderAssignments}">⬅️ Back to list</a>
 </body>
 </html>
