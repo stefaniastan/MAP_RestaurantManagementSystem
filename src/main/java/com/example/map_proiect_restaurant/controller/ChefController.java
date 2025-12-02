@@ -24,19 +24,19 @@ public class ChefController {
     public String listChefs(Model model) {
         List<Chef> chefs = chefService.getAllChefs();
         model.addAttribute("chefs", chefs);
-        return "chefs/index";
+        return "chef/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("chef", new Chef());
-        return "chefs/form";
+        return "chef/form";
     }
 
     @PostMapping
     public String createChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult result) {
         if (result.hasErrors()) {
-            return "chefs/form";
+            return "chef/form";
         }
         chefService.addChef(chef);
         return "redirect:/chefs";
@@ -46,13 +46,13 @@ public class ChefController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Chef chef = chefService.getChefById(id);
         model.addAttribute("chef", chef);
-        return "chefs/form";
+        return "chef/form";
     }
 
     @PostMapping("/{id}")
     public String updateChef(@PathVariable Long id, @Valid @ModelAttribute("chef") Chef chef, BindingResult result) {
         if (result.hasErrors()) {
-            return "chefs/form";
+            return "chef/form";
         }
         chef.setId(id);
         chefService.updateChef(chef);

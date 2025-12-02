@@ -23,7 +23,7 @@ public class BillController {
         this.orderService = orderService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String listBills(Model model) {
         model.addAttribute("bills", billService.getAllBills());
         return "bill/index";
