@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Server</title>
+    <title>Add/Edit Server</title>
 </head>
 <body>
-<h2>Add New Server</h2>
+<h2 th:text="${server.id != null} ? 'Edit Server' : 'Add New Server'"></h2>
 
-<form th:action="@{/servers}" th:object="${server}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
+<form th:action="@{${server.id != null} ? '/servers/update' : '/servers/save'}" th:object="${server}" method="post">
+    <input type="hidden" th:field="*{id}" />
 
     <label>Name:</label>
-    <input type="text" th:field="*{name}" required><br>
+    <input type="text" th:field="*{name}" required maxlength="100" />
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
     <label>Designation:</label>
-    <input type="text" th:field="*{designation}" required><br>
+    <input type="text" th:field="*{designation}" required maxlength="50" />
+    <div th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}"></div>
 
     <label>Rating:</label>
-    <input type="text" th:field="*{rating}" required><br>
+    <input type="text" th:field="*{rating}" required maxlength="10" />
+    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
 
     <button type="submit">Save</button>
 </form>
 
-<a href="/servers">⬅️ Back to list</a>
+<a th:href="@{/servers}">⬅️ Back to list</a>
 </body>
 </html>

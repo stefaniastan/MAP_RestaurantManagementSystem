@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Table</title>
+    <title>Add/Edit Table</title>
 </head>
 <body>
-<h2>Add New Table</h2>
+<h2 th:text="${table.id != null} ? 'Edit Table' : 'Add New Table'"></h2>
 
-<form th:action="@{/tables}" th:object="${table}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
+<form th:action="@{${table.id != null} ? '/tables/update' : '/tables/save'}" th:object="${table}" method="post">
+    <input type="hidden" th:field="*{id}" />
 
     <label>Number:</label>
-    <input type="number" th:field="*{number}" required><br>
+    <input type="number" th:field="*{number}" min="1" required />
+    <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
 
     <label>Occupied Status:</label>
-    <input type="text" th:field="*{occupiedStatus}" required><br>
+    <select th:field="*{occupiedStatus}" required>
+        <option value="true">Occupied</option>
+        <option value="false">Available</option>
+    </select>
+    <div th:if="${#fields.hasErrors('occupiedStatus')}" th:errors="*{occupiedStatus}"></div>
 
     <button type="submit">Save</button>
 </form>
 
-<a href="/tables">⬅️ Back to list</a>
+<a th:href="@{/tables}">⬅️ Back to list</a>
 </body>
 </html>

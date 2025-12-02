@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chefs</title>
+</head>
+<body>
+<h1>Chefs</h1>
+<a th:href="@{/chefs/new}">Add New Chef</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rating</th>
+        <th>Age</th>
+        <th>Specialization</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="chef : ${chefs}">
+        <td th:text="${chef.id}"></td>
+        <td th:text="${chef.name}"></td>
+        <td th:text="${chef.rating}"></td>
+        <td th:text="${chef.age}"></td>
+        <td th:text="${chef.specialization}"></td>
+        <td>
+            <a th:href="@{/chefs/edit/{id}(id=${chef.id})}">Edit</a>
+            <a th:href="@{/chefs/delete/{id}(id=${chef.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
