@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Chef</title>
+    <title>Create/Edit Chef</title>
 </head>
 <body>
-<h2>Add New Chef</h2>
+<h1 th:text="${chef.id != null} ? 'Edit Chef' : 'Create Chef'"></h1>
 
-<form th:action="@{/chefs}" th:object="${chef}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
+<form th:action="@{${chef.id != null} ? '/chefs/update' : '/chefs/save'}" th:object="${chef}" method="post">
+    <input type="hidden" th:field="*{id}" />
 
     <label>Name:</label>
-    <input type="text" th:field="*{name}" required><br>
+    <input type="text" th:field="*{name}" required maxlength="100" />
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
     <label>Rating:</label>
-    <input type="text" th:field="*{rating}" required><br>
-
-    <label>Specialization:</label>
-    <input type="text" th:field="*{specialization}" required><br>
+    <input type="text" th:field="*{rating}" required maxlength="10" />
+    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
 
     <label>Age:</label>
-    <input type="number" th:field="*{age}" required><br>
+    <input type="number" th:field="*{age}" required min="18" />
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+
+    <label>Specialization:</label>
+    <input type="text" th:field="*{specialization}" required maxlength="100" />
+    <div th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></div>
 
     <button type="submit">Save</button>
 </form>
-
-<a href="/chefs">⬅️ Back to list</a>
+<a th:href="@{/chefs}">Back to list</a>
 </body>
 </html>

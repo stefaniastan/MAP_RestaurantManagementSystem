@@ -19,17 +19,13 @@ public class MapProiectRestaurantApplication {
     CommandLineRunner testConnection(DataSource dataSource) {
         return args -> {
             try (Connection connection = dataSource.getConnection()) {
-                System.out.println("========================================");
                 System.out.println("✅ DATABASE CONNECTION SUCCESSFUL!");
                 System.out.println("Database: " + connection.getMetaData().getDatabaseProductName());
                 System.out.println("Version: " + connection.getMetaData().getDatabaseProductVersion());
                 System.out.println("URL: " + connection.getMetaData().getURL());
-                System.out.println("========================================");
             } catch (Exception e) {
-                System.err.println("========================================");
                 System.err.println("❌ DATABASE CONNECTION FAILED!");
                 System.err.println("Error: " + e.getMessage());
-                System.err.println("========================================");
                 e.printStackTrace();
             }
         };
