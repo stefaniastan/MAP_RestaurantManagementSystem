@@ -2,51 +2,87 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Bill;
 import com.example.map_proiect_restaurant.service.BillService;
+import com.example.map_proiect_restaurant.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/bills")
+@Controller
+@RequestMapping("/bill")
 public class BillController {
 
     private final BillService billService;
+    private final OrderService orderService;
 
     @Autowired
-    public BillController(BillService billService) {
+    public BillController(BillService billService, OrderService orderService) {
         this.billService = billService;
+        this.orderService = orderService;
     }
 
     @GetMapping
-    public List<Bill> getAllBills() {
-        return billService.getAllBills();
+    public String listBills(Model model) {
+        model.addAttribute("bills", billService.getAllBills());
+        return "bill/index";
     }
 
-    @GetMapping("/{id}")
-    public Bill getBillById(@PathVariable Long id) {
-        return billService.getBillById(id);
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("bill", new Bill());
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "bill/form";
     }
 
     @PostMapping
-    public Bill createBill(@RequestBody Bill bill) {
-        return billService.addBill(bill);
+    public String createBill(@Valid @ModelAttribute("bill") Bill bill,
+                             BindingResult result,
+                             @RequestParam("order") Long orderId,
+                             Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            return "bill/form";
+        }
+
+        bill.setOrder(orderService.getOrderById(orderId));
+        billService.addBill(bill);
+        return "redirect:/bill";
     }
 
-    @PutMapping("/{id}")
-    public Bill updateBill(@PathVariable Long id, @RequestBody Bill bill) {
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Bill bill = billService.getBillById(id);
+
+        model.addAttribute("bill", bill);
+        model.addAttribute("orders", orderService.getAllOrders());
+
+        return "bill/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateBill(@PathVariable Long id,
+                             @Valid @ModelAttribute("bill") Bill bill,
+                             BindingResult result,
+                             @RequestParam("order") Long orderId,
+                             Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            return "bill/form";
+        }
+
         bill.setId(id);
-        return billService.updateBill(bill);
+        bill.setOrder(orderService.getOrderById(orderId));
+        billService.updateBill(bill);
+        return "redirect:/bill";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteBill(@PathVariable Long id) {
         billService.deleteBill(id);
-        return "Bill deleted successfully";
-    }
-
-    @GetMapping("/order/{orderId}")
-    public List<Bill> getBillsByOrderId(@PathVariable Long orderId) {
-        return billService.getBillsByOrderId(orderId);
+        return "redirect:/bill";
     }
 }

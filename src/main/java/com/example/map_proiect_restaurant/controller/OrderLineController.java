@@ -1,57 +1,79 @@
 package com.example.map_proiect_restaurant.controller;
 
+import com.example.map_proiect_restaurant.model.MenuItem;
 import com.example.map_proiect_restaurant.model.OrderLine;
+import com.example.map_proiect_restaurant.model.Order;
+import com.example.map_proiect_restaurant.service.MenuItemService;
 import com.example.map_proiect_restaurant.service.OrderLineService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.map_proiect_restaurant.service.OrderService;
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/order-lines")
+@Controller
+@RequestMapping("/orderlines")
 public class OrderLineController {
 
     private final OrderLineService orderLineService;
+    private final OrderService orderService;
+    private final MenuItemService menuItemService;
 
-    @Autowired
-    public OrderLineController(OrderLineService orderLineService) {
+    public OrderLineController(OrderLineService orderLineService, OrderService orderService, MenuItemService menuItemService) {
         this.orderLineService = orderLineService;
+        this.orderService = orderService;
+        this.menuItemService = menuItemService;
     }
 
     @GetMapping
-    public List<OrderLine> getAllOrderLines() {
-        return orderLineService.getAllOrderLines();
+    public String listOrderLines(Model model) {
+        List<OrderLine> orderLines = orderLineService.getAllOrderLines();
+        model.addAttribute("orderLines", orderLines);
+        return "orderlines/index";
     }
 
-    @GetMapping("/{id}")
-    public OrderLine getOrderLineById(@PathVariable Long id) {
-        return orderLineService.getOrderLineById(id);
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("orderLine", new OrderLine());
+        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("menuItems", menuItemService.getAllMenuItems());
+        return "orderlines/form";
     }
 
     @PostMapping
-    public OrderLine createOrderLine(@RequestBody OrderLine orderLine) {
-        return orderLineService.addOrderLine(orderLine);
+    public String createOrderLine(@Valid @ModelAttribute("orderLine") OrderLine orderLine, BindingResult result) {
+        if (result.hasErrors()) {
+            return "orderlines/form";
+        }
+        orderLineService.addOrderLine(orderLine);
+        return "redirect:/orderlines";
     }
 
-    @PutMapping("/{id}")
-    public OrderLine updateOrderLine(@PathVariable Long id, @RequestBody OrderLine orderLine) {
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        OrderLine orderLine = orderLineService.getOrderLineById(id);
+        model.addAttribute("orderLine", orderLine);
+        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("menuItems", menuItemService.getAllMenuItems());
+        return "orderlines/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateOrderLine(@PathVariable Long id, @Valid @ModelAttribute("orderLine") OrderLine orderLine, BindingResult result) {
+        if (result.hasErrors()) {
+            return "orderlines/form";
+        }
         orderLine.setId(id);
-        return orderLineService.updateOrderLine(orderLine);
+        orderLineService.updateOrderLine(orderLine);
+        return "redirect:/orderlines";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteOrderLine(@PathVariable Long id) {
         orderLineService.deleteOrderLine(id);
-        return "Order line deleted successfully";
-    }
-
-    @GetMapping("/order/{orderId}")
-    public List<OrderLine> getOrderLinesByOrderId(@PathVariable Long orderId) {
-        return orderLineService.getOrderLinesByOrderId(orderId);
-    }
-
-    @GetMapping("/menu-item/{menuItemId}")
-    public List<OrderLine> getOrderLinesByMenuItemId(@PathVariable Long menuItemId) {
-        return orderLineService.getOrderLinesByMenuItemId(menuItemId);
+        return "redirect:/orderlines";
     }
 }

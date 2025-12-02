@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,12 @@ public class RestaurantTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Table number is required")
     @Column(nullable = false, unique = true)
     private Integer number;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status is required")
     @Column(nullable = false)
     private TableStatusEnum status;
 

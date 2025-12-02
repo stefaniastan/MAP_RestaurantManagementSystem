@@ -1,6 +1,8 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "menu_items")
@@ -10,9 +12,11 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     @Column(nullable = false, length = 100)
     private String name;
 
+    @Positive(message = "Price must be positive")
     @Column(nullable = false)
     private Double price;
 

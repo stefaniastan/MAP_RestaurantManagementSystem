@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +13,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Customer is required")
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @NotNull(message = "Table is required")
     @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
     private RestaurantTable table;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status is required")
     @Column(nullable = false)
     private OrderStatusEnum status;
 

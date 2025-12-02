@@ -2,56 +2,66 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.MenuItem;
 import com.example.map_proiect_restaurant.service.MenuItemService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/menu-items")
+@Controller
+@RequestMapping("/menuitems")
 public class MenuItemController {
 
     private final MenuItemService menuItemService;
 
-    @Autowired
     public MenuItemController(MenuItemService menuItemService) {
         this.menuItemService = menuItemService;
     }
 
     @GetMapping
-    public List<MenuItem> getAllMenuItems() {
-        return menuItemService.getAllMenuItems();
+    public String listMenuItems(Model model) {
+        List<MenuItem> items = menuItemService.getAllMenuItems();
+        model.addAttribute("menuItems", items);
+        return "menuitems/index";
     }
 
-    @GetMapping("/{id}")
-    public MenuItem getMenuItemById(@PathVariable Long id) {
-        return menuItemService.getMenuItemById(id);
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("menuItem", new MenuItem());
+        return "menuitems/form";
     }
 
     @PostMapping
-    public MenuItem createMenuItem(@RequestBody MenuItem menuItem) {
-        return menuItemService.addMenuItem(menuItem);
+    public String createMenuItem(@Valid @ModelAttribute("menuItem") MenuItem menuItem, BindingResult result) {
+        if (result.hasErrors()) {
+            return "menuitems/form";
+        }
+        menuItemService.addMenuItem(menuItem);
+        return "redirect:/menuitems";
     }
 
-    @PutMapping("/{id}")
-    public MenuItem updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem) {
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        MenuItem item = menuItemService.getMenuItemById(id);
+        model.addAttribute("menuItem", item);
+        return "menuitems/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateMenuItem(@PathVariable Long id, @Valid @ModelAttribute("menuItem") MenuItem menuItem, BindingResult result) {
+        if (result.hasErrors()) {
+            return "menuitems/form";
+        }
         menuItem.setId(id);
-        return menuItemService.updateMenuItem(menuItem);
+        menuItemService.updateMenuItem(menuItem);
+        return "redirect:/menuitems";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteMenuItem(@PathVariable Long id) {
         menuItemService.deleteMenuItem(id);
-        return "Menu item deleted successfully";
-    }
-
-    @GetMapping("/name/{name}")
-    public List<MenuItem> getMenuItemsByName(@PathVariable String name) {
-        return menuItemService.getMenuItemsByName(name);
-    }
-
-    @GetMapping("/price-range")
-    public List<MenuItem> getMenuItemsByPriceRange(@RequestParam Double minPrice, @RequestParam Double maxPrice) {
-        return menuItemService.getMenuItemsByPriceRange(minPrice, maxPrice);
+        return "redirect:/menuitems";
     }
 }

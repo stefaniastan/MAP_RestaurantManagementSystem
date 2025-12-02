@@ -2,51 +2,66 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Server;
 import com.example.map_proiect_restaurant.service.ServerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/servers")
 public class ServerController {
 
     private final ServerService serverService;
 
-    @Autowired
     public ServerController(ServerService serverService) {
         this.serverService = serverService;
     }
 
     @GetMapping
-    public List<Server> getAllServers() {
-        return serverService.getAllServers();
+    public String listServers(Model model) {
+        List<Server> servers = serverService.getAllServers();
+        model.addAttribute("servers", servers);
+        return "servers/index";
     }
 
-    @GetMapping("/{id}")
-    public Server getServerById(@PathVariable Long id) {
-        return serverService.getServerById(id);
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("server", new Server());
+        return "servers/form";
     }
 
     @PostMapping
-    public Server createServer(@RequestBody Server server) {
-        return serverService.addServer(server);
+    public String createServer(@Valid @ModelAttribute("server") Server server, BindingResult result) {
+        if (result.hasErrors()) {
+            return "servers/form";
+        }
+        serverService.addServer(server);
+        return "redirect:/servers";
     }
 
-    @PutMapping("/{id}")
-    public Server updateServer(@PathVariable Long id, @RequestBody Server server) {
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Server server = serverService.getServerById(id);
+        model.addAttribute("server", server);
+        return "servers/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateServer(@PathVariable Long id, @Valid @ModelAttribute("server") Server server, BindingResult result) {
+        if (result.hasErrors()) {
+            return "servers/form";
+        }
         server.setId(id);
-        return serverService.updateServer(server);
+        serverService.updateServer(server);
+        return "redirect:/servers";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteServer(@PathVariable Long id) {
         serverService.deleteServer(id);
-        return "Server deleted successfully";
-    }
-
-    @GetMapping("/designation/{designation}")
-    public List<Server> getServersByDesignation(@PathVariable String designation) {
-        return serverService.getServersByDesignation(designation);
+        return "redirect:/servers";
     }
 }

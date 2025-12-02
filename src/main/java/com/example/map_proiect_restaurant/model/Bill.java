@@ -1,6 +1,8 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "bills")
@@ -8,6 +10,7 @@ public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "Order is required")
     private Long id;
 
     @OneToOne
@@ -15,6 +18,7 @@ public class Bill {
     private Order order;
 
     @Column(nullable = false)
+    @Positive(message = "Total amount must be positive")
     private Double totalAmount;
 
     public Bill() {}

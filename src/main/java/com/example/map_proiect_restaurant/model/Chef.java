@@ -1,25 +1,23 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@DiscriminatorValue("CHEF")
+@Table(name = "chefs")
 public class Chef extends Staff {
 
+    @NotBlank(message = "Specialization is required")
     @Column(nullable = false, length = 100)
     private String specialization;
-
-    @Column(nullable = false)
-    private Integer age;
 
     public Chef() {
         super();
     }
 
-    public Chef(String name, String rating, String specialization, Integer age) {
-        super(name, rating);
+    public Chef(String name, String rating, Integer age, String specialization) {
+        super(name, rating, age);
         this.specialization = specialization;
-        this.age = age;
     }
 
     // Getters and Setters
