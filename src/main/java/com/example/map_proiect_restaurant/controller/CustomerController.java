@@ -1,11 +1,14 @@
 package com.example.map_proiect_restaurant.controller;
 
-
 import com.example.map_proiect_restaurant.model.Customer;
-import org.springframework.ui.Model;
 import com.example.map_proiect_restaurant.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/customers")
@@ -18,51 +21,47 @@ public class CustomerController {
     }
 
     @GetMapping
-    public String getAllCustomers(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomers());
-        return "customer/index";
+    public String listCustomers(Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "customers/index";
     }
 
     @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("customer", new Customer("", "", null, "", ""));
-        return "customer/form";
-    }
-    @GetMapping("/{id}")
-    public String getCustomerDetails(@PathVariable String id, Model model) {
-        Customer customer = customerService.getCustomerById(id);
-
-        if (customer == null) {
-            return "redirect:/customers";
-        }
-
-        model.addAttribute("customer", customer);
-        return "customer/details";
-    }
-    @GetMapping("/{id}/edit")
-    public String editCustomer(@PathVariable String id, Model model) {
-        Customer customer = customerService.getCustomerById(id);
-        model.addAttribute("customer", customer);
-        return "customer/form";  // same form used for both add + edit
+    public String showCreateForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customers/form";
     }
 
-    @PostMapping("/{id}/update")
-    public String updateCustomer(@PathVariable String id, @ModelAttribute Customer customer) {
-        customer.setId(id); // ensure same ID is kept
-        customerService.updateCustomer(customer);
-        return "redirect:/customers";
-    }
-//
     @PostMapping
-    public String createCustomer(@ModelAttribute Customer customer) {
+    public String createCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "customers/form";
+        }
         customerService.addCustomer(customer);
         return "redirect:/customers";
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteCustomer(@PathVariable String id) {
-        customerService.deleteCustomer(id);
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customers/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateCustomer(@PathVariable Long id, @Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "customers/form";
+        }
+        customer.setId(id);
+        customerService.updateCustomer(customer);
         return "redirect:/customers";
     }
 
+    @PostMapping("/{id}/delete")
+    public String deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return "redirect:/customers";
+    }
 }

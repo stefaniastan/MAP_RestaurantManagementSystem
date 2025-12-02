@@ -15,23 +15,32 @@ public class MenuItemService {
         this.menuItemRepository = menuItemRepository;
     }
 
-    public List<MenuItem> findAllMenuItems(){
+    public MenuItem addMenuItem(MenuItem menuItem) {
+        return menuItemRepository.save(menuItem);
+    }
+
+    public MenuItem updateMenuItem(MenuItem menuItem) {
+        return menuItemRepository.save(menuItem);
+    }
+
+    public List<MenuItem> getAllMenuItems() {
         return menuItemRepository.findAll();
     }
 
-    public MenuItem findMenuItemById(String id){
-        return menuItemRepository.findById(id);
+    public MenuItem getMenuItemById(Long id) {
+        return menuItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Menu item not found"));
     }
 
-    public MenuItem addMenuItem(MenuItem menuItem){
-        return menuItemRepository.save(menuItem);
-    }
-
-    public MenuItem updateMenuItem(MenuItem menuItem){
-        return menuItemRepository.save(menuItem);
-    }
-
-    public void deleteMenuItem(String id){
+    public void deleteMenuItem(Long id) {
         menuItemRepository.deleteById(id);
+    }
+
+    public List<MenuItem> getMenuItemsByName(String name) {
+        return menuItemRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    public List<MenuItem> getMenuItemsByPriceRange(Double minPrice, Double maxPrice) {
+        return menuItemRepository.findByPriceBetween(minPrice, maxPrice);
     }
 }

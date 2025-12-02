@@ -1,7 +1,7 @@
 [ {
   "id" : "Customer-11",
-  "name" : "Anaa",
-  "orders" : null,
+  "name" : "Ana",
+  "orders" : [ ],
   "adress" : "Str. Florilor 10",
   "email" : "ana@example.com"
 }, {
@@ -22,6 +22,12 @@
   "orders" : [ ],
   "adress" : "Str. Libertatii 8",
   "email" : "roxana@example.com"
+}, {
+  "id" : "Customer-15",
+  "name" : "Andrei",
+  "orders" : null,
+  "adress" : "avram iancu",
+  "email" : "vlad@example.com"
 }, {
   "id" : "Customer-16",
   "name" : "Andreea",
@@ -55,13 +61,19 @@
 }, {
   "id" : "Customer-21",
   "name" : "Puiu",
-  "orders" : [ ],
+  "orders" : null,
   "adress" : "Str penticostalului 29",
   "email" : "puiu@gmail.com"
 }, {
   "id" : "Customer-21",
   "name" : "Igor",
-  "orders" : [ ],
+  "orders" : null,
   "adress" : "Str. Cimitirului 30",
   "email" : "Igor.nati@gmail.com"
+}, {
+  "id" : "Customer-22",
+  "name" : "Igore",
+  "orders" : null,
+  "adress" : "Str. Cimitirului 31",
+  "email" : "Igor.pis@gmail.com"
 } ]

@@ -1,31 +1,34 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.example.map_proiect_restaurant.repository.InFileRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
-public class Chef extends Staff implements InFileRepository.IdProvider {
-    @JsonProperty("specialization")
+@Entity
+@DiscriminatorValue("CHEF")
+public class Chef extends Staff {
+
+    @Column(nullable = false)
+    private Integer age;
+
+    @Column(nullable = false, length = 100)
     private String specialization;
-    @JsonProperty("Age")
-    private Integer Age;
 
-    public Chef(){
-        super("", "", "");
+    public Chef() {
+        super();
     }
 
-    public Chef(String Id, String name, String Rating, String specialization,  Integer Age){
-        super(Id, name, Rating);
+    public Chef(String name, String rating, Integer age, String specialization) {
+        super(name, rating);
+        this.age = age;
         this.specialization = specialization;
-        this.Age = Age;
     }
 
-    @Override
-    public String getId() {
-        return super.getId();
+    // Getters and Setters
+    public Integer getAge() {
+        return age;
     }
-    @Override
-    public void setId(String Id) {
-        super.setId(Id);
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getSpecialization() {
@@ -34,12 +37,5 @@ public class Chef extends Staff implements InFileRepository.IdProvider {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
-    }
-
-    public Integer getAge() {
-        return Age;
-    }
-    public void setAge(Integer Age) {
-        this.Age = Age;
     }
 }

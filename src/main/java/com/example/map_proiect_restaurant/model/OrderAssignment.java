@@ -1,42 +1,54 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.example.map_proiect_restaurant.repository.InFileRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
-public class OrderAssignment implements InFileRepository.IdProvider {
-    @JsonProperty("Id")
-    private String Id;
-    private String orderId;
-    private String staffId;
+@Entity
+@Table(name = "order_assignments")
+public class OrderAssignment {
 
-    public OrderAssignment(){}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public OrderAssignment(String Id, String orderId, String staffId) {
-        this.Id = Id;
-        this.orderId = orderId;
-        this.staffId = staffId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnoreProperties({"orderLines", "assignments", "bill", "customer", "table"})
+    private Order order;
 
-    }
-    @Override
-    public String getId() {
-        return Id;
-    }
-    @Override
-    public void setId(String Id) {
-        this.Id = Id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
 
-    public String getOrderId() {
-        return orderId;
-    }
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public OrderAssignment() {}
+
+    public OrderAssignment(Order order, Staff staff) {
+        this.order = order;
+        this.staff = staff;
     }
 
-    public String getStaffId() {
-        return staffId;
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

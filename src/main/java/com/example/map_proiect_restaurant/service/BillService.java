@@ -15,23 +15,28 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public Bill addBill(Bill bill){
+    public Bill addBill(Bill bill) {
         return billRepository.save(bill);
     }
 
-    public Bill updateBill(Bill bill){
+    public Bill updateBill(Bill bill) {
         return billRepository.save(bill);
     }
 
-    public List<Bill> getAllBills(){
+    public List<Bill> getAllBills() {
         return billRepository.findAll();
     }
 
-    public Bill getBillById(String id){
-        return billRepository.findById(id);
+    public Bill getBillById(Long id) {
+        return billRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bill not found"));
     }
 
-    public void deleteBill(String id){
+    public void deleteBill(Long id) {
         billRepository.deleteById(id);
+    }
+
+    public List<Bill> getBillsByOrderId(Long orderId) {
+        return billRepository.findByOrderId(orderId);
     }
 }
