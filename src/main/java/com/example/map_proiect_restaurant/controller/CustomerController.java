@@ -64,4 +64,16 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return "redirect:/customers";
     }
+    @GetMapping("/{id}")
+    public String showCustomerDetails(@PathVariable Long id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+
+        // Fallback if customer is not found
+        if (customer == null) {
+            return "redirect:/customers";
+        }
+
+        model.addAttribute("customer", customer);
+        return "customer/details";
+    }
 }

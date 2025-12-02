@@ -6,12 +6,15 @@
 <body>
 <h1 th:text="${bill.id != null} ? 'Edit Bill' : 'Create Bill'"></h1>
 
-<form th:action="@{${bill.id != null} ? '/bill/update' : '/bill/save'}" th:object="${bill}" method="post">
-    <input type="hidden" th:field="*{id}" />
+<form th:action="@{${bill.id != null} ? '/bill/' + ${bill.id} : '/bill'}" th:object="${bill}" method="post">    <input type="hidden" th:field="*{id}" />
 
     <label>Order:</label>
-    <select th:field="*{order}" required>
-        <option th:each="order : ${orders}" th:value="${order}" th:text="${order.id}">Order ID</option>
+    <select name="order" required>
+        <option value="">-- Select Order --</option>
+        <option th:each="order : ${orders}"
+                th:value="${order.id}"
+                th:text="${order.id}"
+                th:selected="${bill.order != null and bill.order.id == order.id}">Order ID</option>
     </select>
     <div th:if="${#fields.hasErrors('order')}" th:errors="*{order}"></div>
 
