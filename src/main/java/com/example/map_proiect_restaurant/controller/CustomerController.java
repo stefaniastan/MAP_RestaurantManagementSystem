@@ -24,19 +24,19 @@ public class CustomerController {
     public String listCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        return "customers/index";
+        return "customer/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("customer", new Customer());
-        return "customers/form";
+        return "customer/form";
     }
 
     @PostMapping
     public String createCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
         if (result.hasErrors()) {
-            return "customers/form";
+            return "customer/form";
         }
         customerService.addCustomer(customer);
         return "redirect:/customers";
@@ -46,13 +46,13 @@ public class CustomerController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
-        return "customers/form";
+        return "customer/form";
     }
 
     @PostMapping("/{id}")
     public String updateCustomer(@PathVariable Long id, @Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
         if (result.hasErrors()) {
-            return "customers/form";
+            return "customer/form";
         }
         customer.setId(id);
         customerService.updateCustomer(customer);
