@@ -9,7 +9,7 @@ public class Server extends Staff {
     @Column(nullable = false)
     private Integer age;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String designation;
 
     public Server() {
