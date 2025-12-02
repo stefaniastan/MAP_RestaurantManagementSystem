@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/servers")
+@RequestMapping("/server")
 public class ServerController {
 
     private final ServerService serverService;
@@ -24,19 +24,19 @@ public class ServerController {
     public String listServers(Model model) {
         List<Server> servers = serverService.getAllServers();
         model.addAttribute("servers", servers);
-        return "servers/index";
+        return "server/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("server", new Server());
-        return "servers/form";
+        return "server/form";
     }
 
     @PostMapping
     public String createServer(@Valid @ModelAttribute("server") Server server, BindingResult result) {
         if (result.hasErrors()) {
-            return "servers/form";
+            return "server/form";
         }
         serverService.addServer(server);
         return "redirect:/servers";
