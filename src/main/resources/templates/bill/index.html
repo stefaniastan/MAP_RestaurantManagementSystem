@@ -6,7 +6,7 @@
 <body>
 <h2>Bills</h2>
 
-<a href="/bills/new">Add New Bill</a>
+<a href="/bill/new">Add New Bill</a>
 
 <table border="1">
     <tr>
@@ -20,7 +20,7 @@
         <td th:text="${bill.orderId}"></td>
         <td th:text="${bill.totalAmount}"></td>
         <td>
-            <form th:action="@{'/bills/' + ${bill.id} + '/delete'}" method="post">
+            <form th:action="@{'/bill/' + ${bill.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>

@@ -6,7 +6,7 @@
 <body>
 <h1 th:text="${bill.id != null} ? 'Edit Bill' : 'Create Bill'"></h1>
 
-<form th:action="@{${bill.id != null} ? '/bills/update' : '/bills/save'}" th:object="${bill}" method="post">
+<form th:action="@{${bill.id != null} ? '/bill/update' : '/bill/save'}" th:object="${bill}" method="post">
     <input type="hidden" th:field="*{id}" />
 
     <label>Order:</label>
@@ -21,6 +21,6 @@
 
     <button type="submit">Save</button>
 </form>
-<a th:href="@{/bills}">Back to list</a>
+<a th:href="@{/bill}">Back to list</a>
 </body>
 </html>
