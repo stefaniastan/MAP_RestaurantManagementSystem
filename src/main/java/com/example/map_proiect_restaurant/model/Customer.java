@@ -1,5 +1,6 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
     public Customer() {}
@@ -73,13 +75,11 @@ public class Customer {
         this.orders = orders;
     }
 
-    // Helper method to add order
     public void addOrder(Order order) {
         orders.add(order);
         order.setCustomer(this);
     }
 
-    // Helper method to remove order
     public void removeOrder(Order order) {
         orders.remove(order);
         order.setCustomer(null);

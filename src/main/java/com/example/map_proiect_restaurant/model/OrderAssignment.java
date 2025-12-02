@@ -1,5 +1,6 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class OrderAssignment {
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnoreProperties({"orderLines", "assignments", "bill", "customer", "table"})
     private Order order;
 
     @ManyToOne

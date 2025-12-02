@@ -1,5 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnoreProperties({"orders"})
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
+    @JsonIgnoreProperties({"orders"})
     private RestaurantTable table;
 
     @Enumerated(EnumType.STRING)
@@ -25,12 +29,15 @@ public class Order {
     private OrderStatusEnum status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderAssignment> assignments = new ArrayList<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Bill bill;
 
     public Order() {}
@@ -98,7 +105,6 @@ public class Order {
         this.bill = bill;
     }
 
-    // Helper methods
     public void addOrderLine(OrderLine orderLine) {
         orderLines.add(orderLine);
         orderLine.setOrder(this);

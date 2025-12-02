@@ -2,51 +2,66 @@ package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Customer;
 import com.example.map_proiect_restaurant.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
 
-    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+    public String listCustomers(Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "customers/index";
     }
 
-    @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Long id) {
-        return customerService.getCustomerById(id);
+    @GetMapping("/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customers/form";
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.addCustomer(customer);
+    public String createCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "customers/form";
+        }
+        customerService.addCustomer(customer);
+        return "redirect:/customers";
     }
 
-    @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customers/form";
+    }
+
+    @PostMapping("/{id}")
+    public String updateCustomer(@PathVariable Long id, @Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "customers/form";
+        }
         customer.setId(id);
-        return customerService.updateCustomer(customer);
+        customerService.updateCustomer(customer);
+        return "redirect:/customers";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
-        return "Customer deleted successfully";
-    }
-
-    @GetMapping("/email/{email}")
-    public Customer getCustomerByEmail(@PathVariable String email) {
-        return customerService.getCustomerByEmail(email);
+        return "redirect:/customers";
     }
 }

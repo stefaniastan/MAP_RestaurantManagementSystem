@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 @DiscriminatorValue("SERVER")
 public class Server extends Staff {
 
+    @Column(nullable = false)
+    private Integer age;
+
     @Column(nullable = false, length = 100)
     private String designation;
 
@@ -13,12 +16,21 @@ public class Server extends Staff {
         super();
     }
 
-    public Server(String name, String rating, String designation) {
+    public Server(String name, String rating, Integer age, String designation) {
         super(name, rating);
+        this.age = age;
         this.designation = designation;
     }
 
     // Getters and Setters
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public String getDesignation() {
         return designation;
     }
