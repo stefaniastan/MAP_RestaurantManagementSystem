@@ -1,7 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "order_assignments")
@@ -11,12 +11,11 @@ public class OrderAssignment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Order is required")
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnoreProperties({"orderLines", "assignments", "bill", "customer", "table"})
     private Order order;
 
-    @NotNull(message = "Staff is required")
     @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;

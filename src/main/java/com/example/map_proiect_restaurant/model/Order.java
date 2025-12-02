@@ -1,7 +1,8 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,28 +14,30 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Customer is required")
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnoreProperties({"orders"})
     private Customer customer;
 
-    @NotNull(message = "Table is required")
     @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
+    @JsonIgnoreProperties({"orders"})
     private RestaurantTable table;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Status is required")
     @Column(nullable = false)
     private OrderStatusEnum status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderAssignment> assignments = new ArrayList<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Bill bill;
 
     public Order() {}
@@ -102,7 +105,6 @@ public class Order {
         this.bill = bill;
     }
 
-    // Helper methods
     public void addOrderLine(OrderLine orderLine) {
         orderLines.add(orderLine);
         orderLine.setOrder(this);

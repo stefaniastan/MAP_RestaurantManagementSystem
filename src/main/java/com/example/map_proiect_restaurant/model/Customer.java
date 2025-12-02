@@ -1,8 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +13,17 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotBlank(message = "Address is required")
     @Column(nullable = false, length = 200)
     private String address;
 
-    @Email(message = "Email should be valid")
-    @NotBlank(message = "Email is required")
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 
     public Customer() {}
@@ -79,13 +75,11 @@ public class Customer {
         this.orders = orders;
     }
 
-    // Helper method to add order
     public void addOrder(Order order) {
         orders.add(order);
         order.setCustomer(this);
     }
 
-    // Helper method to remove order
     public void removeOrder(Order order) {
         orders.remove(order);
         order.setCustomer(null);

@@ -1,35 +1,28 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "staff")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "staff_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
     @Column(nullable = false, length = 100)
     private String name;
 
     @Column(length = 10)
     private String rating;
 
-    @Positive(message = "Age must be positive")
-    @Column(nullable = false)
-    public Integer age;
-
     public Staff() {}
 
-    public Staff(String name, String rating, Integer age) {
+    public Staff(String name, String rating) {
         this.name = name;
         this.rating = rating;
-        this.age = age;
     }
 
     // Getters and Setters
@@ -55,13 +48,5 @@ public abstract class Staff {
 
     public void setRating(String rating) {
         this.rating = rating;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 }

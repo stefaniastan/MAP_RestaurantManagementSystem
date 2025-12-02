@@ -1,13 +1,14 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "servers")
+@DiscriminatorValue("SERVER")
 public class Server extends Staff {
 
-    @NotBlank(message = "Designation is required")
+    @Column(nullable = false)
+    private Integer age;
+
     @Column(nullable = false, length = 100)
     private String designation;
 
@@ -16,11 +17,20 @@ public class Server extends Staff {
     }
 
     public Server(String name, String rating, Integer age, String designation) {
-        super(name, rating, age);
+        super(name, rating);
+        this.age = age;
         this.designation = designation;
     }
 
     // Getters and Setters
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public String getDesignation() {
         return designation;
     }
