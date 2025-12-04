@@ -40,7 +40,11 @@
         <option value="READY">Ready</option>
         <option value="SERVED">Served</option>
         <option value="PAID">Paid</option>
+        <option value="PENDING">Pending</option>
+        <option value="DELIVERED">Delivered</option>
+        <option value="CANCELLED">Cancelled</option>
     </select>
+
     <div style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
     <br><br>
 
