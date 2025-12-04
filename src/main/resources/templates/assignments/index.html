@@ -6,7 +6,7 @@
 <body>
 <h2>Order Assignments</h2>
 
-<a href="/orderAssignments/new">Add New Assignment</a>
+<a href="/assignments/new">Add New Assignment</a>
 
 <table border="1">
     <tr>
@@ -20,7 +20,7 @@
         <td th:text="${assignment.orderId}"></td>
         <td th:text="${assignment.staffId}"></td>
         <td>
-            <form th:action="@{'/orderAssignments/' + ${assignment.id} + '/delete'}" method="post">
+            <form th:action="@{'/assignments/' + ${assignment.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>

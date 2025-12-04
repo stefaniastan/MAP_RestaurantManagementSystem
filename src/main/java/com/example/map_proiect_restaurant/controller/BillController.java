@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Bill;
+import com.example.map_proiect_restaurant.model.Order;
 import com.example.map_proiect_restaurant.service.BillService;
 import com.example.map_proiect_restaurant.service.OrderService;
 import jakarta.validation.Valid;
@@ -23,7 +24,7 @@ public class BillController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"", "/"})
     public String listBills(Model model) {
         model.addAttribute("bills", billService.getAllBills());
         return "bill/index";
@@ -37,17 +38,29 @@ public class BillController {
     }
 
     @PostMapping
+
     public String createBill(@Valid @ModelAttribute("bill") Bill bill,
                              BindingResult result,
                              @RequestParam("order") Long orderId,
                              Model model) {
+
+        Order order = orderService.getOrderById(orderId);
+
+        if (order == null) {
+            result.rejectValue("order", "error.bill", "The selected order could not be found.");
+        }
+
+
+        bill.setOrder(order);
+        if (order != null) {
+            order.setBill(bill);
+        }
 
         if (result.hasErrors()) {
             model.addAttribute("orders", orderService.getAllOrders());
             return "bill/form";
         }
 
-        bill.setOrder(orderService.getOrderById(orderId));
         billService.addBill(bill);
         return "redirect:/bill";
     }
@@ -69,13 +82,23 @@ public class BillController {
                              @RequestParam("order") Long orderId,
                              Model model) {
 
+        Order order = orderService.getOrderById(orderId);
+
+        if (order == null) {
+            result.rejectValue("order", "error.bill", "The selected order could not be found.");
+        }
+
+        bill.setId(id);
+        bill.setOrder(order);
+        if (order != null) {
+            order.setBill(bill); // <--- ADD THIS LINE
+        }
+
         if (result.hasErrors()) {
             model.addAttribute("orders", orderService.getAllOrders());
             return "bill/form";
         }
 
-        bill.setId(id);
-        bill.setOrder(orderService.getOrderById(orderId));
         billService.updateBill(bill);
         return "redirect:/bill";
     }

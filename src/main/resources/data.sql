@@ -11,7 +11,7 @@ DELETE FROM staff;
 DELETE FROM restaurant_tables;
 DELETE FROM customers;
 DELETE FROM menu_items;
-
+--
 -- ============================================================
 -- 2. Resetarea Auto-Increment
 -- ============================================================

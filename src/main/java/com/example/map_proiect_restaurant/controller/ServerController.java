@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/server")
+@RequestMapping("/servers")
 public class ServerController {
 
     private final ServerService serverService;
@@ -46,13 +46,13 @@ public class ServerController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Server server = serverService.getServerById(id);
         model.addAttribute("server", server);
-        return "servers/form";
+        return "server/form";
     }
 
     @PostMapping("/{id}")
     public String updateServer(@PathVariable Long id, @Valid @ModelAttribute("server") Server server, BindingResult result) {
         if (result.hasErrors()) {
-            return "servers/form";
+            return "server/form";
         }
         server.setId(id);
         serverService.updateServer(server);

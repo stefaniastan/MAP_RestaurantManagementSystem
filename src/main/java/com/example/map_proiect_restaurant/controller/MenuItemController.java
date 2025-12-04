@@ -20,23 +20,23 @@ public class MenuItemController {
         this.menuItemService = menuItemService;
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     public String listMenuItems(Model model) {
         List<MenuItem> items = menuItemService.getAllMenuItems();
         model.addAttribute("menuItems", items);
-        return "menuitems/index";
+        return "menuitem/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("menuItem", new MenuItem());
-        return "menuitems/form";
+        return "menuitem/form";
     }
 
     @PostMapping
     public String createMenuItem(@Valid @ModelAttribute("menuItem") MenuItem menuItem, BindingResult result) {
         if (result.hasErrors()) {
-            return "menuitems/form";
+            return "menuitem/form";
         }
         menuItemService.addMenuItem(menuItem);
         return "redirect:/menuitems";
@@ -46,13 +46,13 @@ public class MenuItemController {
     public String showEditForm(@PathVariable Long id, Model model) {
         MenuItem item = menuItemService.getMenuItemById(id);
         model.addAttribute("menuItem", item);
-        return "menuitems/form";
+        return "menuitem/form";
     }
 
     @PostMapping("/{id}")
     public String updateMenuItem(@PathVariable Long id, @Valid @ModelAttribute("menuItem") MenuItem menuItem, BindingResult result) {
         if (result.hasErrors()) {
-            return "menuitems/form";
+            return "menuitem/form";
         }
         menuItem.setId(id);
         menuItemService.updateMenuItem(menuItem);

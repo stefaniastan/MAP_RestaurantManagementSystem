@@ -119,15 +119,18 @@ public class DataInitializer {
         serverRepository.saveAll(servers);
 
         // 6. Initialize Orders (10+)
+        // 6. Initialize Orders (10+)
         List<Order> orders = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             Customer customer = customers.get(i % customers.size());
             RestaurantTable table = tables.get(i % tables.size());
-            OrderStatusEnum status = i % 3 == 0 ? OrderStatusEnum.delivered :
-                    i % 3 == 1 ? OrderStatusEnum.pending : OrderStatusEnum.cancelled;
+            OrderStatusEnum status = i % 3 == 0 ? OrderStatusEnum.DELIVERED :
+                    i % 3 == 1 ? OrderStatusEnum.PENDING :
+                            OrderStatusEnum.CANCELLED;
             orders.add(new Order(customer, table, status));
         }
         orderRepository.saveAll(orders);
+
 
         // 7. Initialize Order Lines (10+)
         List<OrderLine> orderLines = new ArrayList<>();
