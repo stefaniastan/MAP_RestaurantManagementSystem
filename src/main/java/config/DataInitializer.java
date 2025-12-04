@@ -130,7 +130,7 @@ public class DataInitializer {
             orders.add(new Order(customer, table, status));
         }
         orderRepository.saveAll(orders);
-
+//
 
         // 7. Initialize Order Lines (10+)
         List<OrderLine> orderLines = new ArrayList<>();
