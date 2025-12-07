@@ -3,7 +3,9 @@ package com.example.map_proiect_restaurant.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "servers")
 @DiscriminatorValue("SERVER")
+@PrimaryKeyJoinColumn(name = "id")
 public class Server extends Staff {
 
     @Column(nullable = false)

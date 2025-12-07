@@ -13,6 +13,11 @@
     <input type="text" th:field="*{name}" required maxlength="100" />
     <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></div>
 
+    <label>Age:</label>
+    <input type="number" th:field="*{age}" required min="18" />
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red;"></div>
+
+
     <label>Designation:</label>
     <input type="text" th:field="*{designation}" required maxlength="50" />
     <div th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" style="color:red;"></div>
