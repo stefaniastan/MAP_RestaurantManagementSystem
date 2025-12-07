@@ -4,17 +4,15 @@
     <title>Servers</title>
 </head>
 <body>
-<h2>Servers</h2>
-
-<a href="/server/new">Add New Server</a>
-
+<h1>Servers</h1>
+<a th:href="@{/servers/new}">➕ Add New Server</a>
 <table border="1">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Designation</th>
         <th>Rating</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="server : ${servers}">
         <td th:text="${server.id}"></td>
@@ -22,9 +20,9 @@
         <td th:text="${server.designation}"></td>
         <td th:text="${server.rating}"></td>
         <td>
-            <form th:action="@{'/servers/' + ${server.id} + '/delete'}" method="post">
-                <button type="submit">Delete</button>
-            </form>
+            <a th:href="@{/servers/edit/{id}(id=${server.id})}">Edit</a>
+            <a th:href="@{/servers/delete/{id}(id=${server.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
         </td>
     </tr>
 </table>

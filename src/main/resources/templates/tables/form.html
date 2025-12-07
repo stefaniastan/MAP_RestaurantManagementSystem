@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${table.id != null} ? 'Edit Table' : 'New Table'">Table Form</title>
+</head>
+<body>
+
+<h2 th:text="${table.id != null} ? 'Edit Table' : 'Add New Table'">Table Form</h2>
+
+<!-- Use th:if/th:unless for action URL -->
+<form th:action="@{${table.id} != null ? '/tables/' + ${table.id} : '/tables'}"
+      th:object="${table}"
+      method="post">
+
+    <label>Table Number:</label><br>
+    <input type="number" th:field="*{number}" required min="1" />
+    <div style="color:red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+    <br><br>
+
+    <label>Status:</label><br>
+    <select th:field="*{status}">
+        <option value="FREE">Free</option>
+        <option value="OCCUPIED">Occupied</option>
+        <option value="RESERVED">Reserved</option>
+    </select>
+
+    <div style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+    <br><br>
+
+    <button type="submit">Save Table</button>
+</form>
+
+<br>
+<a th:href="@{/tables}">⬅️ Back to list</a>
+
+</body>
+</html>

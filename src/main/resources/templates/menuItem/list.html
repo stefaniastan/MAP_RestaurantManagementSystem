@@ -4,26 +4,23 @@
     <title>Menu Items</title>
 </head>
 <body>
-<h2>Menu Items</h2>
-
-<a href="/menuitems/new">Add New Item</a>
-
+<h1>Menu Items</h1>
+<a th:href="@{/menuItems/new}">Add New Menu Item</a>
 <table border="1">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th>Action</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="item : ${menuItems}">
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td>
-            <form th:action="@{/menuitems/{id}/delete(id=${item.id})}" method="post">
-                <button type="submit">Delete</button>
-            </form>
-
+            <a th:href="@{/menuItems/edit/{id}(id=${item.id})}">Edit</a>
+            <a th:href="@{/menuItems/delete/{id}(id=${item.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
         </td>
     </tr>
 </table>

@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Menu Item</title>
+    <title>Create/Edit Menu Item</title>
 </head>
 <body>
-<h2>Add New Menu Item</h2>
+<h1 th:text="${menuItem.id != null} ? 'Edit Menu Item' : 'Create Menu Item'"></h1>
 
-<form th:action="@{/menuItems}" th:object="${menuItem}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
+<form th:action="@{${menuItem.id == null} ? '/menuitems' : '/menuitems/' + ${menuItem.id}}"
+      th:object="${menuItem}"
+      method="post">
 
     <label>Name:</label>
-    <input type="text" th:field="*{name}" required><br>
+    <input type="text" th:field="*{name}" required maxlength="100" />
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
     <label>Price:</label>
-    <input type="number" step="0.01" th:field="*{price}" required><br>
+    <input type="number" th:field="*{price}" required step="0.01" min="0"/>
+    <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 
     <button type="submit">Save</button>
 </form>
-
-<a href="/menuItems">⬅️ Back to list</a>
+<a th:href="@{/menuItems}">Back to list</a>
 </body>
 </html>

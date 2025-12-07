@@ -4,11 +4,8 @@
     <title>Tables</title>
 </head>
 <body>
-<h2>All Tables</h2>
-
-<a href="/tables/new">➕ Add New Table</a>
-<br><br>
-
+<h1>Tables</h1>
+<a th:href="@{/tables/new}">➕ Add New Table</a>
 <table border="1">
     <tr>
         <th>ID</th>
@@ -16,18 +13,17 @@
         <th>Occupied Status</th>
         <th>Actions</th>
     </tr>
-
     <tr th:each="table : ${tables}">
         <td th:text="${table.id}"></td>
         <td th:text="${table.number}"></td>
-        <td th:text="${table.occupiedStatus}"></td>
+        <td th:text="${table.occupiedStatus} ? 'Occupied' : 'Available'"></td>
         <td>
-            <form th:action="@{'/tables/' + ${table.id} + '/delete'}" method="post">
-                <button type="submit">🗑️ Delete</button>
-            </form>
+            <a th:href="@{/tables/edit/{id}(id=${table.id})}">Edit</a>
+            <a th:href="@{/tables/delete/{id}(id=${table.id})}"
+               onclick="return confirm('Are you sure?');">Delete</a>
         </td>
     </tr>
 </table>
-
 </body>
 </html>
+
