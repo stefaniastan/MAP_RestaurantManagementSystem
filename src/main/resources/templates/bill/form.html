@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Bill</title>
+    <title>Create/Edit Bill</title>
 </head>
 <body>
-<h2>Add New Bill</h2>
+<h1 th:text="${bill.id != null} ? 'Edit Bill' : 'Create Bill'"></h1>
 
-<form th:action="@{/bills}" th:object="${bill}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" required><br>
-
-    <label>Order ID:</label>
-    <input type="text" th:field="*{orderId}" required><br>
+<form th:action="@{${bill.id != null} ? '/bill/' + ${bill.id} : '/bill'}" th:object="${bill}" method="post">    <input type="hidden" th:field="*{id}" />
+    <div th:if="${errorMessage}" style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <label>Order:</label>
+    <select name="order" required>
+        <option value="">-- Select Order --</option>
+        <option th:each="order : ${orders}"
+                th:value="${order.id}"
+                th:text="${order.id}"
+                th:selected="${bill.order != null and bill.order.id == order.id}">Order ID</option>
+    </select>
+    <div th:if="${#fields.hasErrors('order')}" th:errors="*{order}"></div>
 
     <label>Total Amount:</label>
-    <input type="number" step="0.01" th:field="*{totalAmount}" required><br>
+    <input type="number" th:field="*{totalAmount}" step="0.01" required />
+    <div th:if="${#fields.hasErrors('totalAmount')}" th:errors="*{totalAmount}"></div>
 
     <button type="submit">Save</button>
 </form>
-
-<a href="/bills">⬅️ Back to list</a>
+<a th:href="@{/bill}">Back to list</a>
 </body>
 </html>

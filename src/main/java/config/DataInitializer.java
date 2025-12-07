@@ -82,10 +82,12 @@ public class DataInitializer {
 
         // 3. Initialize Restaurant Tables (10+)
         List<RestaurantTable> tables = new ArrayList<>();
+        // Restaurant Tables
         for (int i = 1; i <= 15; i++) {
-            TableStatusEnum status = i % 3 == 0 ? TableStatusEnum.occupied : TableStatusEnum.free;
+            TableStatusEnum status = i % 3 == 0 ? TableStatusEnum.OCCUPIED : TableStatusEnum.FREE;
             tables.add(new RestaurantTable(i, status));
         }
+
         tableRepository.saveAll(tables);
 
         // 4. Initialize Chefs (10+)
@@ -119,15 +121,18 @@ public class DataInitializer {
         serverRepository.saveAll(servers);
 
         // 6. Initialize Orders (10+)
+        // 6. Initialize Orders (10+)
         List<Order> orders = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             Customer customer = customers.get(i % customers.size());
             RestaurantTable table = tables.get(i % tables.size());
-            OrderStatusEnum status = i % 3 == 0 ? OrderStatusEnum.delivered :
-                    i % 3 == 1 ? OrderStatusEnum.pending : OrderStatusEnum.cancelled;
+            OrderStatusEnum status = i % 3 == 0 ? OrderStatusEnum.DELIVERED :
+                    i % 3 == 1 ? OrderStatusEnum.PENDING :
+                            OrderStatusEnum.CANCELLED;
             orders.add(new Order(customer, table, status));
         }
         orderRepository.saveAll(orders);
+//
 
         // 7. Initialize Order Lines (10+)
         List<OrderLine> orderLines = new ArrayList<>();

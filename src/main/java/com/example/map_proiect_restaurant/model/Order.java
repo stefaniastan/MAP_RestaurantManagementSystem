@@ -1,6 +1,5 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -29,15 +28,15 @@ public class Order {
     private OrderStatusEnum status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties({"order"}) // avoids infinite recursion
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties({"order"})
     private List<OrderAssignment> assignments = new ArrayList<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties({"order"})
     private Bill bill;
 
     public Order() {}
@@ -49,61 +48,26 @@ public class Order {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    public RestaurantTable getTable() { return table; }
+    public void setTable(RestaurantTable table) { this.table = table; }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public OrderStatusEnum getStatus() { return status; }
+    public void setStatus(OrderStatusEnum status) { this.status = status; }
 
-    public RestaurantTable getTable() {
-        return table;
-    }
+    public List<OrderLine> getOrderLines() { return orderLines; }
+    public void setOrderLines(List<OrderLine> orderLines) { this.orderLines = orderLines; }
 
-    public void setTable(RestaurantTable table) {
-        this.table = table;
-    }
+    public List<OrderAssignment> getAssignments() { return assignments; }
+    public void setAssignments(List<OrderAssignment> assignments) { this.assignments = assignments; }
 
-    public OrderStatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatusEnum status) {
-        this.status = status;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-    public List<OrderAssignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(List<OrderAssignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
+    public Bill getBill() { return bill; }
+    public void setBill(Bill bill) { this.bill = bill; }
 
     public void addOrderLine(OrderLine orderLine) {
         orderLines.add(orderLine);

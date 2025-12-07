@@ -26,11 +26,11 @@ public class OrderController {
         this.tableService = tableService;
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     public String listOrders(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
-        return "orders/index";
+        return "order/index";
     }
 
     @GetMapping("/new")
@@ -38,13 +38,13 @@ public class OrderController {
         model.addAttribute("order", new Order());
         model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("tables", tableService.getAllTables());
-        return "orders/form";
+        return "order/form";
     }
 
     @PostMapping
     public String createOrder(@Valid @ModelAttribute("order") Order order, BindingResult result) {
         if (result.hasErrors()) {
-            return "orders/form";
+            return "order/form";
         }
         orderService.addOrder(order);
         return "redirect:/orders";
@@ -56,13 +56,13 @@ public class OrderController {
         model.addAttribute("order", order);
         model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("tables", tableService.getAllTables());
-        return "orders/form";
+        return "order/form";
     }
 
     @PostMapping("/{id}")
     public String updateOrder(@PathVariable Long id, @Valid @ModelAttribute("order") Order order, BindingResult result) {
         if (result.hasErrors()) {
-            return "orders/form";
+            return "order/form";
         }
         order.setId(id);
         orderService.updateOrder(order);

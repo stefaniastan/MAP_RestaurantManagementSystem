@@ -44,10 +44,22 @@ public class OrderAssignmentController {
     }
 
     @PostMapping
-    public String createAssignment(@Valid @ModelAttribute("assignment") OrderAssignment assignment, BindingResult result) {
+    public String createAssignment(@Valid @ModelAttribute("assignment") OrderAssignment assignment,
+                                   BindingResult result,
+                                   @RequestParam("order") Long orderId,
+                                   @RequestParam("staff") Long staffId,
+                                   Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            model.addAttribute("staffList", staffService.getAllStaff());
             return "assignments/form";
         }
+
+        Order order = orderService.getOrderById(orderId);
+        Staff staff = staffService.getStaffById(staffId);
+        assignment.setOrder(order);
+        assignment.setStaff(staff);
+
         assignmentService.addOrderAssignment(assignment);
         return "redirect:/assignments";
     }
@@ -62,10 +74,23 @@ public class OrderAssignmentController {
     }
 
     @PostMapping("/{id}")
-    public String updateAssignment(@PathVariable Long id, @Valid @ModelAttribute("assignment") OrderAssignment assignment, BindingResult result) {
+    public String updateAssignment(@PathVariable Long id,
+                                   @Valid @ModelAttribute("assignment") OrderAssignment assignment,
+                                   BindingResult result,
+                                   @RequestParam("order") Long orderId,
+                                   @RequestParam("staff") Long staffId,
+                                   Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            model.addAttribute("staffList", staffService.getAllStaff());
             return "assignments/form";
         }
+
+        Order order = orderService.getOrderById(orderId);
+        Staff staff = staffService.getStaffById(staffId);
+        assignment.setOrder(order);
+        assignment.setStaff(staff);
+
         assignment.setId(id);
         assignmentService.updateOrderAssignment(assignment);
         return "redirect:/assignments";

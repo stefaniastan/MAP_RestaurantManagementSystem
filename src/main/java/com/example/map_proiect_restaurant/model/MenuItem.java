@@ -2,6 +2,8 @@ package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "menu_items")
 public class MenuItem {
@@ -15,6 +17,10 @@ public class MenuItem {
 
     @Column(nullable = false)
     private Double price;
+
+    @OneToMany(mappedBy = "menuItem", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<OrderLine> orderLines;
+
 
     public MenuItem() {}
 
@@ -47,4 +53,5 @@ public class MenuItem {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }

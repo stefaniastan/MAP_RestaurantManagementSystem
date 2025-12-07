@@ -24,19 +24,19 @@ public class ServerController {
     public String listServers(Model model) {
         List<Server> servers = serverService.getAllServers();
         model.addAttribute("servers", servers);
-        return "servers/index";
+        return "server/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("server", new Server());
-        return "servers/form";
+        return "server/form";
     }
 
     @PostMapping
     public String createServer(@Valid @ModelAttribute("server") Server server, BindingResult result) {
         if (result.hasErrors()) {
-            return "servers/form";
+            return "server/form";
         }
         serverService.addServer(server);
         return "redirect:/servers";
@@ -46,13 +46,13 @@ public class ServerController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Server server = serverService.getServerById(id);
         model.addAttribute("server", server);
-        return "servers/form";
+        return "server/form";
     }
 
     @PostMapping("/{id}")
     public String updateServer(@PathVariable Long id, @Valid @ModelAttribute("server") Server server, BindingResult result) {
         if (result.hasErrors()) {
-            return "servers/form";
+            return "server/form";
         }
         server.setId(id);
         serverService.updateServer(server);
