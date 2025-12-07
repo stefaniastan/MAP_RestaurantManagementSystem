@@ -48,6 +48,14 @@ public class OrderLineController {
         if (result.hasErrors()) {
             return "orderlines/form";
         }
+
+        // Fetch entities by ID
+        MenuItem menuItem = menuItemService.getMenuItemById(orderLine.getMenuItem().getId());
+        Order order = orderService.getOrderById(orderLine.getOrder().getId());
+
+        orderLine.setMenuItem(menuItem);
+        orderLine.setOrder(order);
+
         orderLineService.addOrderLine(orderLine);
         return "redirect:/orderlines";
     }
@@ -66,6 +74,13 @@ public class OrderLineController {
         if (result.hasErrors()) {
             return "orderlines/form";
         }
+
+        MenuItem menuItem = menuItemService.getMenuItemById(orderLine.getMenuItem().getId());
+        Order order = orderService.getOrderById(orderLine.getOrder().getId());
+
+        orderLine.setMenuItem(menuItem);
+        orderLine.setOrder(order);
+
         orderLine.setId(id);
         orderLineService.updateOrderLine(orderLine);
         return "redirect:/orderlines";
