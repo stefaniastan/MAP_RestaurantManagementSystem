@@ -2,6 +2,10 @@ package com.example.map_proiect_restaurant.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +18,19 @@ public class Customer {
     private Long id;
 
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "Name is required")  //new
+    @Size(max = 100) //new
     private String name;
 
     @Column(nullable = false, length = 200)
+    @NotBlank(message = "Address is required")  //new
+    @Size(max = 200)  //new
     private String address;
 
     @Column(nullable = false, unique = true, length = 100)
+    @NotBlank(message = "Email is required")  //new
+    @Email(message = "Invalid email format")  //new
+    @Size(max = 100)  //new
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)

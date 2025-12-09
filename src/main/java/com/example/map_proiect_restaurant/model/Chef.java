@@ -1,6 +1,9 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "chefs")
@@ -9,9 +12,12 @@ import jakarta.persistence.*;
 public class Chef extends Staff {
 
     @Column(nullable = false)
+    @NotNull(message = "Age is required")
+    @Min(value = 18, message = "Age must be at least 18")
     private Integer age;
 
     @Column(length = 100)
+    @Size(max = 100)
     private String specialization;
 
     public Chef() {

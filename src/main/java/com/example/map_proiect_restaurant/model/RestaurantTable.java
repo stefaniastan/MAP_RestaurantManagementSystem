@@ -2,6 +2,9 @@ package com.example.map_proiect_restaurant.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class RestaurantTable {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotNull(message = "Table number is required")  //new
+    @Positive(message = "Table number must be positive")  //new
     private Integer number;
 
     @Enumerated(EnumType.STRING)

@@ -2,6 +2,8 @@ package com.example.map_proiect_restaurant.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "order_lines")
@@ -18,9 +20,12 @@ public class OrderLine {
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id", nullable = false)
+    @NotNull(message = "Menu item must be selected")  //new
     private MenuItem menuItem;
 
     @Column(nullable = false)
+    @NotNull(message = "Quantity is required")  //new
+    @Min(value = 1, message = "Quantity must be at least 1")  //new
     private Integer quantity;
 
     public OrderLine() {}
