@@ -16,10 +16,16 @@ public class ChefService {
     }
 
     public Chef addChef(Chef chef) {
+        if (chef.getAge() == null || chef.getAge() < 18) {
+            throw new IllegalStateException("Chef must be at least 18 years old.");
+        }
         return chefRepository.save(chef);
     }
 
     public Chef updateChef(Chef chef) {
+        if (chef.getAge() == null || chef.getAge() < 18) {
+            throw new IllegalStateException("Chef must be at least 18 years old.");
+        }
         return chefRepository.save(chef);
     }
 

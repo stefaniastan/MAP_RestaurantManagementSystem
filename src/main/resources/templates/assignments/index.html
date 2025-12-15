@@ -4,27 +4,53 @@
     <title>Order Assignments</title>
 </head>
 <body>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <!--    <h2>Order Assignments</h2>-->
+
+    <a href="/" style="
+        padding:8px 16px;
+        background:#3498db;
+        color:white;
+        border-radius:6px;
+        text-decoration:none;
+        font-weight:bold;
+        font-family:Arial;
+        transition:0.2s;
+    "
+       onmouseover="this.style.background='#2980b9'"
+       onmouseout="this.style.background='#3498db'">
+        Home
+    </a>
+</div>
 <h2>Order Assignments</h2>
 
 <a href="/assignments/new">Add New Assignment</a>
 
 <table border="1">
+    <thead>
     <tr>
         <th>ID</th>
         <th>Order ID</th>
-        <th>Staff ID</th>
+        <th>Staff Name</th>
         <th>Action</th>
     </tr>
-    <tr th:each="assignment : ${orderAssignments}">
+    </thead>
+    <tbody>
+    <tr th:each="assignment : ${assignments}">
         <td th:text="${assignment.id}"></td>
-        <td th:text="${assignment.orderId}"></td>
-        <td th:text="${assignment.staffId}"></td>
+        <td th:text="${assignment.order.id}"></td>
+        <td th:text="${assignment.staff.name}"></td>
         <td>
-            <form th:action="@{'/assignments/' + ${assignment.id} + '/delete'}" method="post">
+            <form th:action="@{'/assignments/' + ${assignment.id} + '/delete'}" method="post" style="display:inline">
                 <button type="submit">Delete</button>
+            </form>
+            <form th:action="@{'/assignments/' + ${assignment.id} + '/edit'}" method="get" style="display:inline">
+                <button type="submit">Edit</button>
             </form>
         </td>
     </tr>
+    </tbody>
 </table>
+
 </body>
 </html>

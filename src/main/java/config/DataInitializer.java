@@ -83,7 +83,7 @@ public class DataInitializer {
         // 3. Initialize Restaurant Tables (10+)
         List<RestaurantTable> tables = new ArrayList<>();
         for (int i = 1; i <= 15; i++) {
-            TableStatusEnum status = i % 3 == 0 ? TableStatusEnum.occupied : TableStatusEnum.free;
+            TableStatusEnum status = i % 3 == 0 ? TableStatusEnum.OCCUPIED : TableStatusEnum.FREE;
             tables.add(new RestaurantTable(i, status));
         }
         tableRepository.saveAll(tables);

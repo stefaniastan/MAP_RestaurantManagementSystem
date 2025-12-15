@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface RestaurantTableRepository extends JpaRepository<RestaurantTable, Long> {
     List<RestaurantTable> findByStatus(TableStatusEnum status);
+    boolean existsByNumber(Integer number);
 }
 //

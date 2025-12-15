@@ -6,27 +6,29 @@
 <body>
 <h1 th:text="${chef.id != null} ? 'Edit Chef' : 'Create Chef'"></h1>
 
-<form th:action="@{${chef.id != null} ? '/chefs/update' : '/chefs/save'}" th:object="${chef}" method="post">
+<form th:action="@{${chef.id != null} ? '/chefs/' + ${chef.id} : '/chefs'}"
+      th:object="${chef}" method="post">
     <input type="hidden" th:field="*{id}" />
 
     <label>Name:</label>
     <input type="text" th:field="*{name}" required maxlength="100" />
-    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></div>
 
     <label>Rating:</label>
-    <input type="text" th:field="*{rating}" required maxlength="10" />
-    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+    <input type="number" step="0.1" th:field="*{rating}" required min="1.0" max="5.0" />
+    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" style="color:red;"></div>
 
     <label>Age:</label>
-    <input type="number" th:field="*{age}" required min="18" />
-    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+    <input type="number" th:field="*{age}" required min="18" max="150" />
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red;"></div>
 
     <label>Specialization:</label>
     <input type="text" th:field="*{specialization}" required maxlength="100" />
-    <div th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}"></div>
+    <div th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" style="color:red;"></div>
 
     <button type="submit">Save</button>
 </form>
+
 <a th:href="@{/chefs}">Back to list</a>
 </body>
 </html>

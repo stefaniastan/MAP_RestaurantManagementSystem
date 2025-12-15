@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add/Edit Server</title>
+    <title>Server Form</title>
 </head>
 <body>
-<h2 th:text="${server.id != null} ? 'Edit Server' : 'Add New Server'"></h2>
 
-<form th:action="@{${server.id != null} ? '/servers/' + ${server.id} : '/servers'}" th:object="${server}" method="post">
-    <input type="hidden" th:field="*{id}" />
+<h2 th:text="${server.id != null} ? 'Edit Server' : 'Add Server'"></h2>
+
+<form th:action="${server.id == null} ? @{/servers} : @{/servers/{id}(id=${server.id})}"
+      th:object="${server}" method="post">
 
     <label>Name:</label>
-    <input type="text" th:field="*{name}" required maxlength="100" />
-    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red;"></div>
+    <input type="text" th:field="*{name}" required />
+    <div th:errors="*{name}" style="color:red"></div>
+
+    <label>Age:</label>
+    <input type="number" th:field="*{age}" min="18" required />
+    <div th:errors="*{age}" style="color:red"></div>
 
     <label>Designation:</label>
-    <input type="text" th:field="*{designation}" required maxlength="50" />
-    <div th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" style="color:red;"></div>
+    <input type="text" th:field="*{designation}" required />
+    <div th:errors="*{designation}" style="color:red"></div>
 
-    <label>Rating:</label>
-    <input type="text" th:field="*{rating}" required maxlength="10" />
-    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" style="color:red;"></div>
+    <label>Rating (1.0 – 5.0):</label>
+    <input type="number" step="0.1" min="1.0" max="5.0" th:field="*{rating}" required />
+    <div th:errors="*{rating}" style="color:red"></div>
 
     <button type="submit">Save</button>
 </form>
 
-<a th:href="@{/servers}">⬅️ Back to list</a>
+<a th:href="@{/servers}">⬅ Back</a>
+
 </body>
 </html>

@@ -2,7 +2,6 @@
 -- 1. Curățarea Tabelelor
 -- ============================================================
 SET FOREIGN_KEY_CHECKS = 0;
-
 DELETE FROM bills;
 DELETE FROM order_assignments;
 DELETE FROM order_lines;
@@ -74,20 +73,40 @@ INSERT INTO restaurant_tables (number, status) VALUES
                                                    (9, 'occupied'), -- Fostul RESERVED
                                                    (10, 'free');
 
--- ============================================================
--- 6. Inserare Staff
--- ============================================================
-INSERT INTO staff (staff_type, name, rating, age, specialization, designation) VALUES
-                                                                                   ('CHEF', 'Gordon Ramsay', '5.0', 50, 'Head Chef', NULL),
-                                                                                   ('CHEF', 'Jamie Oliver', '4.8', 45, 'Italian Cuisine', NULL),
-                                                                                   ('CHEF', 'Florin Dumitrescu', '4.9', 35, 'Fine Dining', NULL),
-                                                                                   ('CHEF', 'Sorin Bontea', '4.9', 52, 'Asian Fusion', NULL),
-                                                                                   ('CHEF', 'Catalin Scarlatescu', '4.7', 48, 'Traditional & Meat', NULL),
-                                                                                   ('SERVER', 'Alina Pop', '4.5', 24, NULL, 'Senior Waiter'),
-                                                                                   ('SERVER', 'Dan Ionescu', '4.2', 22, NULL, 'Junior Waiter'),
-                                                                                   ('SERVER', 'Ioana Radu', '4.9', 28, NULL, 'Shift Manager'),
-                                                                                   ('SERVER', 'Bogdan Munteanu', '4.0', 21, NULL, 'Runner'),
-                                                                                   ('SERVER', 'Simona Halep', '5.0', 26, NULL, 'VIP Waiter');
+-- ================================
+-- 6. Inserare Staff + Chefs + Servers
+-- ================================
+
+-- Staff table (parent)
+INSERT INTO staff (id, staff_type, name, rating) VALUES
+                                                     (1, 'CHEF', 'Gordon Ramsay', '5.0'),
+                                                     (2, 'CHEF', 'Jamie Oliver', '4.8'),
+                                                     (3, 'CHEF', 'Florin Dumitrescu', '4.9'),
+                                                     (4, 'CHEF', 'Sorin Bontea', '4.9'),
+                                                     (5, 'CHEF', 'Catalin Scarlatescu', '4.7'),
+
+                                                     (6, 'SERVER', 'Alina Pop', '4.5'),
+                                                     (7, 'SERVER', 'Dan Ionescu', '4.2'),
+                                                     (8, 'SERVER', 'Ioana Radu', '4.9'),
+                                                     (9, 'SERVER', 'Bogdan Munteanu', '4.0'),
+                                                     (10, 'SERVER', 'Simona Halep', '5.0');
+
+-- Chef table (child)
+INSERT INTO chefs (id, age, specialization) VALUES
+                                                (1, 50, 'Head Chef'),
+                                                (2, 45, 'Italian Cuisine'),
+                                                (3, 35, 'Fine Dining'),
+                                                (4, 52, 'Asian Fusion'),
+                                                (5, 48, 'Traditional & Meat');
+
+-- Server table (child)
+INSERT INTO servers (id, age, designation) VALUES
+                                               (6, 24, 'Senior Waiter'),
+                                               (7, 22, 'Junior Waiter'),
+                                               (8, 28, 'Shift Manager'),
+                                               (9, 21, 'Runner'),
+                                               (10, 26, 'VIP Waiter');
+
 
 -- ============================================================
 -- 7. Inserare Orders

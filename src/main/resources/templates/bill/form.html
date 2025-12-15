@@ -7,7 +7,9 @@
 <h1 th:text="${bill.id != null} ? 'Edit Bill' : 'Create Bill'"></h1>
 
 <form th:action="@{${bill.id != null} ? '/bill/' + ${bill.id} : '/bill'}" th:object="${bill}" method="post">    <input type="hidden" th:field="*{id}" />
-
+    <div th:if="${errorMessage}" style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
     <label>Order:</label>
     <select name="order" required>
         <option value="">-- Select Order --</option>

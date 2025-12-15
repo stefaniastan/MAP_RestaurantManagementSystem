@@ -1,10 +1,12 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "staff")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "staff_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Staff {
 
@@ -13,9 +15,12 @@ public abstract class Staff {
     private Long id;
 
     @Column(nullable = false, length = 100)
+    @NotBlank(message = "Name is required")
+    @Size(max = 100)
     private String name;
 
     @Column(length = 10)
+    @Size(max = 10)
     private String rating;
 
     public Staff() {}

@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/servers")
 public class ServerController {
@@ -22,8 +20,7 @@ public class ServerController {
 
     @GetMapping
     public String listServers(Model model) {
-        List<Server> servers = serverService.getAllServers();
-        model.addAttribute("servers", servers);
+        model.addAttribute("servers", serverService.getAllServers());
         return "server/index";
     }
 
@@ -34,23 +31,32 @@ public class ServerController {
     }
 
     @PostMapping
-    public String createServer(@Valid @ModelAttribute("server") Server server, BindingResult result) {
+    public String createServer(@Valid @ModelAttribute("server") Server server,
+                               BindingResult result) {
         if (result.hasErrors()) {
             return "server/form";
         }
-        serverService.addServer(server);
+
+        try {
+            serverService.addServer(server);
+        } catch (IllegalStateException e) {
+            result.rejectValue("name", "duplicate", e.getMessage());
+            return "server/form";
+        }
+
         return "redirect:/servers";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Server server = serverService.getServerById(id);
-        model.addAttribute("server", server);
+        model.addAttribute("server", serverService.getServerById(id));
         return "server/form";
     }
 
     @PostMapping("/{id}")
-    public String updateServer(@PathVariable Long id, @Valid @ModelAttribute("server") Server server, BindingResult result) {
+    public String updateServer(@PathVariable Long id,
+                               @Valid @ModelAttribute("server") Server server,
+                               BindingResult result) {
         if (result.hasErrors()) {
             return "server/form";
         }

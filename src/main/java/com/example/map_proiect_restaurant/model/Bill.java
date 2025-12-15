@@ -2,6 +2,8 @@ package com.example.map_proiect_restaurant.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "bills")
@@ -17,6 +19,8 @@ public class Bill {
     private Order order;
 
     @Column(nullable = false)
+    @NotNull(message = "Total amount is required")  //new
+    @PositiveOrZero(message = "Total amount must be positive or zero")  //new
     private Double totalAmount;
 
     public Bill() {}

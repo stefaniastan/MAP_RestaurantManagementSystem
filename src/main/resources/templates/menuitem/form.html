@@ -6,8 +6,9 @@
 <body>
 <h1 th:text="${menuItem.id != null} ? 'Edit Menu Item' : 'Create Menu Item'"></h1>
 
-<form th:action="@{${menuItem.id != null} ? '/menuItems/update' : '/menuItems/save'}" th:object="${menuItem}" method="post">
-    <input type="hidden" th:field="*{id}" />
+<form th:action="@{${menuItem.id == null} ? '/menuitems' : '/menuitems/' + ${menuItem.id}}"
+      th:object="${menuItem}"
+      method="post">
 
     <label>Name:</label>
     <input type="text" th:field="*{name}" required maxlength="100" />

@@ -11,6 +11,12 @@
       th:object="${order}"
       method="post">
 
+    <div style="color:red" th:if="${#fields.hasGlobalErrors()}"
+         th:each="err : ${#fields.globalErrors()}"
+         th:text="${err}">
+    </div>
+
+
     <input type="hidden" th:field="*{id}" />
 
     <label>Customer:</label><br>

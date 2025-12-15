@@ -4,7 +4,26 @@
     <title>Bills</title>
 </head>
 <body>
-<h2>Bills</h2>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <h2>Bills</h2>
+
+    <a href="/" style="
+        margin-right: 1130px;
+        padding:8px 16px;
+        background:#3498db;
+        color:white;
+        border-radius:6px;
+        text-decoration:none;
+        font-weight:bold;
+        font-family:Arial;
+        transition:0.2s;
+    "
+       onmouseover="this.style.background='#2980b9'"
+       onmouseout="this.style.background='#3498db'">
+        Home
+    </a>
+</div>
+
 
 <a th:href="@{/bill/new}">Add New Bill</a>
 
