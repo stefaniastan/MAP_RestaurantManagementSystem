@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
@@ -18,14 +19,22 @@ public class Customer {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    @NotBlank(message = "Name is required")  //new
-    @Size(max = 100) //new
+    @NotBlank(message = "Name is required")
+    @Size(max = 100)
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters")
     private String name;
 
+
     @Column(nullable = false, length = 200)
-    @NotBlank(message = "Address is required")  //new
-    @Size(max = 200)  //new
+    @NotBlank(message = "Address is required")
+    @Size(max = 200)
+    @Pattern(
+            regexp = "^[A-Za-z ]+ [1-9][0-9]*[A-Za-z]?$",
+            message = "Address must be valid"
+    )
     private String address;
+
+
 
     @Column(nullable = false, unique = true, length = 100)
     @NotBlank(message = "Email is required")  //new

@@ -1,9 +1,7 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "chefs")
@@ -14,10 +12,13 @@ public class Chef extends Staff {
     @Column(nullable = false)
     @NotNull(message = "Age is required")
     @Min(value = 18, message = "Age must be at least 18")
+    @Max(value = 150, message = "Age must be at most 150")
     private Integer age;
 
     @Column(length = 100)
-    @Size(max = 100)
+    @NotBlank(message = "Specialization is required")
+    @Size(min = 2, max = 100, message = "Specialization must be at least 2 characters")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Specialization must contain letters only")
     private String specialization;
 
     public Chef() {
