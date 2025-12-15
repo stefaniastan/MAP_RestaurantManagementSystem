@@ -44,13 +44,36 @@ public class OrderAssignmentController {
     }
 
     @PostMapping
-    public String createAssignment(@Valid @ModelAttribute("assignment") OrderAssignment assignment, BindingResult result) {
+    public String createAssignment(@Valid @ModelAttribute("assignment") OrderAssignment assignment,
+                                   BindingResult result,
+                                   @RequestParam("order") Long orderId,
+                                   @RequestParam("staff") Long staffId,
+                                   Model model) {
+
+        Order order = orderService.getOrderById(orderId);
+        Staff staff = staffService.getStaffById(staffId);
+
+        assignment.setOrder(order);
+        assignment.setStaff(staff);
+
         if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            model.addAttribute("staffList", staffService.getAllStaff());
             return "assignments/form";
         }
-        assignmentService.addOrderAssignment(assignment);
+
+        try {
+            assignmentService.addOrderAssignment(assignment);
+        } catch (IllegalStateException ex) {
+            result.reject(null, ex.getMessage());
+            model.addAttribute("orders", orderService.getAllOrders());
+            model.addAttribute("staffList", staffService.getAllStaff());
+            return "assignments/form";
+        }
+
         return "redirect:/assignments";
     }
+
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -62,10 +85,23 @@ public class OrderAssignmentController {
     }
 
     @PostMapping("/{id}")
-    public String updateAssignment(@PathVariable Long id, @Valid @ModelAttribute("assignment") OrderAssignment assignment, BindingResult result) {
+    public String updateAssignment(@PathVariable Long id,
+                                   @Valid @ModelAttribute("assignment") OrderAssignment assignment,
+                                   BindingResult result,
+                                   @RequestParam("order") Long orderId,
+                                   @RequestParam("staff") Long staffId,
+                                   Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("orders", orderService.getAllOrders());
+            model.addAttribute("staffList", staffService.getAllStaff());
             return "assignments/form";
         }
+
+        Order order = orderService.getOrderById(orderId);
+        Staff staff = staffService.getStaffById(staffId);
+        assignment.setOrder(order);
+        assignment.setStaff(staff);
+
         assignment.setId(id);
         assignmentService.updateOrderAssignment(assignment);
         return "redirect:/assignments";

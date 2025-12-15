@@ -1,12 +1,18 @@
 package com.example.map_proiect_restaurant.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "servers")
 @DiscriminatorValue("SERVER")
+@PrimaryKeyJoinColumn(name = "id")
 public class Server extends Staff {
 
     @Column(nullable = false)
+    @NotNull(message = "Age is required")
+    @Min(value = 18, message = "Age must be at least 18")
     private Integer age;
 
     @Column(length = 100)
@@ -39,3 +45,4 @@ public class Server extends Staff {
         this.designation = designation;
     }
 }
+//

@@ -10,3 +10,4 @@ import java.util.List;
 public interface ServerRepository extends JpaRepository<Server, Long> {
     List<Server> findByDesignation(String designation);
 }
+//

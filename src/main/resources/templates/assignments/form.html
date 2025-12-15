@@ -4,27 +4,38 @@
     <title>Add/Edit Order Assignment</title>
 </head>
 <body>
-<h2 th:text="${orderAssignment.id != null} ? 'Edit Order Assignment' : 'Add New Order Assignment'"></h2>
 
-<form th:action="@{${orderAssignment.id != null} ? '/orderAssignments/update' : '/orderAssignments/save'}"
-      th:object="${orderAssignment}" method="post">
+<h2 th:text="${assignment.id != null} ? 'Edit Order Assignment' : 'Add New Order Assignment'"></h2>
+
+<form th:action="@{${assignment.id != null} ? '/assignments/' + ${assignment.id} : '/assignments'}"
+      th:object="${assignment}" method="post">
+
+    <div style="color:red"
+         th:if="${#fields.hasGlobalErrors()}"
+         th:each="err : ${#fields.globalErrors()}"
+         th:text="${err}">
+    </div>
+
+
     <input type="hidden" th:field="*{id}" />
 
     <label>Order:</label>
     <select th:field="*{order}" required>
-        <option th:each="o : ${orders}" th:value="${o}" th:text="${o.id}"></option>
+        <option th:each="o : ${orders}" th:value="${o.id}" th:text="${o.id}"></option>
     </select>
     <div th:if="${#fields.hasErrors('order')}" th:errors="*{order}"></div>
 
     <label>Staff:</label>
     <select th:field="*{staff}" required>
-        <option th:each="s : ${staffList}" th:value="${s}" th:text="${s.name}"></option>
+        <option th:each="s : ${staffList}" th:value="${s.id}" th:text="${s.name}"></option>
     </select>
     <div th:if="${#fields.hasErrors('staff')}" th:errors="*{staff}"></div>
+
 
     <button type="submit">Save</button>
 </form>
 
-<a th:href="@{/orderAssignments}">⬅️ Back to list</a>
+<a th:href="@{/assignments}">⬅️ Back to list</a>
+
 </body>
 </html>

@@ -50,9 +50,13 @@ public class BillController {
             result.rejectValue("order", "error.bill", "The selected order could not be found.");
         }
 
+        if (order != null && order.getBill() != null) {
+            result.rejectValue("order", "error.bill", "This order already has a bill.");
+        }
 
         bill.setOrder(order);
-        if (order != null) {
+
+        if (order != null && order.getBill() == null) {
             order.setBill(bill);
         }
 

@@ -17,6 +17,12 @@ public class OrderService {
     }
 
     public Order addOrder(Order order) {
+        if (order.getCustomer() == null) {
+            throw new IllegalStateException("Customer does not exist");
+        }
+        if (order.getTable() == null) {
+            throw new IllegalStateException("Table does not exist");
+        }
         return orderRepository.save(order);
     }
 

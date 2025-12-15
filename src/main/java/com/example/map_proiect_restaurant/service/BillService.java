@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.service;
 
 import com.example.map_proiect_restaurant.model.Bill;
+import com.example.map_proiect_restaurant.model.Order;
 import com.example.map_proiect_restaurant.repository.BillRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,16 @@ public class BillService {
     }
 
     public Bill addBill(Bill bill) {
+        Long orderId = bill.getOrder().getId();
+
+        //prevent duplicate bill
+        if (!billRepository.findByOrderId(orderId).isEmpty()) {
+            throw new IllegalStateException("This order already has a bill.");
+        }
+
         return billRepository.save(bill);
     }
+
 
     public Bill updateBill(Bill bill) {
         return billRepository.save(bill);
@@ -33,7 +42,17 @@ public class BillService {
     }
 
     public void deleteBill(Long id) {
-        billRepository.deleteById(id);
+        Bill bill = billRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bill not found"));
+
+        Order order = bill.getOrder();
+        if (order != null) {
+            order.setBill(null);
+        }
+
+        bill.setOrder(null);
+
+        billRepository.delete(bill);
     }
 
     public List<Bill> getBillsByOrderId(Long orderId) {

@@ -15,32 +15,26 @@ public class OrderLineService {
         this.orderLineRepository = orderLineRepository;
     }
 
-    public OrderLine addOrderLine(OrderLine orderLine) {
-        return orderLineRepository.save(orderLine);
-    }
-
-    public OrderLine updateOrderLine(OrderLine orderLine) {
-        return orderLineRepository.save(orderLine);
-    }
-
     public List<OrderLine> getAllOrderLines() {
-        return orderLineRepository.findAll();
+        // Use optimized query
+        return orderLineRepository.findAllWithMenuItemAndOrder();
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        orderLineRepository.save(orderLine);
     }
 
     public OrderLine getOrderLineById(Long id) {
-        return orderLineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order line not found"));
+        return orderLineRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("OrderLine not found")
+        );
+    }
+
+    public void updateOrderLine(OrderLine orderLine) {
+        orderLineRepository.save(orderLine);
     }
 
     public void deleteOrderLine(Long id) {
         orderLineRepository.deleteById(id);
-    }
-
-    public List<OrderLine> getOrderLinesByOrderId(Long orderId) {
-        return orderLineRepository.findByOrderId(orderId);
-    }
-
-    public List<OrderLine> getOrderLinesByMenuItemId(Long menuItemId) {
-        return orderLineRepository.findByMenuItemId(menuItemId);
     }
 }

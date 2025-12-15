@@ -42,11 +42,25 @@ public class OrderController {
     }
 
     @PostMapping
-    public String createOrder(@Valid @ModelAttribute("order") Order order, BindingResult result) {
+    public String createOrder(@Valid @ModelAttribute("order") Order order,
+                              BindingResult result,
+                              Model model) {
+
         if (result.hasErrors()) {
+            model.addAttribute("customers", customerService.getAllCustomers());
+            model.addAttribute("tables", tableService.getAllTables());
             return "order/form";
         }
-        orderService.addOrder(order);
+
+        try {
+            orderService.addOrder(order);
+        } catch (IllegalStateException ex) {
+            result.reject("orderError", ex.getMessage());
+            model.addAttribute("customers", customerService.getAllCustomers());
+            model.addAttribute("tables", tableService.getAllTables());
+            return "order/form";
+        }
+
         return "redirect:/orders";
     }
 
