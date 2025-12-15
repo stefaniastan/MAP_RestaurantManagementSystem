@@ -17,6 +17,9 @@ public class RestaurantTableService {
     }
 
     public RestaurantTable addTable(RestaurantTable table) {
+        if (tableRepository.existsByNumber(table.getNumber())) {
+            throw new IllegalStateException("Table number already exists");
+        }
         return tableRepository.save(table);
     }
 

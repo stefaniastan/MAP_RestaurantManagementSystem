@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrderAssignmentRepository extends JpaRepository<OrderAssignment, Long> {
     List<OrderAssignment> findByOrderId(Long orderId);
     List<OrderAssignment> findByStaffId(Long staffId);
+    boolean existsByOrderIdAndStaffId(Long orderId, Long staffId);
 }

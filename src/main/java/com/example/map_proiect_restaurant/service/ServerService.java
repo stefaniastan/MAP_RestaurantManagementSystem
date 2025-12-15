@@ -16,10 +16,16 @@ public class ServerService {
     }
 
     public Server addServer(Server server) {
+        if (server.getAge() == null || server.getAge() < 18) {
+            throw new IllegalStateException("Server must be at least 18 years old.");
+        }
         return serverRepository.save(server);
     }
 
     public Server updateServer(Server server) {
+        if (server.getAge() == null || server.getAge() < 18) {
+            throw new IllegalStateException("Server must be at least 18 years old.");
+        }
         return serverRepository.save(server);
     }
 

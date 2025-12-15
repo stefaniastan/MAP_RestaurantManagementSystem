@@ -10,6 +10,13 @@
 <form th:action="@{${assignment.id != null} ? '/assignments/' + ${assignment.id} : '/assignments'}"
       th:object="${assignment}" method="post">
 
+    <div style="color:red"
+         th:if="${#fields.hasGlobalErrors()}"
+         th:each="err : ${#fields.globalErrors()}"
+         th:text="${err}">
+    </div>
+
+
     <input type="hidden" th:field="*{id}" />
 
     <label>Order:</label>

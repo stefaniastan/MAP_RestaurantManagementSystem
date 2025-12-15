@@ -16,7 +16,23 @@ public class OrderAssignmentService {
     }
 
     public OrderAssignment addOrderAssignment(OrderAssignment assignment) {
+        if (assignment.getOrder() == null) {
+            throw new IllegalStateException("Order does not exist.");
+        }
+
+        if (assignment.getStaff() == null) {
+            throw new IllegalStateException("Staff member does not exist.");
+        }
+
+        Long orderId = assignment.getOrder().getId();
+        Long staffId = assignment.getStaff().getId();
+
+        if (orderAssignmentRepository.existsByOrderIdAndStaffId(orderId, staffId)) {
+            throw new IllegalStateException("Staff already assigned to this order.");
+        }
+
         return orderAssignmentRepository.save(assignment);
+
     }
 
     public OrderAssignment updateOrderAssignment(OrderAssignment assignment) {

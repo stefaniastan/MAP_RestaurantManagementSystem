@@ -12,6 +12,13 @@
       th:object="${table}"
       method="post">
 
+    <div style="color:red"
+         th:if="${#fields.hasGlobalErrors()}"
+         th:each="err : ${#fields.globalErrors()}"
+         th:text="${err}">
+    </div>
+
+
     <label>Table Number:</label><br>
     <input type="number" th:field="*{number}" required min="1" />
     <div style="color:red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>

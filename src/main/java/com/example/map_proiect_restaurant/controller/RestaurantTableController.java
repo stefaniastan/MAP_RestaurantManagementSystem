@@ -34,11 +34,20 @@ public class RestaurantTableController {
     }
 
     @PostMapping
-    public String createTable(@Valid @ModelAttribute("table") RestaurantTable table, BindingResult result) {
+    public String createTable(@Valid @ModelAttribute("table") RestaurantTable table,
+                              BindingResult result) {
+
         if (result.hasErrors()) {
             return "tables/form";
         }
-        tableService.addTable(table);
+
+        try {
+            tableService.addTable(table);
+        } catch (IllegalStateException ex) {
+            result.rejectValue("number", "error.table", ex.getMessage());
+            return "tables/form";
+        }
+
         return "redirect:/tables";
     }
 
