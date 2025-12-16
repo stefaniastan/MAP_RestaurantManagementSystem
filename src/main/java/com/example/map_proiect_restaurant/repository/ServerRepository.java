@@ -8,6 +8,12 @@ import java.util.List;
 
 @Repository
 public interface ServerRepository extends JpaRepository<Server, Long> {
+    // 🔍 FILTER
     List<Server> findByDesignation(String designation);
+
+    List<Server> findByAge(Integer age);
+
+    List<Server> findByRating(String rating);
+
 }
 //

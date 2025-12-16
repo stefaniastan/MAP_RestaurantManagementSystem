@@ -28,10 +28,28 @@ public class OrderLineController {
         this.menuItemService = menuItemService;
     }
 
+    // 🔍 Updated listOrderLines with filter and sort parameters
     @GetMapping
-    public String listOrderLines(Model model) {
-        List<OrderLine> orderLines = orderLineService.getAllOrderLines();
-        model.addAttribute("orderLines", orderLines);
+    public String listOrderLines(
+            @RequestParam(required = false) Long orderId,
+            @RequestParam(required = false) Long menuItemId,
+            @RequestParam(required = false) Integer minQuantity,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+        model.addAttribute(
+                "orderLines",
+                orderLineService.filterAndSortOrderLines(orderId, menuItemId, minQuantity, sortBy, direction)
+        );
+
+        // Add filter parameters back to the model for the view
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("menuItemId", menuItemId);
+        model.addAttribute("minQuantity", minQuantity);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "orderlines/index";
     }
 

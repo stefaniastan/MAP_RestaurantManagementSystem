@@ -23,15 +23,14 @@
         <td th:text="${order.id}"></td>
     </tr>
 
-    <!-- Handles customers with no orders -->
-    <tr th:if="${customer.orders == null or customer.orders.size() == 0}">
+    <tr th:if="${customer.orders == null or #lists.isEmpty(customer.orders)}">
         <td>No Orders</td>
     </tr>
 </table>
 
 <br>
 
-<a href="/customers">⬅ Back</a>
+<a th:href="@{/customers}">⬅ Back</a>
 
 </body>
 </html>

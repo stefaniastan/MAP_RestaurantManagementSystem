@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.RestaurantTable;
+import com.example.map_proiect_restaurant.model.TableStatusEnum;
 import com.example.map_proiect_restaurant.service.RestaurantTableService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,29 @@ public class RestaurantTableController {
         this.tableService = tableService;
     }
 
+    // 🔍 Updated listTables with filter and sort parameters
     @GetMapping
-    public String listTables(Model model) {
-        List<RestaurantTable> tables = tableService.getAllTables();
-        model.addAttribute("tables", tables);
+    public String listTables(
+            @RequestParam(required = false) Integer number,
+            @RequestParam(required = false) TableStatusEnum status,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+        model.addAttribute(
+                "tables",
+                tableService.filterAndSortTables(number, status, sortBy, direction)
+        );
+
+        // Add filter parameters back to the model for the view
+        model.addAttribute("number", number);
+        model.addAttribute("status", status);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
+        // Add all statuses for dropdown
+        model.addAttribute("allStatuses", TableStatusEnum.values());
+
         return "tables/index";
     }
 

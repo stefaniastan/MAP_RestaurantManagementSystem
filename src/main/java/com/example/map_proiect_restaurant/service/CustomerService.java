@@ -3,6 +3,7 @@ package com.example.map_proiect_restaurant.service;
 import com.example.map_proiect_restaurant.model.Customer;
 import com.example.map_proiect_restaurant.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -13,6 +14,24 @@ public class CustomerService {
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+    public List<Customer> findCustomers(
+            String name,
+            String email,
+            Sort sort
+    ) {
+        if ((name == null || name.isBlank()) &&
+                (email == null || email.isBlank())) {
+            return customerRepository.findAll(sort);
+        }
+
+        if (name == null) name = "";
+        if (email == null) email = "";
+
+        return customerRepository
+                .findByNameContainingIgnoreCaseAndEmailContainingIgnoreCase(
+                        name, email
+                );
     }
 
     public Customer addCustomer(Customer customer) {

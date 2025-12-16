@@ -4,6 +4,7 @@ import com.example.map_proiect_restaurant.model.Bill;
 import com.example.map_proiect_restaurant.model.Order;
 import com.example.map_proiect_restaurant.repository.BillRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -14,6 +15,29 @@ public class BillService {
 
     public BillService(BillRepository billRepository) {
         this.billRepository = billRepository;
+    }
+
+    public List<Bill> filterAndSortBills(
+            Long orderId,
+            Double minAmount,
+            Double maxAmount,
+            String sortBy,
+            String direction
+    ) {
+        Sort sort = Sort.by(
+                direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+                sortBy
+        );
+
+        if (orderId != null) {
+            return billRepository.findByOrder_Id(orderId);
+        }
+
+        if (minAmount != null && maxAmount != null) {
+            return billRepository.findByTotalAmountBetween(minAmount, maxAmount);
+        }
+
+        return billRepository.findAll(sort);
     }
 
     public Bill addBill(Bill bill) {

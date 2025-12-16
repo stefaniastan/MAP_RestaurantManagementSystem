@@ -5,7 +5,7 @@
 </head>
 <body>
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-<!--    <h2>Tables</h2>-->
+    <!--    <h2>Tables</h2>-->
 
     <a href="/" style="
         padding:8px 16px;
@@ -25,13 +25,65 @@
 <h2>All Tables</h2>
 
 <a th:href="@{/tables/new}">➕ Add New Table</a>
+
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="number" name="number" placeholder="Filter by Table Number"
+           th:value="${number}" />
+
+    <select name="status">
+        <option value="">-- Filter by Status --</option>
+        <option th:each="st : ${allStatuses}"
+                th:value="${st}"
+                th:text="${st}"
+                th:selected="${st == status}">
+        </option>
+    </select>
+
+    <button type="submit">Filter</button>
+    <a href="/tables">Reset</a>
+</form>
 <br><br>
 
 <table border="1">
     <tr>
-        <th>ID</th>
-        <th>Number</th>
-        <th>Status</th> <th>Actions</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/tables(
+                number=${number},
+                status=${status},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                ID
+            </a>
+        </th>
+
+        <!-- SORT BY NUMBER -->
+        <th>
+            <a th:href="@{/tables(
+                number=${number},
+                status=${status},
+                sortBy='number',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Number
+            </a>
+        </th>
+
+        <!-- SORT BY STATUS -->
+        <th>
+            <a th:href="@{/tables(
+                number=${number},
+                status=${status},
+                sortBy='status',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Status
+            </a>
+        </th>
+
+        <th>Actions</th>
     </tr>
 
     <tr th:each="table : ${tables}">

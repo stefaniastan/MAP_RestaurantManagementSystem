@@ -9,7 +9,10 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+    // 🔍 FILTER methods
     List<Order> findByCustomerId(Long customerId);
     List<Order> findByTableId(Long tableId);
     List<Order> findByStatus(OrderStatusEnum status);
+    List<Order> findByCustomer_Id(Long customerId);
+    List<Order> findByTable_Id(Long tableId);
 }

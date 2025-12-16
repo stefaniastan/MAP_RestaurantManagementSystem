@@ -1,13 +1,11 @@
 package com.example.map_proiect_restaurant.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,35 +16,29 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
     @NotBlank(message = "Name is required")
-    @Size(max = 100)
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "Name can only contain letters")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "Name must contain only letters")
+    @Column(nullable = false)
     private String name;
 
-
-    @Column(nullable = false, length = 200)
     @NotBlank(message = "Address is required")
-    @Size(max = 200)
     @Pattern(
             regexp = "^[A-Za-z ]+ [1-9][0-9]*[A-Za-z]?$",
-            message = "Address must be valid"
+            message = "Address must contain a street name and a number"
     )
+    @Column(nullable = false)
     private String address;
 
-
-
-    @Column(nullable = false, unique = true, length = 100)
-    @NotBlank(message = "Email is required")  //new
-    @Email(message = "Invalid email format")  //new
-    @Size(max = 100)  //new
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public Customer(String name, String address, String email) {
         this.name = name;
@@ -54,7 +46,6 @@ public class Customer {
         this.email = email;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -93,15 +84,5 @@ public class Customer {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
-    }
-
-    public void addOrder(Order order) {
-        orders.add(order);
-        order.setCustomer(this);
-    }
-
-    public void removeOrder(Order order) {
-        orders.remove(order);
-        order.setCustomer(null);
     }
 }

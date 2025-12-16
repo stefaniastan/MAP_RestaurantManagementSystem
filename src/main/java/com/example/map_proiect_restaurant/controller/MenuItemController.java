@@ -20,10 +20,28 @@ public class MenuItemController {
         this.menuItemService = menuItemService;
     }
 
+    // 🔍 Updated listMenuItems with filter and sort parameters
     @GetMapping({"", "/"})
-    public String listMenuItems(Model model) {
-        List<MenuItem> items = menuItemService.getAllMenuItems();
-        model.addAttribute("menuItems", items);
+    public String listMenuItems(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+        model.addAttribute(
+                "menuItems",
+                menuItemService.filterAndSortMenuItems(name, minPrice, maxPrice, sortBy, direction)
+        );
+
+        // Add filter parameters back to the model for the view
+        model.addAttribute("name", name);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "menuitem/index";
     }
 

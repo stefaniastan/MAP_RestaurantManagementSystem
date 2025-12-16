@@ -2,6 +2,7 @@ package com.example.map_proiect_restaurant.service;
 
 import com.example.map_proiect_restaurant.model.Chef;
 import com.example.map_proiect_restaurant.repository.ChefRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,35 @@ public class ChefService {
 
     public ChefService(ChefRepository chefRepository) {
         this.chefRepository = chefRepository;
+    }
+
+    // 🔍 FILTER + SORT
+    public List<Chef> filterAndSortChefs(
+            String specialization,
+            Integer age,
+            String rating,
+            String sortBy,
+            String direction
+    ) {
+        Sort sort = Sort.by(
+                direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+                sortBy
+        );
+
+        if (specialization != null && !specialization.isEmpty()) {
+            return chefRepository.findBySpecialization(specialization);
+        }
+
+        if (age != null) {
+            return chefRepository.findByAge(age);
+        }
+
+        if (rating != null && !rating.isEmpty()) {
+            return chefRepository.findByRating(rating);
+        }
+
+        // default
+        return chefRepository.findAll(sort);
     }
 
     public Chef addChef(Chef chef) {
