@@ -16,4 +16,9 @@ public interface OrderLineRepository extends JpaRepository<OrderLine, Long> {
             "LEFT JOIN FETCH o.customer " +
             "LEFT JOIN FETCH o.table")
     List<OrderLine> findAllWithMenuItemAndOrder();
+    // 🔍 FILTER methods
+    List<OrderLine> findByOrderId(Long orderId);
+    List<OrderLine> findByMenuItemId(Long menuItemId);
+    List<OrderLine> findByQuantity(Integer quantity);
+    List<OrderLine> findByQuantityGreaterThanEqual(Integer minQuantity);
 }

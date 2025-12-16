@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
     List<Bill> findByOrderId(Long orderId);
+    // 🔍 FILTER
+    List<Bill> findByOrder_Id(Long orderId);
+
+    List<Bill> findByTotalAmountBetween(Double min, Double max);
 }

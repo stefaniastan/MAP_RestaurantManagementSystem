@@ -20,10 +20,30 @@ public class ChefController {
         this.chefService = chefService;
     }
 
-    @GetMapping
-    public String listChefs(Model model) {
-        List<Chef> chefs = chefService.getAllChefs();
-        model.addAttribute("chefs", chefs);
+    // 🔍 LIST + FILTER + SORT
+    @GetMapping({"", "/"})
+    public String listChefs(
+            @RequestParam(required = false) String specialization,
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) String rating,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+
+        model.addAttribute(
+                "chefs",
+                chefService.filterAndSortChefs(
+                        specialization, age, rating, sortBy, direction
+                )
+        );
+
+        model.addAttribute("specialization", specialization);
+        model.addAttribute("age", age);
+        model.addAttribute("rating", rating);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "chef/index";
     }
 

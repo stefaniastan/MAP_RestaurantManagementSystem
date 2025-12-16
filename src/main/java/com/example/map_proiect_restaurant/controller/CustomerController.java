@@ -3,6 +3,7 @@ package com.example.map_proiect_restaurant.controller;
 import com.example.map_proiect_restaurant.model.Customer;
 import com.example.map_proiect_restaurant.service.CustomerService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,11 +22,32 @@ public class CustomerController {
     }
 
     @GetMapping
-    public String listCustomers(Model model) {
-        List<Customer> customers = customerService.getAllCustomers();
+    public String listCustomers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+
+        Sort sort = direction.equals("asc")
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        List<Customer> customers =
+                customerService.findCustomers(name, email, sort);
+
         model.addAttribute("customers", customers);
+
+        // ca să păstreze valorile în form
+        model.addAttribute("name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "customer/index";
     }
+
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {

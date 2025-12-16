@@ -2,6 +2,7 @@ package com.example.map_proiect_restaurant.service;
 
 import com.example.map_proiect_restaurant.model.MenuItem;
 import com.example.map_proiect_restaurant.repository.MenuItemRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,33 @@ public class MenuItemService {
 
     public MenuItemService(MenuItemRepository menuItemRepository) {
         this.menuItemRepository = menuItemRepository;
+    }
+
+    // 🔍 FILTER AND SORT method
+    public List<MenuItem> filterAndSortMenuItems(
+            String name,
+            Double minPrice,
+            Double maxPrice,
+            String sortBy,
+            String direction
+    ) {
+        Sort sort = Sort.by(
+                direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+                sortBy
+        );
+
+        // Filter by name
+        if (name != null && !name.isEmpty()) {
+            return menuItemRepository.findByNameContainingIgnoreCase(name);
+        }
+
+        // Filter by price range
+        if (minPrice != null && maxPrice != null) {
+            return menuItemRepository.findByPriceBetween(minPrice, maxPrice);
+        }
+
+        // Default: return all with sorting
+        return menuItemRepository.findAll(sort);
     }
 
     public MenuItem addMenuItem(MenuItem menuItem) {

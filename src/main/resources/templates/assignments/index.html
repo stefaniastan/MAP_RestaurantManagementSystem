@@ -26,13 +26,58 @@
 
 <a href="/assignments/new">Add New Assignment</a>
 
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="number" name="orderId" placeholder="Filter by Order ID"
+           th:value="${orderId}" />
+
+    <input type="number" name="staffId" placeholder="Filter by Staff ID"
+           th:value="${staffId}" />
+
+    <button type="submit">Filter</button>
+    <a href="/assignments">Reset</a>
+</form>
+
 <table border="1">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Order ID</th>
-        <th>Staff Name</th>
-        <th>Action</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/assignments(
+                orderId=${orderId},
+                staffId=${staffId},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                ID
+            </a>
+        </th>
+
+        <!-- SORT BY ORDER ID -->
+        <th>
+            <a th:href="@{/assignments(
+                orderId=${orderId},
+                staffId=${staffId},
+                sortBy='order',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Order ID
+            </a>
+        </th>
+
+        <!-- SORT BY STAFF -->
+        <th>
+            <a th:href="@{/assignments(
+                orderId=${orderId},
+                staffId=${staffId},
+                sortBy='staff',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Staff
+            </a>
+        </th>
+
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>

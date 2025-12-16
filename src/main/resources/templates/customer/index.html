@@ -27,19 +27,60 @@
 
 <a href="/customers/new">Add New Customer</a>
 
+<!-- 🔍 FILTER FORM – AICI -->
+<form method="get" style="margin-bottom:15px;">
+    <input type="text" name="name" placeholder="Filter by name"
+           th:value="${name}" />
+
+    <input type="text" name="email" placeholder="Filter by email"
+           th:value="${email}" />
+
+    <button type="submit">Filter</button>
+    <a href="/customers">Reset</a>
+</form>
+
+
+<!-- SORT BY NAME -->
+
 <table border="1">
     <tr>
-        <th>Name</th>
+        <th>
+            <a th:href="@{/customers(
+            name=${name},
+            email=${email},
+            sortBy='name',
+            direction=${direction == 'asc' ? 'desc' : 'asc'}
+        )}">
+                Name
+            </a>
+        </th>
+
+
+        <!-- SORT BY EMAIL -->
+
+        <th>
+            <a th:href="@{/customers(
+            name=${name},
+            email=${email},
+            sortBy='email',
+            direction=${direction == 'asc' ? 'desc' : 'asc'}
+        )}">
+                Email
+            </a>
+        </th>
+
         <th>Orders</th>
         <th>Details</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
 
+
     <tr th:each="customer : ${customers}">
         <td th:text="${customer.name}"></td>
-
+        <td th:text="${customer.email}"></td>
         <td th:text="${customer.orders != null ? customer.orders.size() : 0}"></td>
+
 
         <!-- DETAILS button -->
         <td>

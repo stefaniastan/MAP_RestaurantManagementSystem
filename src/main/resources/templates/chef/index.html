@@ -7,6 +7,22 @@
 <h2>Chefs</h2>
 
 <a href="/chefs/new">Add New Chef</a>
+
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="text" name="specialization" placeholder="Filter by Specialization"
+           th:value="${specialization}" />
+
+    <input type="number" name="age" placeholder="Filter by Age"
+           th:value="${age}" />
+
+    <input type="text" name="rating" placeholder="Filter by Rating"
+           th:value="${rating}" />
+
+    <button type="submit">Filter</button>
+    <a href="/chefs">Reset</a>
+</form>
+
 <a href="/" style="margin-left: 263px; padding: 5px 10px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px;"
    onmouseover="this.style.background='#2980b9'"
    onmouseout="this.style.background='#3498db'">
@@ -14,11 +30,61 @@
 
 <table border="1" style="margin-top: 20px;">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Rating</th>
-        <th>Specialization</th>
-        <th>Age</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/chefs(
+                specialization=${specialization},
+                age=${age},
+                rating=${rating},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">ID</a>
+        </th>
+
+        <!-- SORT BY NAME -->
+        <th>
+            <a th:href="@{/chefs(
+                specialization=${specialization},
+                age=${age},
+                rating=${rating},
+                sortBy='name',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Name</a>
+        </th>
+
+        <!-- SORT BY RATING -->
+        <th>
+            <a th:href="@{/chefs(
+                specialization=${specialization},
+                age=${age},
+                rating=${rating},
+                sortBy='rating',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Rating</a>
+        </th>
+
+        <!-- SORT BY SPECIALIZATION -->
+        <th>
+            <a th:href="@{/chefs(
+                specialization=${specialization},
+                age=${age},
+                rating=${rating},
+                sortBy='specialization',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Specialization</a>
+        </th>
+
+        <!-- SORT BY AGE -->
+        <th>
+            <a th:href="@{/chefs(
+                specialization=${specialization},
+                age=${age},
+                rating=${rating},
+                sortBy='age',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Age</a>
+        </th>
+
         <th>Action</th>
     </tr>
     <tr th:each="chef : ${chefs}">

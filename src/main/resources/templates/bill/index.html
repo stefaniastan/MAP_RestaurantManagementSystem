@@ -4,11 +4,11 @@
     <title>Bills</title>
 </head>
 <body>
+
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
     <h2>Bills</h2>
 
     <a href="/" style="
-        margin-right: 1130px;
         padding:8px 16px;
         background:#3498db;
         color:white;
@@ -24,22 +24,65 @@
     </a>
 </div>
 
-
 <a th:href="@{/bill/new}">Add New Bill</a>
 
-<table border="1">
+<!-- 🔍 FILTER -->
+<form method="get" style="margin:15px 0;">
+    <input type="number" name="orderId" placeholder="Filter by Order ID"
+           th:value="${orderId}" />
+
+    <input type="number" step="0.01" name="minAmount"
+           placeholder="Min amount"
+           th:value="${minAmount}" />
+
+    <input type="number" step="0.01" name="maxAmount"
+           placeholder="Max amount"
+           th:value="${maxAmount}" />
+
+    <button type="submit">Filter</button>
+    <a href="/bill">Reset</a>
+</form>
+
+<table border="1" cellpadding="5" cellspacing="0">
     <tr>
-        <th>ID</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/bill(
+                orderId=${orderId},
+                minAmount=${minAmount},
+                maxAmount=${maxAmount},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                ID
+            </a>
+        </th>
+
         <th>Order ID</th>
-        <th>Total Amount</th>
+
+        <!-- SORT BY TOTAL -->
+        <th>
+            <a th:href="@{/bill(
+                orderId=${orderId},
+                minAmount=${minAmount},
+                maxAmount=${maxAmount},
+                sortBy='totalAmount',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Total Amount
+            </a>
+        </th>
+
         <th>Action</th>
     </tr>
+
     <tr th:each="bill : ${bills}">
         <td th:text="${bill.id}"></td>
 
-        <td th:text="${bill.order != null} ? ${bill.order.id} : 'No Order'"></td>
+        <td th:text="${bill.order != null ? bill.order.id : 'No Order'}"></td>
 
         <td th:text="${bill.totalAmount}"></td>
+
         <td>
             <form th:action="@{/bill/{id}/delete(id=${bill.id})}" method="post">
                 <button type="submit">Delete</button>
@@ -47,5 +90,6 @@
         </td>
     </tr>
 </table>
+
 </body>
 </html>

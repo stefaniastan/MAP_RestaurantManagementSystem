@@ -28,10 +28,26 @@ public class OrderAssignmentController {
         this.staffService = staffService;
     }
 
-    @GetMapping
-    public String listAssignments(Model model) {
-        List<OrderAssignment> assignments = assignmentService.getAllOrderAssignments();
-        model.addAttribute("assignments", assignments);
+    // 🔍 LIST + FILTER + SORT
+    @GetMapping({"", "/"})
+    public String listAssignments(
+            @RequestParam(required = false) Long orderId,
+            @RequestParam(required = false) Long staffId,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+
+        model.addAttribute(
+                "assignments",
+                assignmentService.filterAndSortAssignments(orderId, staffId, sortBy, direction)
+        );
+
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("staffId", staffId);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "assignments/index";
     }
 

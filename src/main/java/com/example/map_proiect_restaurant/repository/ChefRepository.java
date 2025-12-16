@@ -8,5 +8,10 @@ import java.util.List;
 
 @Repository
 public interface ChefRepository extends JpaRepository<Chef, Long> {
+    // 🔍 FILTER
     List<Chef> findBySpecialization(String specialization);
+
+    List<Chef> findByAge(Integer age);
+
+    List<Chef> findByRating(String rating);
 }

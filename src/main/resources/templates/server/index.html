@@ -26,13 +26,68 @@
 
 <a href="/servers/new">Add New Server</a>
 
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="text" name="designation" placeholder="Filter by Designation"
+           th:value="${designation}" />
+
+    <input type="number" name="age" placeholder="Filter by Age"
+           th:value="${age}" />
+
+    <input type="text" name="rating" placeholder="Filter by Rating"
+           th:value="${rating}" />
+
+    <button type="submit">Filter</button>
+    <a href="/servers">Reset</a>
+</form>
+
 <table border="1">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Designation</th>
-        <th>Rating</th>
-        <th>Action</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/servers(
+                designation=${designation},
+                age=${age},
+                rating=${rating},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">ID</a>
+        </th>
+
+        <!-- SORT BY NAME -->
+        <th>
+            <a th:href="@{/servers(
+                designation=${designation},
+                age=${age},
+                rating=${rating},
+                sortBy='name',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Name</a>
+        </th>
+
+        <!-- SORT BY DESIGNATION -->
+        <th>
+            <a th:href="@{/servers(
+                designation=${designation},
+                age=${age},
+                rating=${rating},
+                sortBy='designation',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Designation</a>
+        </th>
+
+        <!-- SORT BY RATING -->
+        <th>
+            <a th:href="@{/servers(
+                designation=${designation},
+                age=${age},
+                rating=${rating},
+                sortBy='rating',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">Rating</a>
+        </th>
+
+        <th>Actions</th>
     </tr>
     <tr th:each="server : ${servers}">
         <td th:text="${server.id}"></td>
