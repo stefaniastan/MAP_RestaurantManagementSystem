@@ -11,4 +11,7 @@ public interface OrderAssignmentRepository extends JpaRepository<OrderAssignment
     List<OrderAssignment> findByOrderId(Long orderId);
     List<OrderAssignment> findByStaffId(Long staffId);
     boolean existsByOrderIdAndStaffId(Long orderId, Long staffId);
+    // 🔍 FILTER methods
+    List<OrderAssignment> findByOrder_Id(Long orderId);
+    List<OrderAssignment> findByStaff_Id(Long staffId);
 }

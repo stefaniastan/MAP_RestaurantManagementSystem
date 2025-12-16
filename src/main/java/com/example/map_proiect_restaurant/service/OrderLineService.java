@@ -2,6 +2,7 @@ package com.example.map_proiect_restaurant.service;
 
 import com.example.map_proiect_restaurant.model.OrderLine;
 import com.example.map_proiect_restaurant.repository.OrderLineRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,38 @@ public class OrderLineService {
 
     public OrderLineService(OrderLineRepository orderLineRepository) {
         this.orderLineRepository = orderLineRepository;
+    }
+
+    // 🔍 FILTER AND SORT method
+    public List<OrderLine> filterAndSortOrderLines(
+            Long orderId,
+            Long menuItemId,
+            Integer minQuantity,
+            String sortBy,
+            String direction
+    ) {
+        Sort sort = Sort.by(
+                direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+                sortBy
+        );
+
+        // Filter by order ID
+        if (orderId != null) {
+            return orderLineRepository.findByOrderId(orderId);
+        }
+
+        // Filter by menu item ID
+        if (menuItemId != null) {
+            return orderLineRepository.findByMenuItemId(menuItemId);
+        }
+
+        // Filter by minimum quantity
+        if (minQuantity != null) {
+            return orderLineRepository.findByQuantityGreaterThanEqual(minQuantity);
+        }
+
+        // Default: return all with sorting
+        return orderLineRepository.findAll(sort);
     }
 
     public List<OrderLine> getAllOrderLines() {

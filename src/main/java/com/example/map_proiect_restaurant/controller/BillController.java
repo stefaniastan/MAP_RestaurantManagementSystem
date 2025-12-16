@@ -25,8 +25,25 @@ public class BillController {
     }
 
     @GetMapping({"", "/"})
-    public String listBills(Model model) {
-        model.addAttribute("bills", billService.getAllBills());
+    public String listBills(
+            @RequestParam(required = false) Long orderId,
+            @RequestParam(required = false) Double minAmount,
+            @RequestParam(required = false) Double maxAmount,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+        model.addAttribute(
+                "bills",
+                billService.filterAndSortBills(orderId, minAmount, maxAmount, sortBy, direction)
+        );
+
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("minAmount", minAmount);
+        model.addAttribute("maxAmount", maxAmount);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "bill/index";
     }
 

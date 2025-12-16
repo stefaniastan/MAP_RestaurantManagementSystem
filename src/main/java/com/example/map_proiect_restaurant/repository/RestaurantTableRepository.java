@@ -9,7 +9,9 @@ import java.util.List;
 
 @Repository
 public interface RestaurantTableRepository extends JpaRepository<RestaurantTable, Long> {
+    // 🔍 FILTER methods
     List<RestaurantTable> findByStatus(TableStatusEnum status);
+    List<RestaurantTable> findByNumber(Integer number);
     boolean existsByNumber(Integer number);
 }
 //

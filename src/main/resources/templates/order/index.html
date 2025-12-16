@@ -22,14 +22,61 @@
 </a>
 
 <a th:href="@{/orders/new}">➕ Add New Order</a>
+
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="number" name="customerId" placeholder="Filter by Customer ID"
+           th:value="${customerId}" />
+
+    <input type="number" name="tableId" placeholder="Filter by Table ID"
+           th:value="${tableId}" />
+
+    <select name="status">
+        <option value="">-- Filter by Status --</option>
+        <option th:each="st : ${allStatuses}"
+                th:value="${st}"
+                th:text="${st}"
+                th:selected="${st == status}">
+        </option>
+    </select>
+
+    <button type="submit">Filter</button>
+    <a href="/orders">Reset</a>
+</form>
 <br><br>
 
 <table border="1">
     <tr>
-        <th>ID</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/orders(
+                customerId=${customerId},
+                tableId=${tableId},
+                status=${status},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                ID
+            </a>
+        </th>
+
         <th>Customer</th>
+
         <th>Table</th>
-        <th>Status</th>
+
+        <!-- SORT BY STATUS -->
+        <th>
+            <a th:href="@{/orders(
+                customerId=${customerId},
+                tableId=${tableId},
+                status=${status},
+                sortBy='status',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Status
+            </a>
+        </th>
+
         <th>Actions</th>
     </tr>
 

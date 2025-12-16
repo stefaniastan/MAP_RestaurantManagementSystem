@@ -18,9 +18,31 @@ public class ServerController {
         this.serverService = serverService;
     }
 
-    @GetMapping
-    public String listServers(Model model) {
-        model.addAttribute("servers", serverService.getAllServers());
+    // 🔍 LIST + FILTER + SORT
+    @GetMapping({"", "/"})
+    public String listServers(
+            @RequestParam(required = false) String designation,
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) String rating,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+
+        model.addAttribute(
+                "servers",
+                serverService.filterAndSortServers(
+                        designation, age, rating, sortBy, direction
+                )
+        );
+
+        // trimitem parametrii înapoi în view
+        model.addAttribute("designation", designation);
+        model.addAttribute("age", age);
+        model.addAttribute("rating", rating);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
         return "server/index";
     }
 

@@ -2,6 +2,7 @@ package com.example.map_proiect_restaurant.service;
 
 import com.example.map_proiect_restaurant.model.OrderAssignment;
 import com.example.map_proiect_restaurant.repository.OrderAssignmentRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,29 @@ public class OrderAssignmentService {
 
     public OrderAssignmentService(OrderAssignmentRepository orderAssignmentRepository) {
         this.orderAssignmentRepository = orderAssignmentRepository;
+    }
+
+    // 🔍 FILTER + SORT
+    public List<OrderAssignment> filterAndSortAssignments(
+            Long orderId,
+            Long staffId,
+            String sortBy,
+            String direction
+    ) {
+        Sort sort = Sort.by(
+                direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
+                sortBy
+        );
+
+        if (orderId != null) {
+            return orderAssignmentRepository.findByOrder_Id(orderId);
+        }
+
+        if (staffId != null) {
+            return orderAssignmentRepository.findByStaff_Id(staffId);
+        }
+
+        return orderAssignmentRepository.findAll(sort);
     }
 
     public OrderAssignment addOrderAssignment(OrderAssignment assignment) {

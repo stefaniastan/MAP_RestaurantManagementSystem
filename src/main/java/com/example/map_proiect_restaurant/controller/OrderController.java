@@ -1,6 +1,7 @@
 package com.example.map_proiect_restaurant.controller;
 
 import com.example.map_proiect_restaurant.model.Order;
+import com.example.map_proiect_restaurant.model.OrderStatusEnum;
 import com.example.map_proiect_restaurant.service.OrderService;
 import com.example.map_proiect_restaurant.service.CustomerService;
 import com.example.map_proiect_restaurant.service.RestaurantTableService;
@@ -26,10 +27,31 @@ public class OrderController {
         this.tableService = tableService;
     }
 
+    // 🔍 Updated listOrders with filter and sort parameters
     @GetMapping({"", "/"})
-    public String listOrders(Model model) {
-        List<Order> orders = orderService.getAllOrders();
-        model.addAttribute("orders", orders);
+    public String listOrders(
+            @RequestParam(required = false) Long customerId,
+            @RequestParam(required = false) Long tableId,
+            @RequestParam(required = false) OrderStatusEnum status,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            Model model
+    ) {
+        model.addAttribute(
+                "orders",
+                orderService.filterAndSortOrders(customerId, tableId, status, sortBy, direction)
+        );
+
+        // Add filter parameters back to the model for the view
+        model.addAttribute("customerId", customerId);
+        model.addAttribute("tableId", tableId);
+        model.addAttribute("status", status);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("direction", direction);
+
+        // Add all statuses for dropdown
+        model.addAttribute("allStatuses", OrderStatusEnum.values());
+
         return "order/index";
     }
 

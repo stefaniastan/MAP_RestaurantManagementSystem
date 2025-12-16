@@ -26,11 +26,51 @@
 
 <a href="/orderlines/new">Add New Order Line</a>
 
+<!-- 🔍 FILTER FORM -->
+<form method="get" style="margin:15px 0;">
+    <input type="number" name="orderId" placeholder="Filter by Order ID"
+           th:value="${orderId}" />
+
+    <input type="number" name="menuItemId" placeholder="Filter by Menu Item ID"
+           th:value="${menuItemId}" />
+
+    <input type="number" name="minQuantity" placeholder="Min Quantity"
+           th:value="${minQuantity}" />
+
+    <button type="submit">Filter</button>
+    <a href="/orderlines">Reset</a>
+</form>
+
 <table border="1">
     <tr>
-        <th>ID</th>
+        <!-- SORT BY ID -->
+        <th>
+            <a th:href="@{/orderlines(
+                orderId=${orderId},
+                menuItemId=${menuItemId},
+                minQuantity=${minQuantity},
+                sortBy='id',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                ID
+            </a>
+        </th>
+
         <th>Menu Item</th>
-        <th>Quantity</th>
+
+        <!-- SORT BY QUANTITY -->
+        <th>
+            <a th:href="@{/orderlines(
+                orderId=${orderId},
+                menuItemId=${menuItemId},
+                minQuantity=${minQuantity},
+                sortBy='quantity',
+                direction=${direction == 'asc' ? 'desc' : 'asc'}
+            )}">
+                Quantity
+            </a>
+        </th>
+
         <th>Action</th>
     </tr>
     <tr th:each="line : ${orderLines}">
